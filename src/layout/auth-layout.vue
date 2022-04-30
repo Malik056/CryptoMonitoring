@@ -2,7 +2,7 @@
   <div class="auth-layout row align-content--center">
     <div class="flex xs12 pa-3 flex-center">
       <router-link class="py-5 flex-center" to="/">
-        <vuestic-logo height="32"/>
+        <h1>CRYPTOASSETS<br/>MONITOR</h1>
       </router-link>
     </div>
 
@@ -30,11 +30,8 @@
 </template>
 
 <script>
-import VuesticLogo from "@/components/vuestic-logo";
-
 export default {
   name: "AuthLayout",
-  components: { VuesticLogo },
   data() {
     return {
       selectedTabIndex: 0
@@ -56,11 +53,19 @@ export default {
 <style lang="scss">
 .auth-layout {
   min-height: 100vh;
-  background-image: linear-gradient(to right, var(--va-background), var(--va-white));
+  background-image: linear-gradient(
+    to right,
+    var(--va-background),
+    var(--va-white)
+  );
 
   &__card {
     width: 100%;
     max-width: 600px;
   }
+}
+h1 {
+  font-size: 36pt;
+  text-align: center;
 }
 </style>

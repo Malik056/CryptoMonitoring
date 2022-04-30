@@ -9,8 +9,9 @@
             class="va-navbar__item"
             :color="colors.primary"
           />
-          <router-link to="/">
-            <vuestic-logo class="logo"/>
+          <router-link to="dashboard">
+            <!-- <vuestic-logo class="logo"/> -->
+            <h2 v-bind:style="{color: colors.primary}">CRYPTOASSETS MONITOR</h2>
           </router-link>          
         </div>
       </template>
@@ -28,12 +29,11 @@
 import { useColors } from 'vuestic-ui'
 import { useStore } from 'vuex'
 import { computed } from 'vue'
-import VuesticLogo from '@/components/vuestic-logo'
 import VaIconMenuCollapsed from '@/components/icons/VaIconMenuCollapsed'
 import AppNavbarActions from './components/AppNavbarActions'
 
 export default {
-  components: { VuesticLogo, AppNavbarActions, VaIconMenuCollapsed },
+  components: { AppNavbarActions, VaIconMenuCollapsed },
   setup() {
     const { getColors } = useColors()
     const colors = computed(() => getColors() )
