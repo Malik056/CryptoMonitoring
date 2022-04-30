@@ -20,7 +20,7 @@ export default {
     },
     {
       name: 'cryptoassets',
-      displayName: 'Crypt Assets',
+      displayName: 'Crypto Assets',
       meta: {
         icon: 'vuestic-iconset-tables',
       },
