@@ -17,7 +17,6 @@ import ProfileDropdown from './dropdowns/ProfileDropdown'
 import NotificationDropdown from './dropdowns/NotificationDropdown'
 import MessageDropdown from './dropdowns/MessageDropdown'
 import ColorDropdown from './dropdowns/color-dropdown/ColorDropdown'
-import SettingsDropdown from './dropdowns/SettingsDropdown'
 
 export default {
   name: 'app-navbar-actions',

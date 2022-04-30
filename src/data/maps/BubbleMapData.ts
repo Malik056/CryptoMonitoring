@@ -1,4 +1,5 @@
-const latlong = {} as any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const latlong: any = {} as any
 
 latlong.AD = {
   latitude: 42.5,

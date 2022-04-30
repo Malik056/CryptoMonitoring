@@ -7,7 +7,18 @@ export const THEME_NAMES = {
   DARK: 'DARK',
   SEMI_DARK: 'SEMI_DARK',
 }
-
+type ColorScheme = {
+  primary: string;
+  secondary: string;
+  background: string;
+  success: string;
+  info: string;
+  danger: string;
+  warning: string;
+  white: string;
+  dark: string;
+  gray: string;
+}
 export const COLOR_THEMES = [
   {
     name: THEME_NAMES.LIGHT,
@@ -22,7 +33,7 @@ export const COLOR_THEMES = [
       white: '#ffffff',
       dark: '#262824',
       gray: '#767c88',
-    },
+    } as ColorScheme,
     components: {
       VaNavbar: {
         color: 'white',
@@ -156,7 +167,7 @@ export const useTheme = () => {
 
     if (!theme) { throw new Error('Theme not found') }
 
-    mergeGlobalConfig({ colors: theme.colors as any, components: theme.components })
+    mergeGlobalConfig({ colors: theme.colors as ColorScheme, components: theme.components })
   }
 
   const theme = computed(() =>  COLOR_THEMES.find((theme) => theme.name === themeNameRef.value))

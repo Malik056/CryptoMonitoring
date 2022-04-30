@@ -10,6 +10,11 @@
         <dashboard-map ref="dashboardMap"/>
       </div>
     </div>
+    <div class="row">
+      <div class="flex lg12 xs12">
+        <dashboard-table ></dashboard-table>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -18,6 +23,7 @@ import DashboardCharts from './DashboardCharts'
 import DashboardInfoBlock from './DashboardInfoBlock'
 import DashboardTabs from './DashboardTabs'
 import DashboardMap from './DashboardMap'
+import DashboardTable from './DashboardTable'
 
 export default {
   name: 'dashboard',
@@ -26,6 +32,7 @@ export default {
     DashboardInfoBlock,
     DashboardTabs,
     DashboardMap,
+    DashboardTable,
   },
   methods: {
     addAddressToMap ({ city, country }) {

@@ -1,100 +1,115 @@
 <template>
-  <div class="markup-tables flex">
-    <va-card :title="$t('tables.basic')" class="flex mb-4">
-      <va-card-content>
-        <div class="table-wrapper">
-          <table class="va-table">
-            <thead>
-              <tr>
-                <th>{{ $t('tables.headings.name') }}</th>
-                <th>{{ $t('tables.headings.email') }}</th>
-                <th>{{ $t('tables.headings.country') }}</th>
-                <th>{{ $t('tables.headings.status') }}</th>
-              </tr>
-            </thead>
+  <div>
+    <va-card class="xs12">
+      <div style="overflow: scroll">
+        <table class="va-table va-table--striped va-table--hoverable">
+          <thead>
+            <tr>
+              <th v-for="heading in headings" :key="heading">
+                {{ $t(heading) }}
+              </th>
+            </tr>
+          </thead>
 
-            <tbody>
-              <tr v-for="user in users" :key="user.id">
-                <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.country }}</td>
-                <td>
-                  <va-badge :color="getStatusColor(user.status)">
-                    {{ user.status }}
-                  </va-badge>
-                </td>
-              </tr>
-            </tbody>
-          </table>                
+          <tbody>
+            <tr v-for="user in users" :key="user.id">
+              <td v-for="heading in headings" :key="heading">
+                {{ $t(user[heading]) }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row justify--end mt-2">
+        <div class="flex">
+          <va-pagination
+            v-model="currentPage"
+            :pages="rows"
+            :visible-pages="3"
+          />
         </div>
-      </va-card-content>
-    </va-card>
-  
-    <va-card :title="$t('tables.stripedHoverable')">
-      <va-card-content>
-        <div class="table-wrapper">
-          <table class="va-table va-table--striped va-table--hoverable">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Country</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr v-for="user in users" :key="user.id">
-                <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.country }}</td>
-                <td>
-                  <va-badge :color="getStatusColor(user.status)">
-                    {{ user.status }}
-                  </va-badge>
-                </td>
-              </tr>
-            </tbody>
-          </table>          
-        </div>
-      </va-card-content>
+      </div>
     </va-card>
   </div>
 </template>
 
 <script>
-import data from '@/data/tables/markup-table/data.json'
+import data from "@/data/tables/markup-table/data.json";
 
 export default {
-  data () {
+  props: {
+    headings: {
+      type: [Array, null]
+    },
+    query: {
+      type: [String, null, undefined]
+    },
+    items: {
+      type: [Array, undefined, null]
+    },
+    initialPage: {
+      type: Number,
+      required: false,
+      default: 1,
+    },
+  },
+  data() {
     return {
-      users: data.slice(0, 8),
+      data: this.items ?? data,
+      pageSize: 12,
+      currentPage: this.initialPage,
+    };
+  },
+  computed: {
+    users() {
+      const startIndex = (this.currentPage - 1) * this.pageSize;
+      const endIndex = startIndex + this.pageSize;
+      return [...this.filterData()].slice(startIndex, endIndex);
+    },
+    rows() {
+      const data = this.filterData();
+      const quotient = parseInt(data.length / this.pageSize);
+      const remainder = data.length % this.pageSize;
+      console.log("pageSize: ", this.pageSize);
+      console.log("data.size: ", data.length);
+      console.log("quotient: ", quotient);
+      console.log("remainder: ", remainder);
+      return remainder == 0 ? quotient : quotient + 1;
     }
   },
   methods: {
-    getStatusColor (status) {
-      if (status === 'paid') {
-        return 'success'
-      }
-
-      if (status === 'processing') {
-        return 'info'
-      }
-
-      return 'danger'
+    filterData() {
+      return this.data.filter(value => {
+        return value.name
+          .toLowerCase()
+          .includes(this.query?.toLowerCase() ?? "");
+      });
     },
-  },
-}
+    getStatusColor(status) {
+      if (status === "paid") {
+        return "success";
+      }
+
+      if (status === "processing") {
+        return "info";
+      }
+
+      return "danger";
+    }
+  }
+};
 </script>
 
 <style lang="scss">
-  .markup-tables {
-    .table-wrapper {
-      overflow: auto;
-    }
-
-    .va-table {
-      width: 100%;
-    }
-  }
+.table {
+  overflow: auto;
+  height: 60vh;
+  width: 10vw;
+}
+.red {
+  background: red;
+}
+.blue {
+  background: blue;
+}
 </style>
