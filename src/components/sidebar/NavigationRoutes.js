@@ -27,21 +27,21 @@ export default {
     },
     {
       name: 'page3',
-      displayName: 'Page 3',
+      displayName: 'Withdrawals',
       meta: {
         icon: 'vuestic-iconset-tables',
       },
     },
     {
       name: 'page4',
-      displayName: 'Page 4',
+      displayName: 'Authorized Issuers',
       meta: {
         icon: 'vuestic-iconset-tables',
       },
     },
     {
       name: 'page5',
-      displayName: 'Page 5',
+      displayName: 'Assets',
       meta: {
         icon: 'vuestic-iconset-tables',
       },

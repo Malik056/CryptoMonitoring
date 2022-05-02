@@ -16,7 +16,7 @@ const i18nConfig = {
     en: require('@/i18n/en.json'),
     ch: require('@/i18n/cn.json'),
     es: require('@/i18n/es.json'),
-    ir: require('@/i18n/ir.json'),
+    it: require('@/i18n/it.json'),
     br: require('@/i18n/br.json')
   }
 }
