@@ -34,14 +34,14 @@ export default {
     },
     {
       name: 'page4',
-      displayName: 'Authorized Issuers',
+      displayName: 'Claims',
       meta: {
         icon: 'vuestic-iconset-tables',
       },
     },
     {
       name: 'page5',
-      displayName: 'Assets',
+      displayName: 'Trust Registry',
       meta: {
         icon: 'vuestic-iconset-tables',
       },
