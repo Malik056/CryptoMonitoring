@@ -1,0 +1,52 @@
+{
+  "assets": [
+    {
+      "CryptoAssetName": "AssetName1",
+      "EmittingBody": "fghfhdghfdg",
+      "Country": "ITA",
+      "CryptoAssetType": "AssetTipo1",
+      "CryptoAssetSymbol": "$1",
+      "QuantityofTokens": 1000,
+      "Transparency": {
+        "AuthorizedCustomersType": "dfsgsf",
+        "DistributionStrategy": "dfsgsf",
+        "ReferenceMarket": "dfsgsf",
+        "IncompatibleCustomerTypes": "dfsgsf",
+        "TraderID": "dfsgsf",
+        "Timestamp": "456354"
+      }
+    },
+    {
+      "CryptoAssetName": "AssetName2",
+      "EmittingBody": "fghfhdghfdg",
+      "Country": "ITA",
+      "CryptoAssetType": "AssetTipo2",
+      "CryptoAssetSymbol": "$2",
+      "QuantityofTokens": 500,
+      "Transparency": {
+        "AuthorizedCustomersType": "dfsgsf",
+        "DistributionStrategy": "dfsgsf",
+        "ReferenceMarket": "dfsgsf",
+        "IncompatibleCustomerTypes": "dfsgsf",
+        "TraderID": "dfsgsf",
+        "Timestamp": "456354"
+      }
+    },
+    {
+      "CryptoAssetName": "AssetName3",
+      "EmittingBody": "fghfhdghfdg",
+      "Country": "ITA",
+      "CryptoAssetType": "AssetTipo1",
+      "CryptoAssetSymbol": "$1",
+      "QuantityofTokens": 1000,
+      "Transparency": {
+        "AuthorizedCustomersType": "dfsgsf",
+        "DistributionStrategy": "dfsgsf",
+        "ReferenceMarket": "dfsgsf",
+        "IncompatibleCustomerTypes": "dfsgsf",
+        "TraderID": "dfsgsf",
+        "Timestamp": "456354"
+      }
+    }
+  ]
+}

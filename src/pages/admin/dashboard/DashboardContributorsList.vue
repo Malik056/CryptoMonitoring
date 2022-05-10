@@ -26,7 +26,7 @@
           >
             {{ contributor.contributions }} {{ $t('dashboard.charts.commits') }}
           </va-progress-bar>
-          <p class="mt-2">{{ contributor.login }}</p>
+          <p class="mt-2">{{ contributor.name }}</p>
         </div>
       </va-inner-loading>
     </va-card-content>
@@ -34,14 +34,13 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { useGlobalConfig } from 'vuestic-ui'
-
+import { useGlobalConfig } from 'vuestic-ui';
+import contributors from '@/data/tables/markup-table/assets_data.json';
 export default {
   name: 'DashboardContributorsList',
   data () {
     return {
-      contributors: [],
+      contributors: contributors,
       loading: false,
       progressMax: 392,
       visibleList: [],
@@ -60,8 +59,8 @@ export default {
   methods: {
     async loadContributorsList () {
       this.loading = true
-      const { data } = await axios.get('https://api.github.com/repos/epicmaxco/vuestic-admin/contributors')
-      this.contributors = data
+      // const { data } = @
+      // this.contributors = data
       this.progressMax = Math.max(...this.contributors.map(({ contributions }) => contributions))
       this.showNext()
       this.loading = false
@@ -69,7 +68,7 @@ export default {
     getPercent (val) {
       return (val / this.progressMax) * 100
     },
-    showNext () {     
+    showNext () {
       this.visibleList = this.contributors.slice(this.page * this.step, this.page * this.step + this.step)
       this.page += 1
 

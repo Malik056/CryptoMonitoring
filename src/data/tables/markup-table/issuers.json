@@ -1,0 +1,89 @@
+{
+  "issuers": [
+    {
+      "DID": 12895482,
+      "Entity Name": "Issuer Uno",
+      "LEI": "1234001X5DFR5TGH8YU521SW12",
+      "Country": "ITA",
+      "Type": "IssuerTipo1",
+      "Cryptos": [
+        {
+          "CryptoAssetName": "AssetName2",
+          "CryptoAssetType": "AssetTipo1",
+          "CryptoAssetSymbol": "$1",
+          "CryptoAssetTotalSupply": 1000,
+          "isEUCurrency": 0
+        },
+        {
+          "CryptoAssetName": "AssetName1",
+          "CryptoAssetType": "AssetTipo1",
+          "CryptoAssetSymbol": "$1",
+          "CryptoAssetTotalSupply": 500,
+          "isEUCurrency": 0
+        }
+      ]
+    },
+    {
+      "DID": 89428541,
+      "Entity Name": "Issuer Due",
+      "LEI": "1234001X5D5445458YU521SW12",
+      "Country": "CH",
+      "Type": "IssuerTipo1",
+      "Cryptos": [
+        {
+          "CryptoAssetName": "AssetName2",
+          "CryptoAssetType": "AssetTipo2",
+          "CryptoAssetSymbol": "$2",
+          "CryptoAssetTotalSupply": 1000,
+          "isEUCurrency": 1
+        },
+        {
+          "CryptoAssetName": "AssetName2",
+          "CryptoAssetType": "AssetTipo2",
+          "CryptoAssetSymbol": "$2",
+          "CryptoAssetTotalSupply": 1000,
+          "isEUCurrency": 1
+        },
+        {
+          "CryptoAssetName": "AssetName2",
+          "CryptoAssetType": "AssetTipo2",
+          "CryptoAssetSymbol": "$2",
+          "CryptoAssetTotalSupply": 1000,
+          "isEUCurrency": 1
+        }
+      ]
+    },
+    {
+      "DID": 45875216,
+      "Entity Name": "Issuer tre",
+      "LEI": "1234001X5DFR5TGH1DFR51SW12",
+      "Country": "GB",
+      "Type": "IssuerTipo3",
+      "Cryptos": [
+        {
+          "CryptoAssetName": "AssetName3",
+          "CryptoAssetType": "AssetTipo3",
+          "CryptoAssetSymbol": "$3",
+          "CryptoAssetTotalSupply": 1000,
+          "isEUCurrency": 0
+        }
+      ]
+    },
+    {
+      "DID": 89632547,
+      "Entity Name": "Issuer quattro",
+      "LEI": "1234001X5W3D5TGH8Y58G1SW12",
+      "Country": "AU",
+      "Type": "IssuerTipo2",
+      "Cryptos": [
+        {
+          "CryptoAssetName": "AssetName4",
+          "CryptoAssetType": "AssetTipo4",
+          "CryptoAssetSymbol": "$4",
+          "CryptoAssetTotalSupply": 1000,
+          "isEUCurrency": 1
+        }
+      ]
+    }
+  ]
+}

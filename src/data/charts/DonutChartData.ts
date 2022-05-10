@@ -8,7 +8,7 @@ export const getDonutChartData = (themes: ColorThemes) => {
     generatedData.datasets[0].backgroundColor = [themes.danger, themes.info, themes.primary]
   } else {
     generatedData = {
-      labels: ['North America', 'South America', 'Australia'],
+      labels: ['Italy', 'France', 'Switzerland'],
       datasets: [{
         label: 'Population (millions)',
         backgroundColor: [themes.danger, themes.info, themes.primary],

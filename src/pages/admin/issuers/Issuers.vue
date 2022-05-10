@@ -24,12 +24,14 @@
       :query="query"
       :initialPage="1"
       :key="query"
+      :items="issuersList.issuers"
     ></markup-table>
   </div>
 </template>
 
 <script>
 import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
+import issuers from "@/data/tables/markup-table/issuers.json";
 
 export default {
   name: "issuers",
@@ -39,7 +41,8 @@ export default {
   data() {
     return {
       term: "",
-      searchQuery: ""
+      searchQuery: "",
+      issuersList: issuers,
     };
   },
   computed: {
@@ -47,7 +50,7 @@ export default {
       return this.term;
     },
     headings() {
-      return ["id", "name", "email", "country", "status"];
+      return ["Official Name", "Emitting Body", "Nation (Issuing Body)", "Asset Type"];
     }
   },
   methods: {}

@@ -13,10 +13,10 @@ const generateValue = () => {
   return Math.floor(Math.random() * 100)
 }
 
-const generateYLabels = () => {
-  const flip = !!Math.floor(Math.random() * 2)
-  return flip ? ['Debit', 'Credit'] : ['Credit', 'Debit']
-}
+// const generateYLabels = () => {
+//   const flip = !!Math.floor(Math.random() * 2)
+//   return flip ? ['Debit', 'Credit'] : ['Credit', 'Debit']
+// }
 
 const generateArray = (length: number) => {
   return Array.from(Array(length), generateValue)
@@ -30,9 +30,9 @@ const getSize = () => {
 
 type DataSet = {
   backgroundColor: string;
-  label: string;
   borderColor: string;
   data: number[];
+  label: string;
 };
 
 let generatedData: {
@@ -45,8 +45,7 @@ let firstMonthIndex = 0
 export const getLineChartData = (themes: ColorThemes, firstMonth: number | undefined) => {
   const size = getSize()
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-  const yLabels = generateYLabels()
-
+  // const yLabels = generateYLabels()
   if (generatedData) {
     generatedData.datasets[0].backgroundColor = colorToRgba(themes.primary, 0.6)
     generatedData.datasets[1].backgroundColor = colorToRgba(themes.info, 0.6)
@@ -62,17 +61,17 @@ export const getLineChartData = (themes: ColorThemes, firstMonth: number | undef
       labels: months.splice(firstMonthIndex, size),
       datasets: [
         {
-          label: yLabels[0],
-          backgroundColor: colorToRgba(themes.primary, 0.6),
-          borderColor: 'transparent',
-          data: generateArray(size - firstMonthIndex),
-        },
-        {
-          label: yLabels[1],
           backgroundColor: colorToRgba(themes.info, 0.6),
           borderColor: 'transparent',
-          data: generateArray(size),
+          data: generateArray(size - firstMonthIndex),
+          label: "Enabled Issuers",
         },
+        // {
+        //   label: yLabels[1],
+        //   backgroundColor: colorToRgba(themes.info, 0.6),
+        //   borderColor: 'transparent',
+        //   data: generateArray(size),
+        // },
       ],
     }
   }
