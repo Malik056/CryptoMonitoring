@@ -117,12 +117,12 @@
     "setupRemoteConnections": "Setup Remote Connections",
     "currentVisitors": "Current Visitors",
     "charts": {
-      "trendyTrends": "Trendy Trends",
+      "trendyTrends": "Enabled Issuers",
       "showInMoreDetail": "Show in more detail",
-      "loadingSpeed": "Loading speed",
-      "topContributors": "Top contributors",
+      "loadingSpeed": "Issuers Country",
+      "topContributors": "Top Issuers",
       "showNextFive": "Show next five",
-      "commits": "Commits"
+      "commits": "Crypto Assets"
     },
     "info": {
       "componentRichTheme": "component-rich theme",
