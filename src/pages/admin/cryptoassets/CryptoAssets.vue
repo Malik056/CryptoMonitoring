@@ -21,15 +21,20 @@
     </va-card>
     <markup-table
       :headings="headings"
+      :labels="labels"
       :query="query"
       :initialPage="1"
       :key="query"
+      :items="cryptoAssets"
+      :objId="objKey"
+      :filterKey="filterKey"
     ></markup-table>
   </div>
 </template>
 
 <script>
 import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
+import CryptoAssets from "@/data/tables/markup-table/assets.json";
 
 export default {
   name: "crypto_assets",
@@ -39,7 +44,10 @@ export default {
   data() {
     return {
       term: "",
-      searchQuery: ""
+      cryptoAssets: CryptoAssets.assets,
+      labels: ["CryptoAssetName", "EmittingBody", "Country", "CryptoAssetType"],
+      objKey: "CryptoAssetName",
+      filterKey: "CryptoAssetName"
     };
   },
   computed: {
@@ -47,7 +55,7 @@ export default {
       return this.term;
     },
     headings() {
-      return ["id", "name", "email", "country", "status"];
+      return ["Name", "Emitting Body", "Country", "Asset Type"];
     }
   },
   methods: {}
@@ -56,7 +64,7 @@ export default {
 
 <style lang="scss">
 .va-table {
-  min-width: 90rem;
+  min-width: 100%;
 }
 .va-card {
   padding: 0 1rem 0 1rem;

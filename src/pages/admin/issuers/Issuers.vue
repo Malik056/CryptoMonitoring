@@ -24,7 +24,10 @@
       :query="query"
       :initialPage="1"
       :key="query"
-      :items="issuersList.issuers"
+      :items="issuersList"
+      :filterKey="filterKey"
+      :labels="labels"
+      :objId="objKey"
     ></markup-table>
   </div>
 </template>
@@ -36,30 +39,35 @@ import issuers from "@/data/tables/markup-table/issuers.json";
 export default {
   name: "issuers",
   components: {
-    MarkupTable
+    MarkupTable,
   },
   data() {
     return {
       term: "",
       searchQuery: "",
-      issuersList: issuers,
+      issuersList: issuers.issuers,
+      objKey: "DID",
+      filterKey: "Entity Name",
     };
   },
   computed: {
     query() {
       return this.term;
     },
+    labels() {
+      return ["DID", "Entity Name", "Country"];
+    },
     headings() {
-      return ["Official Name", "Emitting Body", "Nation (Issuing Body)", "Asset Type"];
-    }
+      return ["DID", "Entity Name", "Country"];
+    },
   },
-  methods: {}
+  methods: {},
 };
 </script>
 
 <style lang="scss">
 .va-table {
-  min-width: 90rem;
+  min-width: 100%;
 }
 .va-card {
   padding: 0 1rem 0 1rem;

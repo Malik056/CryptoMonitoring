@@ -6,15 +6,15 @@
           <thead>
             <tr>
               <th v-for="heading in headings" :key="heading">
-                {{ $t(heading) }}
+                {{ heading }}
               </th>
             </tr>
           </thead>
 
           <tbody>
-            <tr v-for="user in users" :key="user.id">
-              <td v-for="heading in headings" :key="heading">
-                {{ $t(user[heading]) }}
+            <tr v-for="user in users" :key="user[id]">
+              <td v-for="heading in dataKeys" :key="heading">
+                {{ user[heading] }}
               </td>
             </tr>
           </tbody>
@@ -39,18 +39,31 @@ import data from "@/data/tables/markup-table/data.json";
 export default {
   props: {
     headings: {
-      type: [Array, null]
+      type: [Array, null],
     },
     query: {
-      type: [String, null, undefined]
+      type: [String, null, undefined],
+    },
+    labels: {
+      type: [Array, null, undefined],
     },
     items: {
-      type: [Array, undefined, null]
+      type: [Array, undefined, null],
     },
     initialPage: {
       type: Number,
       required: false,
       default: 1,
+    },
+    filterKey: {
+      type: String,
+      required: false,
+      default: "name",
+    },
+    objId: {
+      type: String,
+      required: false,
+      default: "id",
     },
   },
   data() {
@@ -58,6 +71,7 @@ export default {
       data: this.items ?? data,
       pageSize: 12,
       currentPage: this.initialPage,
+      dataKeys: this.labels ?? this.headings,
     };
   },
   computed: {
@@ -75,14 +89,16 @@ export default {
       console.log("quotient: ", quotient);
       console.log("remainder: ", remainder);
       return remainder == 0 ? quotient : quotient + 1;
-    }
+    },
   },
   methods: {
     filterData() {
-      return this.data.filter(value => {
-        return value.name
-          .toLowerCase()
-          .includes(this.query?.toLowerCase() ?? "");
+      return this.data.filter((value) => {
+        return (
+          value[this.filterKey]
+            ?.toLowerCase()
+            ?.includes(this.query?.toLowerCase() ?? "") ?? []
+        );
       });
     },
     getStatusColor(status) {
@@ -95,8 +111,8 @@ export default {
       }
 
       return "danger";
-    }
-  }
+    },
+  },
 };
 </script>
 
