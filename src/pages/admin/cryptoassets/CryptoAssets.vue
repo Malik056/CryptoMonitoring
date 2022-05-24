@@ -28,6 +28,7 @@
       :items="cryptoAssets"
       :objId="objKey"
       :filterKey="filterKey"
+      @clicked="onItemSelected"
     ></markup-table>
   </div>
 </template>
@@ -51,6 +52,7 @@ export default {
     };
   },
   computed: {
+
     query() {
       return this.term;
     },
@@ -58,7 +60,12 @@ export default {
       return ["Name", "Emitting Body", "Country", "Asset Type"];
     }
   },
-  methods: {}
+  methods: {
+    onItemSelected(value) {
+      console.log("Asset Details: ", value);
+      this.$router.push({name: 'assetDetails', params: {asset: JSON.stringify(value)}})
+    }
+  }
 };
 </script>
 

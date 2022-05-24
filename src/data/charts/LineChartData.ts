@@ -48,7 +48,7 @@ export const getLineChartData = (themes: ColorThemes, firstMonth: number | undef
   // const yLabels = generateYLabels()
   if (generatedData) {
     generatedData.datasets[0].backgroundColor = colorToRgba(themes.primary, 0.6)
-    generatedData.datasets[1].backgroundColor = colorToRgba(themes.info, 0.6)
+    // generatedData.datasets[1].backgroundColor = colorToRgba(themes.info, 0.6)
     if (firstMonth && firstMonthIndex !== firstMonth) {
       generatedData.labels.shift()
       generatedData.datasets.forEach((dataset: DataSet) => {

@@ -12,7 +12,7 @@
           </thead>
 
           <tbody>
-            <tr v-for="user in users" :key="user[id]">
+            <tr v-for="user in users" :key="user[id]" v-on:click="onClickUser(user)">
               <td v-for="heading in dataKeys" :key="heading">
                 {{ user[heading] }}
               </td>
@@ -92,6 +92,10 @@ export default {
     },
   },
   methods: {
+    onClickUser(user) {
+      console.log("User: ", user);
+      return this.$emit('clicked', user);
+    },
     filterData() {
       return this.data.filter((value) => {
         return (

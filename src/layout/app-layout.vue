@@ -7,14 +7,14 @@
           <va-button
             class="px-4 py-4"
             icon="close"
-            flat 
+            flat
             color="dark"
             @click="onCloseSidebarButtonClick"
           />
         </div>
         <sidebar
           :width="sidebarWidth"
-          :minimized="isSidebarMinimized" 
+          :minimized="isSidebarMinimized"
           :minimizedWidth="sidebarMinimizedWidth"
         />
       </div>
@@ -42,14 +42,14 @@ export default {
     Navbar, Sidebar
   },
 
-  setup() {   
+  setup() {
     const store = useStore()
     const mobileBreakPointPX = 640
     const tabletBreakPointPX = 768
 
     const sidebarWidth = ref('16rem')
     const sidebarMinimizedWidth = ref(undefined)
-    
+
     const isMobile = ref(false)
     const isTablet = ref(false)
     const isSidebarMinimized = computed(() => store.state.isSidebarMinimized)
@@ -66,7 +66,7 @@ export default {
     }
 
     onMounted(() => {
-      window.addEventListener('resize', onResize)     
+      window.addEventListener('resize', onResize)
     })
 
     onBeforeUnmount(() => {
@@ -89,8 +89,8 @@ export default {
     }
 
     return {
-      isSidebarMinimized, 
-      sidebarWidth, sidebarMinimizedWidth, 
+      isSidebarMinimized,
+      sidebarWidth, sidebarMinimizedWidth,
       isFullScreenSidebar, onCloseSidebarButtonClick
     }
   }
@@ -103,6 +103,7 @@ $tabletBreakPointPX: 768px;
 
 .app-layout {
   height: 100vh;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   &__navbar {
@@ -129,7 +130,7 @@ $tabletBreakPointPX: 768px;
           height: 100%;
           position: fixed;
           top: 0;
-          z-index: 999; 
+          z-index: 999;
         }
 
         .va-sidebar:not(.va-sidebar--minimized) {

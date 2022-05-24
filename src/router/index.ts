@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import AuthLayout from '@/layout/auth-layout.vue'
-import AppLayout from '@/layout/app-layout.vue'
-import Page404Layout from '@/layout/page-404-layout.vue'
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import AuthLayout from "@/layout/auth-layout.vue";
+import AppLayout from "@/layout/app-layout.vue";
+import Page404Layout from "@/layout/page-404-layout.vue";
 
 // import RouteViewComponent from './route-view.vue'
 // import UIRoute from '@/pages/admin/ui/route'
@@ -9,43 +9,58 @@ import Page404Layout from '@/layout/page-404-layout.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/:catchAll(.*)",
-    redirect: { name: 'login' },
+    redirect: { name: "login" }
   },
   {
-    name: 'admin',
-    path: '/admin',
+    name: "admin",
+    path: "/admin",
     component: AppLayout,
     children: [
       {
-        name: 'dashboard',
-        path: 'dashboard',
-        component: () => import('@/pages/admin/dashboard/Dashboard.vue'),
+        name: "dashboard",
+        path: "dashboard",
+        component: () => import("@/pages/admin/dashboard/Dashboard.vue")
       },
       {
-        name: 'issuers',
-        path: 'issuers',
-        component: () => import('@/pages/admin/issuers/Issuers.vue'),
+        name: "issuers",
+        path: "issuers",
+        component: () => import("@/pages/admin/issuers/Issuers.vue")
+        // children: [
+        //   {
+        //     name: 'issuerDetails',
+        //     path: 'issuerDetails',
+        //     component: () => import('@/pages/admin/issuers/issuerDetails.vue'),
+        //     props: route => ({ issuer: route.params.issuer })
+        //   },
+        // ]
       },
       {
-        name: 'cryptoassets',
-        path: 'cryptoassets',
-        component: () => import('@/pages/admin/cryptoassets/CryptoAssets.vue'),
+        name: "cryptoassets",
+        path: "cryptoassets",
+        component: () => import("@/pages/admin/cryptoassets/CryptoAssets.vue")
       },
       {
-        name: 'page3',
-        path: 'page3',
-        component: () => import('@/pages/admin/cryptoassets/CryptoAssets.vue'),
+        name: "assetDetails",
+        path: "assetDetails",
+        component: () => import("@/pages/admin/cryptoassets/AssetDetails.vue"),
+        props: route => ({ ...route.params })
+      },
+
+      {
+        name: "page3",
+        path: "page3",
+        component: () => import("@/pages/admin/cryptoassets/CryptoAssets.vue")
       },
       {
-        name: 'page4',
-        path: 'page4',
-        component: () => import('@/pages/admin/cryptoassets/CryptoAssets.vue'),
+        name: "page4",
+        path: "page4",
+        component: () => import("@/pages/admin/cryptoassets/CryptoAssets.vue")
       },
       {
-        name: 'page5',
-        path: 'page5',
-        component: () => import('@/pages/admin/cryptoassets/CryptoAssets.vue'),
-      },
+        name: "page5",
+        path: "page5",
+        component: () => import("@/pages/admin/cryptoassets/CryptoAssets.vue")
+      }
       // {
       //   name: 'statistics',
       //   path: 'statistics',
@@ -183,56 +198,57 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
-    path: '/auth',
+    path: "/auth",
     component: AuthLayout,
     children: [
       {
-        name: 'login',
-        path: 'login',
-        component: () => import('@/pages/auth/login/Login.vue'),
+        name: "login",
+        path: "login",
+        component: () => import("@/pages/auth/login/Login.vue")
       },
       {
-        name: 'signup',
-        path: 'signup',
-        component: () => import('@/pages/auth/signup/Signup.vue'),
+        name: "signup",
+        path: "signup",
+        component: () => import("@/pages/auth/signup/Signup.vue")
       },
       {
-        name: 'recover-password',
-        path: 'recover-password',
-        component: () => import('@/pages/auth/recover-password/RecoverPassword.vue'),
+        name: "recover-password",
+        path: "recover-password",
+        component: () =>
+          import("@/pages/auth/recover-password/RecoverPassword.vue")
       },
       {
-        path: '',
-        redirect: { name: 'login' },
-      },
-    ],
+        path: "",
+        redirect: { name: "login" }
+      }
+    ]
   },
   {
-    path: '/404',
+    path: "/404",
     component: Page404Layout,
     children: [
       {
-        name: 'not-found-advanced',
-        path: 'not-found-advanced',
-        component: () => import('@/pages/404-pages/VaPageNotFoundSearch.vue'),
+        name: "not-found-advanced",
+        path: "not-found-advanced",
+        component: () => import("@/pages/404-pages/VaPageNotFoundSearch.vue")
       },
       {
-        name: 'not-found-simple',
-        path: 'not-found-simple',
-        component: () => import('@/pages/404-pages/VaPageNotFoundSimple.vue'),
+        name: "not-found-simple",
+        path: "not-found-simple",
+        component: () => import("@/pages/404-pages/VaPageNotFoundSimple.vue")
       },
       {
-        name: 'not-found-custom',
-        path: 'not-found-custom',
-        component: () => import('@/pages/404-pages/VaPageNotFoundCustom.vue'),
+        name: "not-found-custom",
+        path: "not-found-custom",
+        component: () => import("@/pages/404-pages/VaPageNotFoundCustom.vue")
       },
       {
-        name: 'not-found-large-text',
-        path: '/pages/not-found-large-text',
-        component: () => import('@/pages/404-pages/VaPageNotFoundLargeText.vue'),
-      },
-    ],
-  },
+        name: "not-found-large-text",
+        path: "/pages/not-found-large-text",
+        component: () => import("@/pages/404-pages/VaPageNotFoundLargeText.vue")
+      }
+    ]
+  }
   // {
   //   name: 'admin',
   //   path: '/admin',
@@ -508,12 +524,12 @@ const routes: Array<RouteRecordRaw> = [
   //   },
   // ],
   // },
-]
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   //  mode: process.env.VUE_APP_ROUTER_MODE_HISTORY === 'true' ? 'history' : 'hash',
   routes
-})
+});
 
-export default router
+export default router;

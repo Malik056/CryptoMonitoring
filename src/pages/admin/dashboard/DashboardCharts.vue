@@ -109,6 +109,8 @@ export default {
   },
   computed: {
     theme() {
+      console.log(useGlobalConfig().getGlobalConfig().colors);
+      console.log(useGlobalConfig().getGlobalConfig().colors.backgroundColor);
       return useGlobalConfig().getGlobalConfig().colors;
     },
     donutChartDataURL() {
