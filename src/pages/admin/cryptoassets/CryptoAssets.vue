@@ -62,7 +62,6 @@ export default {
   },
   methods: {
     onItemSelected(value) {
-      console.log("Asset Details: ", value);
       this.$router.push({name: 'assetDetails', params: {asset: JSON.stringify(value)}})
     }
   }

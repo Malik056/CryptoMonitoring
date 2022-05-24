@@ -84,16 +84,11 @@ export default {
       const data = this.filterData();
       const quotient = parseInt(data.length / this.pageSize);
       const remainder = data.length % this.pageSize;
-      console.log("pageSize: ", this.pageSize);
-      console.log("data.size: ", data.length);
-      console.log("quotient: ", quotient);
-      console.log("remainder: ", remainder);
       return remainder == 0 ? quotient : quotient + 1;
     },
   },
   methods: {
     onClickUser(user) {
-      console.log("User: ", user);
       return this.$emit('clicked', user);
     },
     filterData() {
