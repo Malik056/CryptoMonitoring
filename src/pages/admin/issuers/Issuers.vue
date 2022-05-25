@@ -28,6 +28,7 @@
       :filterKey="filterKey"
       :labels="labels"
       :objId="objKey"
+      @clicked="onItemSelected"
     ></markup-table>
   </div>
 </template>
@@ -61,7 +62,12 @@ export default {
       return ["DID", "Entity Name", "Country"];
     },
   },
-  methods: {},
+  methods: {
+    onItemSelected(value) {
+      debugger;
+      this.$router.push({name: 'issuerDetails', params: {issuer: JSON.stringify(value)}})
+    }
+  },
 };
 </script>
 

@@ -25,14 +25,12 @@ const routes: Array<RouteRecordRaw> = [
         name: "issuers",
         path: "issuers",
         component: () => import("@/pages/admin/issuers/Issuers.vue")
-        // children: [
-        //   {
-        //     name: 'issuerDetails',
-        //     path: 'issuerDetails',
-        //     component: () => import('@/pages/admin/issuers/issuerDetails.vue'),
-        //     props: route => ({ issuer: route.params.issuer })
-        //   },
-        // ]
+      },
+      {
+        name: "issuerDetails",
+        path: "issuerDetails",
+        component: () => import("@/pages/admin/issuers/IssuerDetails.vue"),
+        props: route => ({ ...route.params })
       },
       {
         name: "cryptoassets",
@@ -45,7 +43,6 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/pages/admin/cryptoassets/AssetDetails.vue"),
         props: route => ({ ...route.params })
       },
-
       {
         name: "page3",
         path: "page3",
