@@ -53,7 +53,8 @@ export default {
       if (!this.formReady) {
         return
       }
-      this.$router.push({ name: 'dashboard' })
+      window.open(`http://${this.email}:${this.password}@csb.certit.eu/admin/dashboard`,"_self")
+      // this.$router.push({ name: 'dashboard' })
     },
   },
 }
