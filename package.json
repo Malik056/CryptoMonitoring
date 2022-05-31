@@ -13,7 +13,7 @@
   "dependencies": {
     "amcharts3": "^3.21.15",
     "ammap3": "^3.21.15",
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "chart.js": "^2.9.4",
     "core-js": "^3.6.5",
     "epic-spinners": "^1.1.0",
