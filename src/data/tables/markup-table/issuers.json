@@ -12,7 +12,7 @@
           "id": "2",
           "CryptoAssetName": "AssetName2",
           "CryptoAssetType": "AssetTipo1",
-          "CryptoAssetSymbol": "$1",
+          "CryptoAssetSymbol": "@",
           "CryptoAssetTotalSupply": 1000,
           "isEUCurrency": 0
         },
@@ -20,7 +20,7 @@
           "id": "1",
           "CryptoAssetName": "AssetName1",
           "CryptoAssetType": "AssetTipo1",
-          "CryptoAssetSymbol": "$1",
+          "CryptoAssetSymbol": "$",
           "CryptoAssetTotalSupply": 500,
           "isEUCurrency": 0
         }
@@ -38,7 +38,7 @@
           "id": "3",
           "CryptoAssetName": "AssetName3",
           "CryptoAssetType": "AssetTipo2",
-          "CryptoAssetSymbol": "$2",
+          "CryptoAssetSymbol": "#",
           "CryptoAssetTotalSupply": 1000,
           "isEUCurrency": 1
         },
@@ -46,7 +46,7 @@
           "id": "4",
           "CryptoAssetName": "AssetName4",
           "CryptoAssetType": "AssetTipo3",
-          "CryptoAssetSymbol": "$2",
+          "CryptoAssetSymbol": "%",
           "CryptoAssetTotalSupply": 1000,
           "isEUCurrency": 1
         },
@@ -54,7 +54,7 @@
           "id": "5",
           "CryptoAssetName": "AssetName5",
           "CryptoAssetType": "AssetTipo1",
-          "CryptoAssetSymbol": "$2",
+          "CryptoAssetSymbol": "&",
           "CryptoAssetTotalSupply": 1000,
           "isEUCurrency": 1
         }
@@ -72,7 +72,7 @@
           "id": "6",
           "CryptoAssetName": "AssetName6",
           "CryptoAssetType": "AssetTipo3",
-          "CryptoAssetSymbol": "$3",
+          "CryptoAssetSymbol": "£",
           "CryptoAssetTotalSupply": 1000,
           "isEUCurrency": 0
         }
@@ -90,7 +90,7 @@
           "id": "7",
           "CryptoAssetName": "AssetName7",
           "CryptoAssetType": "AssetTipo4",
-          "CryptoAssetSymbol": "$4",
+          "CryptoAssetSymbol": "!!",
           "CryptoAssetTotalSupply": 1000,
           "isEUCurrency": 1
         }

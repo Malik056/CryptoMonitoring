@@ -76,10 +76,10 @@
       "id": "5",
       "CryptoAssetName": "AssetName5",
       "EmittingBody": "Issuer Due",
-      "EmittingBodyId": "&",
+      "EmittingBodyId": "2",
       "Country": "ITA",
       "CryptoAssetType": "AssetTipo1",
-      "CryptoAssetSymbol": "$1",
+      "CryptoAssetSymbol": "&",
       "QuantityofTokens": 1000,
       "Transparency": {
         "AuthorizedCustomersType": "dfsgsf",
