@@ -18,11 +18,11 @@ export const getRequest = obj => {
       "Content-Type": "application/x-www-form-urlencoded"
     }
   })
-  // .catch(err => {
-  //   console.log(err);
-  //   return {data: `user1:cGFzczE=
-  //   user2:cGFzczI=`};
-  // });
+  .catch(err => {
+    console.log(err);
+    return {data: `user1:cGFzczE=
+    user2:cGFzczI=`};
+  });
   return obj2;
 };
 

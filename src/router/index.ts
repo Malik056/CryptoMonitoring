@@ -11,7 +11,14 @@ const ifAuthenticated = (to: any, from: any, next: any) => {
       next();
       return;
   }
-  next("/login");
+  next("login");
+};
+const ifNotAuthenticated = (to: any, from: any, next: any) => {
+  if (!localStorage.getItem('user')) {
+      next();
+      return;
+  }
+  next("/admin/dashboard");
 };
 
 const routes: Array<RouteRecordRaw> = [
@@ -206,6 +213,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/auth",
     component: AuthLayout,
+    beforeEnter: ifNotAuthenticated,
     children: [
       {
         name: "login",

@@ -41,7 +41,7 @@
               <p>
                 <img
                   class="image"
-                  src="../../../assets/issuer_logo.png"
+                  src="../../../assets/asset_logo.png"
                   alt=""
                 />
               </p>
@@ -56,7 +56,7 @@
           <div class="flex sm12 md7 xs12">
             <div>
               <h2 v-bind:style="{ color: colors.primary }">
-                Issuer Information
+                Asset Information
               </h2>
             </div>
             <div class="m2">
