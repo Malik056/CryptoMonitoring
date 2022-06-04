@@ -7,7 +7,7 @@
       "EmittingBodyId": "1",
       "Country": "ITA",
       "CryptoAssetType": "AssetTipo1",
-      "CryptoAssetSymbol": "$1",
+      "CryptoAssetSymbol": "$",
       "QuantityofTokens": 1000,
       "Transparency": {
         "AuthorizedCustomersType": "dfsgsf",
@@ -25,7 +25,7 @@
       "EmittingBodyId": "1",
       "Country": "ITA",
       "CryptoAssetType": "AssetTipo2",
-      "CryptoAssetSymbol": "$2",
+      "CryptoAssetSymbol": "@",
       "QuantityofTokens": 500,
       "Transparency": {
         "AuthorizedCustomersType": "dfsgsf",
@@ -43,7 +43,7 @@
       "EmittingBodyId": "2",
       "Country": "ITA",
       "CryptoAssetType": "AssetTipo1",
-      "CryptoAssetSymbol": "$1",
+      "CryptoAssetSymbol": "#",
       "QuantityofTokens": 1000,
       "Transparency": {
         "AuthorizedCustomersType": "dfsgsf",
@@ -61,7 +61,7 @@
       "EmittingBodyId": "2",
       "Country": "ITA",
       "CryptoAssetType": "AssetTipo1",
-      "CryptoAssetSymbol": "$1",
+      "CryptoAssetSymbol": "%",
       "QuantityofTokens": 1000,
       "Transparency": {
         "AuthorizedCustomersType": "dfsgsf",
@@ -76,7 +76,7 @@
       "id": "5",
       "CryptoAssetName": "AssetName5",
       "EmittingBody": "Issuer Due",
-      "EmittingBodyId": "2",
+      "EmittingBodyId": "&",
       "Country": "ITA",
       "CryptoAssetType": "AssetTipo1",
       "CryptoAssetSymbol": "$1",
@@ -97,7 +97,7 @@
       "EmittingBodyId": "3",
       "Country": "ITA",
       "CryptoAssetType": "AssetTipo1",
-      "CryptoAssetSymbol": "$1",
+      "CryptoAssetSymbol": "£",
       "QuantityofTokens": 1000,
       "Transparency": {
         "AuthorizedCustomersType": "dfsgsf",
@@ -115,7 +115,7 @@
       "EmittingBodyId": "4",
       "Country": "ITA",
       "CryptoAssetType": "AssetTipo1",
-      "CryptoAssetSymbol": "$1",
+      "CryptoAssetSymbol": "!!",
       "QuantityofTokens": 1000,
       "Transparency": {
         "AuthorizedCustomersType": "dfsgsf",
