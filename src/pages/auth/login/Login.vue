@@ -67,14 +67,13 @@ export default {
         return;
       }
       getRequest({ pathAndQuery: "passwd", withPort: false })
-        .then((resp) => {
-          console.log("getRequest resp: ", resp);
-          const text = resp.text();
-          console.log("text: ", text);
-          const data = text.then(data=> {
-            console.log("data: ", data);
-            return data;
-          });
+        .then(async (resp) => {
+          // const data2 = await resp.json().then((text) => {
+          //   debugger;
+          //   console.log("data: ", text);
+          //   return text;
+          // });
+          const data = resp.data;
           //         `user1:cGFzczE=
           // user2:cGFzczI=`;
 
@@ -93,7 +92,7 @@ export default {
           }
           if (found) {
             const username = emailOrUsernameToUserNameTitleCase(this.email);
-            localStorage.setItem('user', username);
+            localStorage.setItem("user", username);
             this.$store.commit("changeUserName", username);
             this.$router.push({ name: "dashboard" });
           } else {
