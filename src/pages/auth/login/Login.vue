@@ -68,6 +68,7 @@ export default {
       }
       getRequest({ pathAndQuery: "passwd", withPort: false })
         .then((resp) => {
+          console.log("getRequest resp: ", resp);
           const data = resp.data;
           //         `user1:cGFzczE=
           // user2:cGFzczI=`;

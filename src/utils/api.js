@@ -16,6 +16,9 @@ export const getRequest = obj => {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     }
+  }).then(resp => {
+    console.log("resp: ", resp);
+    return resp;
   });
   // .catch(err => {
   //   console.log(err);
