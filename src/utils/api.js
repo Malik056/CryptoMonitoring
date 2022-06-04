@@ -12,17 +12,16 @@ export const getRequest = obj => {
   const url =
     serverAdd +
     (obj.withPort ?? true ? `${obj.port ?? ":8081"}/` : obj.pathAndQuery);
-  console.log("URL: ", url);
   const obj2 = fetch(url, {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     }
-  })
-  .catch(err => {
-    console.log(err);
-    return {data: `user1:cGFzczE=
-    user2:cGFzczI=`};
   });
+  // .catch(err => {
+  //   console.log(err);
+  //   return {data: `user1:cGFzczE=
+  //   user2:cGFzczI=`};
+  // });
   return obj2;
 };
 
