@@ -39,7 +39,11 @@
           <div v-show="windowWidth >= 768" class="flex md4">
             <div class="center">
               <p>
-                <img class="image" src="../../../assets/issuer_logo.png" alt="" />
+                <img
+                  class="image"
+                  src="../../../assets/issuer_logo.png"
+                  alt=""
+                />
               </p>
             </div>
           </div>
@@ -51,7 +55,9 @@
           </div>
           <div class="flex sm12 md7 xs12">
             <div>
-              <h2 v-bind:style="{ color: colors.primary }">Issuer Information</h2>
+              <h2 v-bind:style="{ color: colors.primary }">
+                Issuer Information
+              </h2>
             </div>
             <div class="m2">
               <label>Name</label>
@@ -87,6 +93,7 @@
                 v-for="(asset, index) in issuerData['Cryptos'] ?? []"
                 v-bind:key="index"
                 :asset="asset"
+                @click="openAsset(asset)"
               >
               </asset-container>
             </div>
@@ -100,6 +107,7 @@
 <script>
 import { useColors } from "vuestic-ui";
 import AssetContainer from "./AssetContainer";
+import assets from "@/data/tables/markup-table/assets.json";
 export default {
   components: {
     AssetContainer,
@@ -132,6 +140,22 @@ export default {
     });
   },
   methods: {
+    openAsset(asset) {
+      const assetList = assets.assets;
+      let foundAsset;
+      for (let i = 0; i < assetList.length; i++) {
+        const element = assetList[i];
+        if (element.id === asset.id) {
+          foundAsset = element;
+        }
+      }
+      if (foundAsset) {
+        this.$router.push({
+          name: "assetDetails",
+          params: { asset: JSON.stringify(foundAsset) },
+        });
+      }
+    },
     onResize() {
       this.windowHeight = window.innerHeight;
       this.windowWidth = window.innerWidth;

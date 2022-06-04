@@ -6,6 +6,14 @@ import Page404Layout from "@/layout/page-404-layout.vue";
 // import RouteViewComponent from './route-view.vue'
 // import UIRoute from '@/pages/admin/ui/route'
 
+const ifAuthenticated = (to: any, from: any, next: any) => {
+  if (localStorage.getItem('user')) {
+      next();
+      return;
+  }
+  next("/login");
+};
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/:catchAll(.*)",
@@ -15,6 +23,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "admin",
     path: "/admin",
     component: AppLayout,
+    beforeEnter: ifAuthenticated,
     children: [
       {
         name: "dashboard",

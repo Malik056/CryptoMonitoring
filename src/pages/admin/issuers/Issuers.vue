@@ -64,7 +64,6 @@ export default {
   },
   methods: {
     onItemSelected(value) {
-      debugger;
       this.$router.push({name: 'issuerDetails', params: {issuer: JSON.stringify(value)}})
     }
   },

@@ -5,7 +5,9 @@
         width:
           windowWidth >= 768
             ? `${windowWidth * 0.8}px`
-            : windowWidth >= 641 ? `${windowWidth * 0.9}px`: `${windowWidth}px`,
+            : windowWidth >= 641
+              ? `${windowWidth * 0.9}px`
+              : `${windowWidth}px`,
       }"
       class="right-center"
     >
@@ -21,96 +23,124 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div v-show="windowWidth >= 768" class="flex md4">
-        <div class="center">
-          <p>
-            <img class="image" src="../../../assets/asset_logo.png" alt="" />
-          </p>
-        </div>
-      </div>
-      <div v-show="windowWidth >= 768" class="flex md1 hide-sm-and-below">
-        <div
-          v-bind:style="{ backgroundColor: colors.primary }"
-          class="v-line"
-        ></div>
-      </div>
-      <div class="flex sm12 md7 xs12">
-        <div>
-          <h2 v-bind:style="{ color: colors.primary }">Asset Information</h2>
-        </div>
-        <div class="m2">
-          <label>Name</label>
-          <p>{{ assetData["CryptoAssetName"] }}</p>
-        </div>
-        <div class="m1">
-          <label>Emitting Body</label>
-          <p>{{ assetData["EmittingBody"] }}</p>
-        </div>
-        <div class="m1">
-          <div class="row">
-            <div class="flex md6 sm6 xs6">
-              <label>Country</label>
-              <p>{{ assetData["Country"] }}</p>
-            </div>
-            <div class="flex md6 sm6 xs6">
-              <label>Asset Type</label>
-              <p>{{ assetData["CryptoAssetType"] }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="m1">
-          <div class="row">
-            <div class="flex md6 sm6 xs6">
-              <label>Crypto Asset Symbol</label>
-              <p>{{ assetData["CryptoAssetSymbol"] }}</p>
-            </div>
-            <div class="flex md6 sm6 xs6">
-              <label>Quantity of Tokens</label>
-              <p>{{ assetData["QuantityofTokens"] }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="m3">
-          <h2 v-bind:style="{ color: colors.primary }">Asset Transparency</h2>
-        </div>
-        <div class="m1">
-          <div class="row">
-            <div class="flex md6 sm6 xs6">
-              <label>Authorized Customers Type</label>
+    <div
+      v-bind:style="{
+        width:
+          windowWidth >= 768
+            ? `${windowWidth * 0.8}px`
+            : windowWidth >= 641
+              ? `${windowWidth * 0.9}px`
+              : `${windowWidth}px`,
+      }"
+      class="right-center"
+    >
+      <div class="overlay">
+        <div class="row">
+          <div v-show="windowWidth >= 768" class="flex md4">
+            <div class="center">
               <p>
-                {{ assetData["Transparency"]["AuthorizedCustomersType"] }}&nbsp;
-              </p>
-            </div>
-            <div class="flex md6 sm6 xs6">
-              <label>Incompatible Customer Types</label>
-              <p>{{ assetData["Transparency"]["DistributionStrategy"] }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="m1">
-          <div class="row">
-            <div class="flex md6 sm6 xs6">
-              <label>Distribution Strategy</label>
-              <p>{{ assetData["Transparency"]["ReferenceMarket"] }}</p>
-            </div>
-            <div class="flex md6 sm6 xs6">
-              <label>Trader ID</label>
-              <p>
-                {{ assetData["Transparency"]["IncompatibleCustomerTypes"] }}
+                <img
+                  class="image"
+                  src="../../../assets/issuer_logo.png"
+                  alt=""
+                />
               </p>
             </div>
           </div>
-        </div>
-        <div class="m1">
-          <div class="row">
-            <div class="flex md6 sm6 xs6">
-              <label>ReferenceMarket</label>
-              <p>{{ assetData["Transparency"]["TraderID"] }}</p>
+          <div v-show="windowWidth >= 768" class="flex md1 hide-sm-and-below">
+            <div
+              v-bind:style="{ backgroundColor: colors.primary }"
+              class="v-line"
+            ></div>
+          </div>
+          <div class="flex sm12 md7 xs12">
+            <div>
+              <h2 v-bind:style="{ color: colors.primary }">
+                Issuer Information
+              </h2>
             </div>
-            <div class="flex md6 sm6 xs6">
-              <label>Timestamp</label>
-              <p>{{ assetData["Transparency"]["Timestamp"] }}</p>
+            <div class="m2">
+              <label>Name</label>
+              <p>{{ assetData["CryptoAssetName"] }}</p>
+            </div>
+            <div class="m1">
+              <label>Emitting Body</label>
+              <p>
+                <a href="" @click.prevent="openIssuer(assetData)">{{
+                  assetData["EmittingBody"]
+                }}</a>
+              </p>
+            </div>
+            <div class="m1">
+              <div class="row">
+                <div class="flex md6 sm6 xs6">
+                  <label>Country</label>
+                  <p>{{ assetData["Country"] }}</p>
+                </div>
+                <div class="flex md6 sm6 xs6">
+                  <label>Asset Type</label>
+                  <p>{{ assetData["CryptoAssetType"] }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="m1">
+              <div class="row">
+                <div class="flex md6 sm6 xs6">
+                  <label>Crypto Asset Symbol</label>
+                  <p>{{ assetData["CryptoAssetSymbol"] }}</p>
+                </div>
+                <div class="flex md6 sm6 xs6">
+                  <label>Quantity of Tokens</label>
+                  <p>{{ assetData["QuantityofTokens"] }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="m3">
+              <h2 v-bind:style="{ color: colors.primary }">
+                Asset Transparency
+              </h2>
+            </div>
+            <div class="m1">
+              <div class="row">
+                <div class="flex md6 sm6 xs6">
+                  <label>Authorized Customers Type</label>
+                  <p>
+                    {{
+                      assetData["Transparency"]["AuthorizedCustomersType"]
+                    }}&nbsp;
+                  </p>
+                </div>
+                <div class="flex md6 sm6 xs6">
+                  <label>Incompatible Customer Types</label>
+                  <p>{{ assetData["Transparency"]["DistributionStrategy"] }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="m1">
+              <div class="row">
+                <div class="flex md6 sm6 xs6">
+                  <label>Distribution Strategy</label>
+                  <p>{{ assetData["Transparency"]["ReferenceMarket"] }}</p>
+                </div>
+                <div class="flex md6 sm6 xs6">
+                  <label>Trader ID</label>
+                  <p>
+                    {{ assetData["Transparency"]["IncompatibleCustomerTypes"] }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="m1">
+              <div class="row">
+                <div class="flex md6 sm6 xs6">
+                  <label>ReferenceMarket</label>
+                  <p>{{ assetData["Transparency"]["TraderID"] }}</p>
+                </div>
+                <div class="flex md6 sm6 xs6">
+                  <label>Timestamp</label>
+                  <p>{{ assetData["Transparency"]["Timestamp"] }}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -121,10 +151,12 @@
 
 <script>
 import { useColors } from "vuestic-ui";
+import issuers from "@/data/tables/markup-table/issuers.json";
+
 export default {
   props: {
     asset: {
-      type: Object,
+      type: String,
       required: true,
     },
   },
@@ -150,6 +182,24 @@ export default {
     });
   },
   methods: {
+    openIssuer(issuer) {
+      debugger;
+      const assetList = issuers.issuers;
+      let foundIssuer;
+      for (let i = 0; i < assetList.length; i++) {
+        const element = assetList[i];
+        if (element.id === issuer.EmittingBodyId) {
+          foundIssuer = element;
+        }
+      }
+      if (foundIssuer) {
+        this.$router.push({
+          name: "issuerDetails",
+          params: { issuer: JSON.stringify(foundIssuer) },
+        });
+      }
+    },
+
     onResize() {
       this.windowHeight = window.innerHeight;
       this.windowWidth = window.innerWidth;

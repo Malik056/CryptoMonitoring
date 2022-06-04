@@ -8,10 +8,10 @@
   >
     <template #anchor>
       <span class="profile-dropdown__anchor">
-        <slot/>
+        <slot />
         <va-icon
           class="px-2"
-          :name="isShown ? 'angle_up' :'angle_down'"
+          :name="isShown ? 'angle_up' : 'angle_down'"
           :color="theme.primary"
         />
       </span>
@@ -20,51 +20,56 @@
       <va-list-item
         v-for="option in options"
         :key="option.name"
+        @click="logout(option.name)"
       >
-        <router-link
-          :to="{name: option.redirectTo}"
-          class="profile-dropdown__item"
-        >
-          {{ $t(`user.${option.name}`) }}
-        </router-link>          
+        {{ $t(`user.${option.name}`) }}
       </va-list-item>
     </va-dropdown-content>
   </va-dropdown>
 </template>
 
 <script>
-import { useGlobalConfig } from 'vuestic-ui'
+import { useGlobalConfig } from "vuestic-ui";
 
 export default {
-  name: 'profile-section',
-  data () {
+  name: "profile-section",
+  data() {
     return {
       isShown: false,
-    }
+    };
   },
   props: {
     options: {
       type: Array,
       default: () => [
         {
-          name: 'profile',
-          redirectTo: '',
+          name: "profile",
+          redirectTo: "",
         },
         {
-          name: 'logout',
-          redirectTo: 'login',
+          name: "logout",
+          redirectTo: "login",
         },
       ],
     },
   },
+  methods: {
+    logout(name) {
+      if (name == "logout") {
+        localStorage.removeItem("user");
+        this.$router.replace({ name: "login" });
+      }
+    },
+  },
   computed: {
-    theme() { return useGlobalConfig().getGlobalConfig() },
-  }
-}
+    theme() {
+      return useGlobalConfig().getGlobalConfig();
+    },
+  },
+};
 </script>
 
 <style lang="scss">
-
 .profile-dropdown {
   cursor: pointer;
 
@@ -75,6 +80,7 @@ export default {
 
   &__content {
     width: 8rem;
+    cursor: pointer;
   }
 
   &__item {

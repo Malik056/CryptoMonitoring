@@ -40,7 +40,9 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from "axios";
+import { getRequest } from "@/utils/api";
+import { emailOrUsernameToUserNameTitleCase } from "@/utils/string";
 export default {
   name: "login",
   data() {
@@ -64,8 +66,7 @@ export default {
       if (!this.formReady) {
         return;
       }
-      axios
-        .get("http://csb.certit.eu/passwd")
+      getRequest({ pathAndQuery: "passwd", withPort: false })
         .then((resp) => {
           const data = resp.data;
           //         `user1:cGFzczE=
@@ -85,6 +86,9 @@ export default {
             }
           }
           if (found) {
+            const username = emailOrUsernameToUserNameTitleCase(this.email);
+            localStorage.setItem('user', username);
+            this.$store.commit("changeUserName", username);
             this.$router.push({ name: "dashboard" });
           } else {
             this.emailErrors = [];
@@ -96,6 +100,40 @@ export default {
           this.emailErrors = [];
           this.passwordErrors = [`Couldn't connect to the server`];
         });
+
+      // axios
+      //   .get("http://csb.certit.eu/passwd")
+      //   .then((resp) => {
+      //     const data = resp.data;
+      //     //         `user1:cGFzczE=
+      //     // user2:cGFzczI=`;
+
+      //     const users = data.split("\n");
+      //     let found = false;
+      //     for (let i = 0; i < users.length; i++) {
+      //       const element = users[i];
+      //       const namePassPair = element.split(":");
+      //       if (
+      //         namePassPair[0] == this.email &&
+      //         namePassPair[1] == btoa(this.password)
+      //       ) {
+      //         found = true;
+      //         break;
+      //       }
+      //     }
+      //     if (found) {
+      //       this.$router.push({ name: "dashboard" });
+      //     } else {
+      //       this.emailErrors = [];
+      //       this.passwordErrors = [`Incorrect username or password`];
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //     this.emailErrors = [];
+      //     this.passwordErrors = [`Couldn't connect to the server`];
+      //   });
+
       // window.open(`http://${this.email}:${this.password}@csb.certit.eu/admin/dashboard`,"_self")
     },
   },
