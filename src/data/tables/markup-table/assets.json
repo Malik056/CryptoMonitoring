@@ -21,8 +21,8 @@
     {
       "id": "2",
       "CryptoAssetName": "AssetName2",
-      "EmittingBody": "Issuer Due",
-      "EmittingBodyId": "2",
+      "EmittingBody": "Issuer Uno",
+      "EmittingBodyId": "1",
       "Country": "ITA",
       "CryptoAssetType": "AssetTipo2",
       "CryptoAssetSymbol": "$2",
@@ -39,7 +39,61 @@
     {
       "id": "3",
       "CryptoAssetName": "AssetName3",
-      "EmittingBody": "Issuer tre",
+      "EmittingBody": "Issuer Due",
+      "EmittingBodyId": "2",
+      "Country": "ITA",
+      "CryptoAssetType": "AssetTipo1",
+      "CryptoAssetSymbol": "$1",
+      "QuantityofTokens": 1000,
+      "Transparency": {
+        "AuthorizedCustomersType": "dfsgsf",
+        "DistributionStrategy": "dfsgsf",
+        "ReferenceMarket": "dfsgsf",
+        "IncompatibleCustomerTypes": "dfsgsf",
+        "TraderID": "dfsgsf",
+        "Timestamp": "456354"
+      }
+    },
+    {
+      "id": "4",
+      "CryptoAssetName": "AssetName4",
+      "EmittingBody": "Issuer Due",
+      "EmittingBodyId": "2",
+      "Country": "ITA",
+      "CryptoAssetType": "AssetTipo1",
+      "CryptoAssetSymbol": "$1",
+      "QuantityofTokens": 1000,
+      "Transparency": {
+        "AuthorizedCustomersType": "dfsgsf",
+        "DistributionStrategy": "dfsgsf",
+        "ReferenceMarket": "dfsgsf",
+        "IncompatibleCustomerTypes": "dfsgsf",
+        "TraderID": "dfsgsf",
+        "Timestamp": "456354"
+      }
+    },
+    {
+      "id": "5",
+      "CryptoAssetName": "AssetName5",
+      "EmittingBody": "Issuer Due",
+      "EmittingBodyId": "2",
+      "Country": "ITA",
+      "CryptoAssetType": "AssetTipo1",
+      "CryptoAssetSymbol": "$1",
+      "QuantityofTokens": 1000,
+      "Transparency": {
+        "AuthorizedCustomersType": "dfsgsf",
+        "DistributionStrategy": "dfsgsf",
+        "ReferenceMarket": "dfsgsf",
+        "IncompatibleCustomerTypes": "dfsgsf",
+        "TraderID": "dfsgsf",
+        "Timestamp": "456354"
+      }
+    },
+    {
+      "id": "6",
+      "CryptoAssetName": "AssetName6",
+      "EmittingBody": "Issuer Tre",
       "EmittingBodyId": "3",
       "Country": "ITA",
       "CryptoAssetType": "AssetTipo1",
@@ -53,6 +107,24 @@
         "TraderID": "dfsgsf",
         "Timestamp": "456354"
       }
-    }
+    },
+    {
+      "id": "7",
+      "CryptoAssetName": "AssetName7",
+      "EmittingBody": "Issuer Quattro",
+      "EmittingBodyId": "4",
+      "Country": "ITA",
+      "CryptoAssetType": "AssetTipo1",
+      "CryptoAssetSymbol": "$1",
+      "QuantityofTokens": 1000,
+      "Transparency": {
+        "AuthorizedCustomersType": "dfsgsf",
+        "DistributionStrategy": "dfsgsf",
+        "ReferenceMarket": "dfsgsf",
+        "IncompatibleCustomerTypes": "dfsgsf",
+        "TraderID": "dfsgsf",
+        "Timestamp": "456354"
+      }
+    }    
   ]
 }
