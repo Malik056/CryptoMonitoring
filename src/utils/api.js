@@ -13,13 +13,11 @@ export const getRequest = obj => {
     serverAdd +
     (obj.withPort ?? true ? `${obj.port ?? ":8081"}/` : obj.pathAndQuery);
   const obj2 = fetch(url, {
+    mode: 'no-cors', // 'cors' by default
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     }
-  }).then(resp => {
-    console.log("resp: ", resp);
-    return resp;
-  });
+  })
   // .catch(err => {
   //   console.log(err);
   //   return {data: `user1:cGFzczE=
