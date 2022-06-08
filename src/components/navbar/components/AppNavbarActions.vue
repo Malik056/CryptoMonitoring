@@ -1,5 +1,6 @@
 <template>
   <div class="app-navbar-actions">
+    <a href="#" v-on:click.prevent="gotoTestPage">Test page</a>
     <color-dropdown class="app-navbar-actions__item"/>
     <message-dropdown class="app-navbar-actions__item"/>
     <notification-dropdown class="app-navbar-actions__item"/>
@@ -51,6 +52,11 @@ export default {
       },
     },
   },
+  methods: {
+    gotoTestPage() {
+      this.$router.push({name: 'testPage'});
+    }
+  }
 }
 </script>
 
@@ -63,12 +69,12 @@ export default {
     color: var(--va-primary);
     fill: var(--va-primary);
   }
-  
+
   &__item {
     padding: 0;
     margin-left: 1.25rem;
     margin-right: 1.25rem;
-    
+
     svg {
       height: 24px;
     }
