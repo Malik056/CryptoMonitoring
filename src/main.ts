@@ -1,6 +1,6 @@
 import { VuesticPlugin } from 'vuestic-ui';
 import { createApp } from 'vue'
-import { createGtm } from 'vue-gtm'
+import { createGtm, VueGtmUseOptions } from 'vue-gtm'
 import { createI18n } from 'vue-i18n'
 import App from './App.vue'
 import './registerServiceWorker'
@@ -20,11 +20,12 @@ const i18nConfig = {
 }
 
 const app = createApp(App)
-app.use(store)
-app.use(router)
+app.use(store);
+app.use(router);
+
 if (process.env.VUE_APP_GTM_ENABLED === 'true') {
-  const gtmConfig = {
-    id: process.env.VUE_APP_GTM_KEY,
+  const gtmConfig: VueGtmUseOptions = {
+    id: process.env.VUE_APP_GTM_KEY ?? '',
     debug: false,
     vueRouter: router,
   }
