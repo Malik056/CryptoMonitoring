@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     gotoTestPage() {
-      this.$router.push({name: 'test/testPage'});
+      this.$router.push({name: 'testPage'});
     }
   }
 }
