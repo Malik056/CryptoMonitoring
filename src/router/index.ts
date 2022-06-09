@@ -238,9 +238,15 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
-    name: "testPage",
-    path: "/testPage",
-    component: import("@/pages/TestPage.vue")
+    path: "/test",
+    component: Page404Layout,
+    children: [
+      {
+        name: "testPage",
+        path: "testPage",
+        component: () => import("@/pages/TestPage.vue"),
+      }
+    ],
   },
   {
     path: "/404",

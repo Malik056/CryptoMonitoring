@@ -12,23 +12,26 @@ export const getRequest = obj => {
   const url =
     serverAdd +
     (obj.withPort ?? true ? `${obj.port ?? ":8081"}/` : obj.pathAndQuery);
-  const obj2 = axios.get(
-    url,
-    {
-      mode: "no-cors"
-    }
-    // , {
-    // // mode: 'no-cors', // 'cors' by default
-    // headers: {
-    //   "Content-Type": "text/plain"
-    // }
-    // }
-  );
-  // .catch(err => {
-  //   console.log(err);
-  //   return {data: `user1:cGFzczE=
-  //   user2:cGFzczI=`};
-  // });
+  const obj2 = axios
+    .get(
+      url,
+      {
+        mode: "no-cors"
+      }
+      // , {
+      // // mode: 'no-cors', // 'cors' by default
+      // headers: {
+      //   "Content-Type": "text/plain"
+      // }
+      // }
+    )
+    .catch(err => {
+      console.log(err);
+      return {
+        data: `user1:cGFzczE=
+    user2:cGFzczI=`
+      };
+    });
   return obj2;
 };
 

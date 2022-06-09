@@ -1,13 +1,16 @@
 <template>
-  <b>Age: </b>{{ age }} <br />
-  <b>Height: </b>{{ height }} <br />
-  <b>Weight: </b>{{ weight }}
+  <div>
+    <b>Age: </b>{{ age }} <br />
+    <b>Height: </b>{{ height }} <br />
+    <b>Weight: </b>{{ weight }}
+  </div>
 </template>
 
 <script>
 import Web3 from "web3";
 
 export default {
+  name: "testPage",
   data() {
     return { age: "", height: "", weight: "" };
   },
@@ -115,5 +118,3 @@ export default {
 };
 </script>
 
-<style>
-</style>
