@@ -10,11 +10,11 @@
       "CryptoAssetSymbol": "$",
       "QuantityofTokens": 1000,
       "Transparency": {
-        "AuthorizedCustomersType": "dfsgsf",
-        "DistributionStrategy": "dfsgsf",
-        "ReferenceMarket": "dfsgsf",
-        "IncompatibleCustomerTypes": "dfsgsf",
-        "TraderID": "dfsgsf",
+        "AuthorizedCustomersType": "Auth 1",
+        "DistributionStrategy": "Dist 1",
+        "ReferenceMarket": "Ref 1",
+        "IncompatibleCustomerTypes": "Incomp 1",
+        "TraderID": "Trad 1",
         "Timestamp": "456354"
       }
     },
@@ -28,11 +28,11 @@
       "CryptoAssetSymbol": "@",
       "QuantityofTokens": 500,
       "Transparency": {
-        "AuthorizedCustomersType": "dfsgsf",
-        "DistributionStrategy": "dfsgsf",
-        "ReferenceMarket": "dfsgsf",
-        "IncompatibleCustomerTypes": "dfsgsf",
-        "TraderID": "dfsgsf",
+        "AuthorizedCustomersType": "Auth 2",
+        "DistributionStrategy": "Dist 2",
+        "ReferenceMarket": "Ref 2",
+        "IncompatibleCustomerTypes": "Incomp 2",
+        "TraderID": "Trad 2",
         "Timestamp": "456354"
       }
     },
@@ -46,11 +46,11 @@
       "CryptoAssetSymbol": "#",
       "QuantityofTokens": 1000,
       "Transparency": {
-        "AuthorizedCustomersType": "dfsgsf",
-        "DistributionStrategy": "dfsgsf",
-        "ReferenceMarket": "dfsgsf",
-        "IncompatibleCustomerTypes": "dfsgsf",
-        "TraderID": "dfsgsf",
+        "AuthorizedCustomersType": "Auth 3",
+        "DistributionStrategy": "Dist 3",
+        "ReferenceMarket": "Ref 3",
+        "IncompatibleCustomerTypes": "Incomp 3",
+        "TraderID": "Trad 3",
         "Timestamp": "456354"
       }
     },
@@ -64,11 +64,11 @@
       "CryptoAssetSymbol": "%",
       "QuantityofTokens": 1000,
       "Transparency": {
-        "AuthorizedCustomersType": "dfsgsf",
-        "DistributionStrategy": "dfsgsf",
-        "ReferenceMarket": "dfsgsf",
-        "IncompatibleCustomerTypes": "dfsgsf",
-        "TraderID": "dfsgsf",
+        "AuthorizedCustomersType": "Auth 4",
+        "DistributionStrategy": "Dist 4",
+        "ReferenceMarket": "Ref 4",
+        "IncompatibleCustomerTypes": "Incomp 4",
+        "TraderID": "Trad 4",
         "Timestamp": "456354"
       }
     },
@@ -82,11 +82,11 @@
       "CryptoAssetSymbol": "&",
       "QuantityofTokens": 1000,
       "Transparency": {
-        "AuthorizedCustomersType": "dfsgsf",
-        "DistributionStrategy": "dfsgsf",
-        "ReferenceMarket": "dfsgsf",
-        "IncompatibleCustomerTypes": "dfsgsf",
-        "TraderID": "dfsgsf",
+        "AuthorizedCustomersType": "Auth 5",
+        "DistributionStrategy": "Dist 5",
+        "ReferenceMarket": "Ref 5",
+        "IncompatibleCustomerTypes": "Incomp 5",
+        "TraderID": "Trad 5",
         "Timestamp": "456354"
       }
     },
@@ -100,11 +100,11 @@
       "CryptoAssetSymbol": "£",
       "QuantityofTokens": 1000,
       "Transparency": {
-        "AuthorizedCustomersType": "dfsgsf",
-        "DistributionStrategy": "dfsgsf",
-        "ReferenceMarket": "dfsgsf",
-        "IncompatibleCustomerTypes": "dfsgsf",
-        "TraderID": "dfsgsf",
+        "AuthorizedCustomersType": "Auth 6",
+        "DistributionStrategy": "Dist 6",
+        "ReferenceMarket": "Ref 6",
+        "IncompatibleCustomerTypes": "Incomp 6",
+        "TraderID": "Trad 6",
         "Timestamp": "456354"
       }
     },
@@ -118,11 +118,11 @@
       "CryptoAssetSymbol": "!!",
       "QuantityofTokens": 1000,
       "Transparency": {
-        "AuthorizedCustomersType": "dfsgsf",
-        "DistributionStrategy": "dfsgsf",
-        "ReferenceMarket": "dfsgsf",
-        "IncompatibleCustomerTypes": "dfsgsf",
-        "TraderID": "dfsgsf",
+        "AuthorizedCustomersType": "Auth 7",
+        "DistributionStrategy": "Dist 7",
+        "ReferenceMarket": "Ref 7",
+        "IncompatibleCustomerTypes": "Incomp 7",
+        "TraderID": "Trad 7",
         "Timestamp": "456354"
       }
     }    
