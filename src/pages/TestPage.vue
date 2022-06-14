@@ -206,9 +206,11 @@ export default {
       // this.owner = owner;
       console.log("MyContract: ", myContract);
       this.ownerPA_name = await myContract.methods.ownerPA_Name().call();
-      this.ownerPA_PK = String(await myContract.methods.ownerPA_PK().call());
+      this.ownerPA_PK = await myContract.methods.ownerPA_PK().call();
+      this.issuingInstitution = await myContract.methods.issuingInstitution("0x3d7201049aa892B89aDF9b492eEd0680148b3ca9").call();
       console.log(this.ownerPA_name);
       console.log(this.ownerPA_PK);
+      console.log(this.issuingInstitution);
     } catch (ex) {
       console.log(ex);
     }
