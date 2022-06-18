@@ -35,7 +35,9 @@
 
 <script>
 import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
-import issuers from "@/data/tables/markup-table/issuers.json";
+import issuersAbi from "@/data/abis/issuerabi.json";
+import issuers from "@/data/tables/markup-table/issuers_list.json";
+import Web3 from "web3";
 
 export default {
   name: "issuers",
@@ -46,7 +48,7 @@ export default {
     return {
       term: "",
       searchQuery: "",
-      issuersList: issuers.issuers,
+      issuersList: [],
       objKey: "DID",
       filterKey: "Entity Name",
     };
@@ -62,10 +64,40 @@ export default {
       return ["DID", "Entity Name", "Country"];
     },
   },
+  async created() {
+    const issuersList = issuers.issuers;
+    const web3 = new Web3("http://51.38.226.91:8545");
+    for (let i = 0; i < issuersList.length; i++) {
+      const issuerObj = issuersList[i];
+      const myContract = new web3.eth.Contract(
+        issuersAbi,
+        issuerObj.dapp
+        // "0x9fB0f7088b660d289c7404cb27Ff140999384D36"
+        // "0xd830b9D8e890D290be7e7365fE3D7bbDD94cF7f9"
+      );
+      const methods = myContract.methods;
+      console.log(methods);
+      const issuerData = {};
+      console.log(`IssuerData[${i}]`, issuerData);
+      const name = await methods.institutionName().call();
+      const country = await methods.institutionCountry().call();
+      const did = await methods.institutionID().call();
+      const lei = await methods.institutionLEI().call();
+      debugger;
+      issuerData["DID"] = did;
+      issuerData["Entity Name"] = name;
+      issuerData["Country"] = country;
+      issuerData["LEI"] = lei;
+      this.issuersList.push(issuerData);
+    }
+  },
   methods: {
     onItemSelected(value) {
-      this.$router.push({name: 'issuerDetails', params: {issuer: JSON.stringify(value)}})
-    }
+      this.$router.push({
+        name: "issuerDetails",
+        params: { issuer: JSON.stringify(value) },
+      });
+    },
   },
 };
 </script>

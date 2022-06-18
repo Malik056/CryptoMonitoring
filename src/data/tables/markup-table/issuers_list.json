@@ -2,15 +2,18 @@
   "issuers": [
     {
       "address": "0x89499a02B0892cfB3902D29851c1f03CbC96238B",
-      "dapp": "0xd830b9D8e890D290be7e7365fE3D7bbDD94cF7f9"
+      "dapp": "0xd830b9D8e890D290be7e7365fE3D7bbDD94cF7f9",
+      "did": "ibsi2:0x89499a02B0892cfB3902D29851c1f03CbC96238B"
     },
     {
       "address": "0x9fB0f7088b660d289c7404cb27Ff140999384D36",
-      "dapp": "0x700DCdf29b29823Def70F8608aDA9A51f9aDB14f"
+      "dapp": "0x700DCdf29b29823Def70F8608aDA9A51f9aDB14f",
+      "did": "ibsi:0x9fB0f7088b660d289c7404cb27Ff140999384D36"
     },
     {
       "address": "0x3d7201049aa892B89aDF9b492eEd0680148b3ca9",
-      "dapp": "0xd6b982dA22f63f9E9647B5976d27E7cAe38db732"
+      "dapp": "0xd6b982dA22f63f9E9647B5976d27E7cAe38db732",
+      "did": "ibsi2:0x3d7201049aa892B89aDF9b492eEd0680148b3ca9"
     }
   ]
 }
