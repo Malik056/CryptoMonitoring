@@ -70,10 +70,7 @@ export default {
     const web3 = new Web3("http://51.38.226.91:8545");
     for (let i = 0; i < issuersList.length; i++) {
       const issuerObj = issuersList[i];
-      const myContract = new web3.eth.Contract(
-        issuersAbi,
-        issuerObj.dapp
-      );
+      const myContract = new web3.eth.Contract(issuersAbi, issuerObj.dapp);
       // const assetsContract = new web3.eth.Contract(
       //   assetsAbi,
       //   issuerObj.address
@@ -88,20 +85,26 @@ export default {
       const country = await methods.institutionCountry().call();
       const did = await methods.institutionID().call();
       const lei = await methods.institutionLEI().call();
-      const tokensIssues = await methods.tokensIssued(issuerObj.address).call();
-      console.log("tokensIssues: ", tokensIssues);
-      debugger;
+      // const tokensIssues = await methods.tokensIssued(issuerObj.address).call();
       issuerData["DID"] = did;
       issuerData["Entity Name"] = name;
       issuerData["Country"] = country;
       issuerData["LEI"] = lei;
       issuerData["Cryptos"] = [];
-      const crypto = {};
-      crypto.CryptoAssetName = tokensIssues.name;
-      crypto.CryptoAssetType = tokensIssues.token_type;
-      crypto.CryptoAssetSymbol = tokensIssues.symbol;
-      crypto.CryptoAssetTotalSupply = await methods.totalTokens().call();
-      issuerData["Cryptos"].push(crypto);
+      const tokens = issuerObj.tokens;
+      for (let i = 0; i < tokens.length; i++) {
+        const assetsContract = new web3.eth.Contract(assetsAbi, tokens[i]);
+        const assetsMethods = assetsContract.methods;
+        const crypto = {};
+        crypto.CryptoAssetName = await assetsMethods.name().call();
+        crypto.CryptoAssetType = await assetsMethods.tokenType().call();
+        crypto.CryptoAssetSymbol = await assetsMethods.symbol().call();
+        crypto.CryptoAssetTotalSupply = await assetsMethods
+          .totalSupply()
+          .call();
+        issuerData["Cryptos"].push(crypto);
+        console.log("Assets Methods: ", assetsMethods);
+      }
       this.issuersList.push(issuerData);
     }
   },

@@ -3,17 +3,27 @@
     {
       "address": "0x89499a02B0892cfB3902D29851c1f03CbC96238B",
       "dapp": "0xd830b9D8e890D290be7e7365fE3D7bbDD94cF7f9",
-      "did": "ibsi2:0x89499a02B0892cfB3902D29851c1f03CbC96238B"
+      "did": "ibsi2:0x89499a02B0892cfB3902D29851c1f03CbC96238B",
+      "tokens": [
+        "0xff9C171905e8bB4E1aa4BCA9D5c7cA8a1379d782",
+        "0xF800699D096DCBa07b5dc7020f0c79448596e184"
+      ]
     },
     {
       "address": "0x9fB0f7088b660d289c7404cb27Ff140999384D36",
       "dapp": "0x700DCdf29b29823Def70F8608aDA9A51f9aDB14f",
-      "did": "ibsi:0x9fB0f7088b660d289c7404cb27Ff140999384D36"
+      "did": "ibsi:0x9fB0f7088b660d289c7404cb27Ff140999384D36",
+      "tokens": [
+        "0xcB9dEC6EebAe618e5241DfdcF979C9Cae889C674"
+      ]
     },
     {
       "address": "0x3d7201049aa892B89aDF9b492eEd0680148b3ca9",
       "dapp": "0xd6b982dA22f63f9E9647B5976d27E7cAe38db732",
-      "did": "ibsi2:0x3d7201049aa892B89aDF9b492eEd0680148b3ca9"
+      "did": "ibsi2:0x3d7201049aa892B89aDF9b492eEd0680148b3ca9",
+      "tokens": [
+        "0x76e705E72d6095a15F95Dd7C39b8C90687273e09"
+      ]
     }
   ]
 }
