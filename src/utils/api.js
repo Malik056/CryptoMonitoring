@@ -6,7 +6,6 @@ const mocks = {
   "user/me": { GET: { name: localStorage.getItem("user")?.name ?? "" } }
 };
 
-const web3 = new Web3(blockChainAddress);
 export const getRequest = obj => {
   console.log("obj: ", obj);
   const serverAdd = server;
@@ -51,6 +50,7 @@ export const apiCall = ({ url, method }) =>
   });
 
 export const getSmartContract = ({address, abi}) => {
+  const web3 = new Web3(blockChainAddress);
   const contract = new web3.eth.Contract(abi, address);
   return contract;
 }
