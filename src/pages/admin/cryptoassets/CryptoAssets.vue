@@ -19,12 +19,18 @@
         </div>
       </div>
     </va-card>
+    <va-card class="xs12 loading" v-if="isLoading">
+      <div class="flex md12 xs12">
+        <va-progress-bar indeterminate>Loading</va-progress-bar>
+      </div>
+    </va-card>
     <markup-table
+      v-else
       :headings="headings"
       :labels="labels"
       :query="query"
       :initialPage="1"
-      :key="query"
+      :key="tableKey"
       :items="getAssets"
       :objId="objKey"
       :filterKey="filterKey"
@@ -37,11 +43,12 @@
 import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
 import CryptoAssets from "@/data/tables/markup-table/assets.json";
 import { mapGetters } from "vuex";
+import { UPDATE_ISSUERS } from '@/store/actions/issuers';
 
 export default {
   name: "crypto_assets",
   components: {
-    MarkupTable
+    MarkupTable,
   },
   data() {
     return {
@@ -49,23 +56,32 @@ export default {
       cryptoAssets: CryptoAssets.assets,
       labels: ["CryptoAssetName", "EmittingBody", "Country", "CryptoAssetType"],
       objKey: "CryptoAssetName",
-      filterKey: "CryptoAssetName"
+      filterKey: "CryptoAssetName",
     };
   },
   computed: {
-    ...mapGetters(["getAssets"]),
+    ...mapGetters(["getAssets", "isLoading"]),
+    tableKey() {
+      return this.query + this.getAssets.toString();
+    },
     query() {
       return this.term;
     },
     headings() {
       return ["Name", "Emitting Body", "Country", "Asset Type"];
-    }
+    },
+  },
+  created() {
+    this.$store.dispatch(UPDATE_ISSUERS);
   },
   methods: {
     onItemSelected(value) {
-      this.$router.push({name: 'assetDetails', params: {asset: JSON.stringify(value)}})
-    }
-  }
+      this.$router.push({
+        name: "assetDetails",
+        params: { asset: JSON.stringify(value) },
+      });
+    },
+  },
 };
 </script>
 
@@ -75,5 +91,8 @@ export default {
 }
 .va-card {
   padding: 0 1rem 0 1rem;
+}
+.loading {
+  padding: 1rem;
 }
 </style>

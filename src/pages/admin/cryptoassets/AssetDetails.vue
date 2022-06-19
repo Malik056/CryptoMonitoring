@@ -183,7 +183,6 @@ export default {
   },
   methods: {
     openIssuer(issuer) {
-      debugger;
       const assetList = issuers.issuers;
       let foundIssuer;
       for (let i = 0; i < assetList.length; i++) {

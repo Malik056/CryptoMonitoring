@@ -8,11 +8,17 @@ const state = {
   issuers: [],
   cryptoAssets: [],
   issuersPage: 0,
-  cryptoAssetsPage: 0
+  cryptoAssetsPage: 0,
+  loading: false
 };
 
 const getters = {
-  getIssuers: state => state.getIssuers,
+  getIssuers: state => {
+    return state.issuers;
+  },
+  isLoading: state => {
+    return state.loading && state.issuers.length == 0;
+  },
   getAssets: state => state.cryptoAssets,
   getIssuerPage: state => state.issuersPage,
   getAssetsPage: state => state.cryptoAssetsPage
@@ -20,6 +26,7 @@ const getters = {
 
 const actions = {
   [UPDATE_ISSUERS]: async ({ commit }) => {
+    commit(UPDATE_ISSUERS);
     const issuers = issuerList.issuers;
     const fetchedIssuers = [];
     const fetchedAssets = [];
@@ -87,7 +94,11 @@ const actions = {
 };
 
 const mutations = {
+  [UPDATE_ISSUERS]: state => {
+    state.loading = true;
+  },
   [LOAD_SUCCESS]: (state, data) => {
+    state.loading = false;
     state.issuers = data.fetchedIssuers;
     state.cryptoAssets = data.fetchedAssets;
   }

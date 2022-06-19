@@ -19,11 +19,17 @@
         </div>
       </div>
     </va-card>
+    <va-card class="xs12 loading" v-if="isLoading">
+      <div class="flex md12 xs12">
+        <va-progress-bar indeterminate>Loading</va-progress-bar>
+      </div>
+    </va-card>
     <markup-table
+      v-else
       :headings="headings"
       :query="query"
       :initialPage="1"
-      :key="query"
+      :key="tableKey"
       :items="getIssuers"
       :filterKey="filterKey"
       :labels="labels"
@@ -36,7 +42,7 @@
 <script>
 import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
 import { mapGetters } from "vuex";
-import { UPDATE_ISSUERS } from '@/store/actions/issuers';
+import { UPDATE_ISSUERS } from "@/store/actions/issuers";
 
 export default {
   name: "issuers",
@@ -52,7 +58,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getIssuers"]),
+    ...mapGetters(["getIssuers", "isLoading"]),
+    tableKey() {
+      return this.query + this.getIssuers.toString();
+    },
     query() {
       return this.term;
     },
@@ -63,7 +72,7 @@ export default {
       return ["DID", "Entity Name", "Country"];
     },
   },
-  async created() {
+  created() {
     this.$store.dispatch(UPDATE_ISSUERS);
   },
   methods: {
@@ -83,5 +92,8 @@ export default {
 }
 .va-card {
   padding: 0 1rem 0 1rem;
+}
+.loading {
+  padding: 1rem;
 }
 </style>
