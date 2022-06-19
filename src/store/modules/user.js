@@ -1,13 +1,10 @@
 import { USER_REQUEST, USER_ERROR, USER_SUCCESS } from "../actions/user";
 import { apiCall } from "../../utils/api";
-import Vue from "vue";
 import { AUTH_LOGOUT } from "../actions/auth";
 
 const state = {
-  status: "",
-  profile: {},
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  super_classes: []
+  isSidebarMinimized: false,
+  userName: localStorage.getItem("user") ?? "Vasili S"
 };
 
 const getters = {
@@ -31,19 +28,25 @@ const actions = {
 };
 
 const mutations = {
-  [USER_REQUEST]: state => {
-    state.status = "loading";
+  updateSidebarCollapsedState(state, isSidebarMinimized) {
+    state.isSidebarMinimized = isSidebarMinimized;
   },
-  [USER_SUCCESS]: (state, resp) => {
-    state.status = "success";
-    Vue.set(state, "profile", resp);
-  },
-  [USER_ERROR]: state => {
-    state.status = "error";
-  },
-  [AUTH_LOGOUT]: state => {
-    state.profile = {};
+  changeUserName(state, newUserName) {
+    state.userName = newUserName;
   }
+  // [USER_REQUEST]: state => {
+  //   state.status = "loading";
+  // },
+  // [USER_SUCCESS]: (state, resp) => {
+  //   state.status = "success";
+  //   Vue.set(state, "profile", resp);
+  // },
+  // [USER_ERROR]: state => {
+  //   state.status = "error";
+  // },
+  // [AUTH_LOGOUT]: state => {
+  //   state.profile = {};
+  // }
 };
 
 export default {

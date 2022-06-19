@@ -1,10 +1,12 @@
-import { server } from "../store/index";
+import { server, blockChainAddress } from "../store/index";
 import axios from "axios";
+import Web3 from "web3";
 const mocks = {
   auth: { POST: { token: "This-is-a-mocked-token" } },
   "user/me": { GET: { name: localStorage.getItem("user")?.name ?? "" } }
 };
 
+const web3 = new Web3(blockChainAddress);
 export const getRequest = obj => {
   console.log("obj: ", obj);
   const serverAdd = server;
@@ -47,3 +49,8 @@ export const apiCall = ({ url, method }) =>
       }
     }, 1000);
   });
+
+export const getSmartContract = ({address, abi}) => {
+  const contract = new web3.eth.Contract(abi, address);
+  return contract;
+}

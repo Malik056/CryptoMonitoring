@@ -1,25 +1,27 @@
 import { createStore } from 'vuex'
-// import user from "./modules/user";
-// import auth from "./modules/auth";
+import user from "./modules/user";
+import auth from "./modules/auth";
+import issuers from "./modules/issuers";
 
 export const server = "http://csb.certit.eu/";
+export const blockChainAddress = "http://51.38.226.91:8545";
 
 export default createStore({
   strict: true, // process.env.NODE_ENV !== 'production',
-  // modules: {
-  //   user,
-  //   auth,
-  // }
-  state: {
-    isSidebarMinimized: false,
-    userName: localStorage.getItem('user') ?? 'Vasili S'
+  modules: {
+    user,
+    auth,
+    issuers
   },
-  mutations: {
-    updateSidebarCollapsedState(state, isSidebarMinimized) {
-      state.isSidebarMinimized = isSidebarMinimized
-    },
-    changeUserName(state, newUserName) {
-      state.userName = newUserName
-    }
-  },
+  // state: {
+
+  // },
+  // mutations: {
+  //   updateSidebarCollapsedState(state, isSidebarMinimized) {
+  //     state.isSidebarMinimized = isSidebarMinimized
+  //   },
+  //   changeUserName(state, newUserName) {
+  //     state.userName = newUserName
+  //   }
+  // },
 })

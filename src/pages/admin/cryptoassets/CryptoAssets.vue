@@ -25,7 +25,7 @@
       :query="query"
       :initialPage="1"
       :key="query"
-      :items="cryptoAssets"
+      :items="getAssets"
       :objId="objKey"
       :filterKey="filterKey"
       @clicked="onItemSelected"
@@ -36,6 +36,7 @@
 <script>
 import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
 import CryptoAssets from "@/data/tables/markup-table/assets.json";
+import { mapGetters } from "vuex";
 
 export default {
   name: "crypto_assets",
@@ -52,7 +53,7 @@ export default {
     };
   },
   computed: {
-
+    ...mapGetters(["getAssets"]),
     query() {
       return this.term;
     },
