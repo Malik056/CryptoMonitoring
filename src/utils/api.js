@@ -26,13 +26,13 @@ export const getRequest = obj => {
       // }
       // }
     )
-    .catch(err => {
-      console.log(err);
-      return {
-        data: `user1:cGFzczE=
-    user2:cGFzczI=`
-      };
-    });
+    // .catch(err => {
+    //   console.log(err);
+    //   return {
+    //     data: `user1:cGFzczE=
+    // user2:cGFzczI=`
+    //   };
+    // });
   return obj2;
 };
 

@@ -106,8 +106,8 @@
 
 <script>
 import { useColors } from "vuestic-ui";
+import { mapGetters } from 'vuex';
 import AssetContainer from "./AssetContainer";
-import assets from "@/data/tables/markup-table/assets.json";
 export default {
   components: {
     AssetContainer,
@@ -141,7 +141,7 @@ export default {
   },
   methods: {
     openAsset(asset) {
-      const assetList = assets.assets;
+      const assetList = this.getAssets;
       let foundAsset;
       for (let i = 0; i < assetList.length; i++) {
         const element = assetList[i];
@@ -162,6 +162,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters([["getAssets"]]),
     colors() {
       const { getColors } = useColors();
       const colors = getColors();

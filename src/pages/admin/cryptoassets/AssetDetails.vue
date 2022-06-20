@@ -151,7 +151,7 @@
 
 <script>
 import { useColors } from "vuestic-ui";
-import issuers from "@/data/tables/markup-table/issuers.json";
+import { mapGetters } from 'vuex';
 
 export default {
   props: {
@@ -181,13 +181,14 @@ export default {
       window.addEventListener("resize", this.onResize);
     });
   },
+
   methods: {
-    openIssuer(issuer) {
-      const assetList = issuers.issuers;
+    openIssuer(asset) {
+      const issuers = this.getIssuers;
       let foundIssuer;
-      for (let i = 0; i < assetList.length; i++) {
-        const element = assetList[i];
-        if (element.id === issuer.EmittingBodyId) {
+      for (let i = 0; i < issuers.length; i++) {
+        const element = issuers[i];
+        if (element.id === asset.EmittingBodyId) {
           foundIssuer = element;
         }
       }
@@ -205,6 +206,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters([["getIssuers"]]),
     colors() {
       const { getColors } = useColors();
       const colors = getColors();
