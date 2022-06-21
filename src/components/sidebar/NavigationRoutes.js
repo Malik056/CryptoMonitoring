@@ -40,7 +40,7 @@ export default {
       },
     },
     {
-      name: 'page5',
+      name: 'trustRegistry',
       displayName: 'Trust Registry',
       meta: {
         icon: 'vuestic-iconset-tables',

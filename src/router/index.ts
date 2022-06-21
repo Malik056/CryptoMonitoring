@@ -70,9 +70,9 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/pages/admin/cryptoassets/CryptoAssets.vue")
       },
       {
-        name: "page5",
-        path: "page5",
-        component: () => import("@/pages/admin/cryptoassets/CryptoAssets.vue")
+        name: "trustRegistry",
+        path: "registry",
+        component: () => import("@/pages/admin/trust-registry/TrustRegistry.vue")
       }
       // {
       //   name: 'statistics',

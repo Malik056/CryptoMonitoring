@@ -25,7 +25,10 @@ const getters = {
 };
 
 const actions = {
-  [UPDATE_ISSUERS]: async ({ commit }) => {
+  [UPDATE_ISSUERS]: async ({ commit, state }) => {
+    if (state.loading) {
+      return;
+    }
     commit(UPDATE_ISSUERS);
     const issuers = issuerList.issuers;
     const fetchedIssuers = [];

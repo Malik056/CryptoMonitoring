@@ -66,7 +66,8 @@
     "danger": "Danger",
     "warning": "Warning",
     "gray": "Gray",
-    "dark": "Dark"
+    "dark": "Dark",
+    "addItem": "Add Item"
   },
   "charts": {
     "horizontalBarChart": "Horizontal Bar Chart",
@@ -389,7 +390,7 @@
     "modalText": "File type is incorrect!"
   },
   "chips": {
-    "chips": { 
+    "chips": {
     "title": "Chips",
     "primary": "Primary chip",
     "secondary": "Secondary chip",
@@ -400,7 +401,7 @@
     "gray": "Gray chip",
     "dark": "Dark chip"
     },
-    "badges": { 
+    "badges": {
     "title": "Badges",
     "primary": "Primary badge",
     "secondary": "Secondary badge",

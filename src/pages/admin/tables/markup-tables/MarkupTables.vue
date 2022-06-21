@@ -12,7 +12,11 @@
           </thead>
 
           <tbody>
-            <tr v-for="user in users" :key="user[id]" v-on:click="onClickUser(user)">
+            <tr
+              v-for="user in users"
+              :key="user[id]"
+              v-on:click="onClickUser(user)"
+            >
               <td v-for="heading in dataKeys" :key="heading">
                 {{ user[heading] }}
               </td>
@@ -20,7 +24,12 @@
           </tbody>
         </table>
       </div>
-      <div class="row justify--end mt-2">
+      <div class="row justify--space-between mt-2">
+        <div class="flex xs4">
+          <div v-if="showAddButton">
+            <va-button @click="onAddItem">{{ $t(addButtonText) }}</va-button>
+          </div>
+        </div>
         <div class="flex">
           <va-pagination
             v-model="currentPage"
@@ -38,6 +47,16 @@ import data from "@/data/tables/markup-table/data.json";
 
 export default {
   props: {
+    showAddButton: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    addButtonText: {
+      type: String,
+      required: false,
+      default: 'buttons.addItem',
+    },
     headings: {
       type: [Array, null],
     },
@@ -89,7 +108,11 @@ export default {
   },
   methods: {
     onClickUser(user) {
-      return this.$emit('clicked', user);
+      return this.$emit("clicked", user);
+    },
+    onAddItem() {
+      console.log("Add Item Clicked");
+      return this.$emit('addItemClicked');
     },
     filterData() {
       return this.data.filter((value) => {

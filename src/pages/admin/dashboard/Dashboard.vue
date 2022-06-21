@@ -25,6 +25,7 @@ import DashboardTabs from "./DashboardTabs";
 import DashboardMap from "./DashboardMap";
 import DashboardTable from "./DashboardTable";
 import { UPDATE_ISSUERS } from "@/store/actions/issuers";
+import { UPDATE_REGISTRY } from "@/store/actions/trust_registry";
 
 export default {
   name: "dashboard",
@@ -37,6 +38,7 @@ export default {
   },
   created() {
     this.$store.dispatch(UPDATE_ISSUERS);
+    this.$store.dispatch(UPDATE_REGISTRY);
   },
   methods: {
     addAddressToMap({ city, country }) {

@@ -1,0 +1,180 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_ownerPA_PK",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_ownerPA_Name",
+				"type": "string"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_issuerAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_issuerID",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_ownerPA_PK",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_issuerName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_competentAuth",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "_offeror",
+				"type": "bool"
+			},
+			{
+				"internalType": "enum ERC1960TrustRegistry.mktInfra_type",
+				"name": "_marketInfraType",
+				"type": "uint8"
+			}
+		],
+		"name": "EIP160AddIssuer",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_issuerAddress",
+				"type": "address"
+			}
+		],
+		"name": "disableIssuer",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_issuerAddress",
+				"type": "address"
+			}
+		],
+		"name": "enableIssuer",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "issuingInstitution",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "issuerID",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "active",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "offeror",
+				"type": "bool"
+			},
+			{
+				"internalType": "string",
+				"name": "issuerPK",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "issuerName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "competentAuth",
+				"type": "string"
+			},
+			{
+				"internalType": "enum ERC1960TrustRegistry.mktInfra_type",
+				"name": "marketInfrastructureType",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ownerPA_Name",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ownerPA_PK",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]

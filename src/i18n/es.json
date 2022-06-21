@@ -19,7 +19,8 @@
     "main": "Botón Primario y Secundario",
     "micro": "MICRO",
     "pressed": "PRESIONADO",
-    "small": "PEQUEÑO"
+    "small": "PEQUEÑO",
+    "addItem": "Add Item"
   },
   "charts": {
     "bubbleChart": "Bubble Chart",

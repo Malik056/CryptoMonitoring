@@ -19,7 +19,7 @@
         </div>
       </div>
     </va-card>
-    <va-card class="xs12 loading" v-if="isLoading">
+    <va-card class="xs12 loading" v-if="isTrustRegistryLoading">
       <div class="flex md12 xs12">
         <va-progress-bar indeterminate>Loading</va-progress-bar>
       </div>
@@ -31,11 +31,25 @@
       :query="query"
       :initialPage="1"
       :key="tableKey"
-      :items="getAssets"
+      :items="getRegistry"
       :objId="objKey"
       :filterKey="filterKey"
+      :showAddButton="true"
       @clicked="onItemSelected"
+      @addItemClicked="onOpenForm"
     ></markup-table>
+    <va-modal :title="'Add Issuer'" ref="addItem" stateful blur>
+      <div>
+        <va-form ref="form">
+          <va-input
+            class="mb-4"
+            label="Name"
+            v-model="inputValue"
+            :rules="inputRules"
+          />
+        </va-form>
+      </div>
+    </va-modal>
   </div>
 </template>
 
@@ -43,11 +57,11 @@
 import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
 import CryptoAssets from "@/data/tables/markup-table/assets.json";
 import { mapGetters } from "vuex";
-import { UPDATE_ISSUERS } from '@/store/actions/issuers';
-import { UPDATE_REGISTRY } from '@/store/actions/trust_registry';
+import { UPDATE_ISSUERS } from "@/store/actions/issuers";
+import { UPDATE_REGISTRY } from "@/store/actions/trust_registry";
 
 export default {
-  name: "crypto_assets",
+  name: "trust_registry",
   components: {
     MarkupTable,
   },
@@ -55,21 +69,21 @@ export default {
     return {
       term: "",
       cryptoAssets: CryptoAssets.assets,
-      labels: ["CryptoAssetName", "EmittingBody", "Country", "CryptoAssetType"],
-      objKey: "CryptoAssetName",
-      filterKey: "CryptoAssetName",
+      labels: ["issuerName", "competentAuth", "active"],
+      objKey: "issuerName",
+      filterKey: "issuerName",
     };
   },
   computed: {
-    ...mapGetters(["getAssets", "isLoading"]),
+    ...mapGetters(["getRegistry", "isTrustRegistryLoading"]),
     tableKey() {
-      return this.query + this.getAssets.toString();
+      return this.query + this.getRegistry.toString();
     },
     query() {
       return this.term;
     },
     headings() {
-      return ["Name", "Emitting Body", "Country", "Asset Type"];
+      return ["Issuer Name", "Competent Authority", "Active"];
     },
   },
   created() {
@@ -77,12 +91,16 @@ export default {
     this.$store.dispatch(UPDATE_REGISTRY);
   },
   methods: {
-    onItemSelected(value) {
-      this.$router.push({
-        name: "assetDetails",
-        params: { asset: JSON.stringify(value) },
-      });
-    },
+    onOpenForm() {
+      console.log("Opening popup")
+      this.$refs.addItem.show();
+    }
+    // onItemSelected(value) {
+    // this.$router.push({
+    //   name: "assetDetails",
+    //   params: { asset: JSON.stringify(value) },
+    // });
+    // },
   },
 };
 </script>

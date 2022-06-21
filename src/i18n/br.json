@@ -21,7 +21,8 @@
     "main": "Primeiro & Segundo Botão",
     "micro": "MICRO",
     "pressed": "PRESSIONADO",
-    "small": "PEQUENO"
+    "small": "PEQUENO",
+    "addItem": "Add Item"
   },
   "charts": {
     "horizontalBarChart": "Barra de Gráfico Horizontal",

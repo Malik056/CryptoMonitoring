@@ -19,7 +19,8 @@
     "main": "主按钮和辅助按钮",
     "micro": "微型的",
     "pressed": "按下",
-    "small": "小的"
+    "small": "小的",
+    "addItem": "Add Item"
   },
   "charts": {
     "horizontalBarChart": "横条图",
