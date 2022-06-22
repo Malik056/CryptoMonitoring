@@ -1,4 +1,10 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import {
+  createRouter,
+  createWebHistory,
+  NavigationGuardNext,
+  RouteLocationNormalized,
+  RouteRecordRaw
+} from "vue-router";
 import AuthLayout from "@/layout/auth-layout.vue";
 import AppLayout from "@/layout/app-layout.vue";
 import Page404Layout from "@/layout/page-404-layout.vue";
@@ -6,17 +12,25 @@ import Page404Layout from "@/layout/page-404-layout.vue";
 // import RouteViewComponent from './route-view.vue'
 // import UIRoute from '@/pages/admin/ui/route'
 
-const ifAuthenticated = (to: any, from: any, next: any) => {
-  if (localStorage.getItem('user')) {
-      next();
-      return;
+const ifAuthenticated = (
+  to: RouteLocationNormalized,
+  from: RouteLocationNormalized,
+  next: NavigationGuardNext
+): void => {
+  if (localStorage.getItem("user")) {
+    next();
+    return;
   }
   next("login");
 };
-const ifNotAuthenticated = (to: any, from: any, next: any) => {
-  if (!localStorage.getItem('user')) {
-      next();
-      return;
+const ifNotAuthenticated = (
+  to: RouteLocationNormalized,
+  from: RouteLocationNormalized,
+  next: NavigationGuardNext
+) => {
+  if (!localStorage.getItem("user")) {
+    next();
+    return;
   }
   next("/admin/dashboard");
 };
@@ -72,7 +86,8 @@ const routes: Array<RouteRecordRaw> = [
       {
         name: "trustRegistry",
         path: "registry",
-        component: () => import("@/pages/admin/trust-registry/TrustRegistry.vue")
+        component: () =>
+          import("@/pages/admin/trust-registry/TrustRegistry.vue")
       }
       // {
       //   name: 'statistics',
@@ -244,9 +259,9 @@ const routes: Array<RouteRecordRaw> = [
       {
         name: "testPage",
         path: "testPage",
-        component: () => import("@/pages/TestPage.vue"),
+        component: () => import("@/pages/TestPage.vue")
       }
-    ],
+    ]
   },
   {
     path: "/404",

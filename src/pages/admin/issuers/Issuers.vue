@@ -69,7 +69,7 @@ export default {
       return ["DID", "Entity Name", "Country"];
     },
     headings() {
-      return ["DID", "Entity Name", "Country"];
+      return ["DID", this.$t('issuers.tableHeaders.name'), this.$t('issuers.tableHeaders.country')];
     },
   },
   created() {

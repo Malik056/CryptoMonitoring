@@ -40,10 +40,18 @@ const actions = {
       const issuingInstitution = await methods
         .issuingInstitution(issuer.address)
         .call();
+      const ownerPAName = await methods.ownerPA_Name().call();
+      const ownerPAPK = await methods.ownerPA_PK().call();
       const registryDataObj = {};
       registryDataObj.issuerName = issuingInstitution.issuerName;
       registryDataObj.competentAuth = issuingInstitution.competentAuth;
       registryDataObj.active = issuingInstitution.active;
+      registryDataObj.issuerID = issuingInstitution.issuerID;
+      registryDataObj.issuerPK = issuingInstitution.issuerPK;
+      registryDataObj.offeror = issuingInstitution.offeror;
+      registryDataObj.marketInfrastructureType = issuingInstitution.marketInfrastructureType;
+      registryDataObj.ownerPAName = ownerPAName;
+      registryDataObj.ownerPAPK = ownerPAPK;
       registries.push(registryDataObj);
     }
 

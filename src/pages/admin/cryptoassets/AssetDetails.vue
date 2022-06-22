@@ -56,15 +56,15 @@
           <div class="flex sm12 md7 xs12">
             <div>
               <h2 v-bind:style="{ color: colors.primary }">
-                Asset Information
+                {{$t('assets.details.title')}}
               </h2>
             </div>
             <div class="m2">
-              <label>Name</label>
+              <label>{{$t('assets.details.name')}}</label>
               <p>{{ assetData["CryptoAssetName"] }}</p>
             </div>
             <div class="m1">
-              <label>Emitting Body</label>
+              <label>{{$t('assets.details.emittingBody')}}</label>
               <p>
                 <a href="" @click.prevent="openIssuer(assetData)">{{
                   assetData["EmittingBody"]
@@ -74,11 +74,11 @@
             <div class="m1">
               <div class="row">
                 <div class="flex md6 sm6 xs6">
-                  <label>Country</label>
+                  <label>{{$t('assets.details.country')}}</label>
                   <p>{{ assetData["Country"] }}</p>
                 </div>
                 <div class="flex md6 sm6 xs6">
-                  <label>Asset Type</label>
+                  <label>{{$t('assets.details.type')}}</label>
                   <p>{{ assetData["CryptoAssetType"] }}</p>
                 </div>
               </div>
@@ -86,24 +86,24 @@
             <div class="m1">
               <div class="row">
                 <div class="flex md6 sm6 xs6">
-                  <label>Crypto Asset Symbol</label>
+                  <label>{{$t('assets.details.symbol')}}</label>
                   <p>{{ assetData["CryptoAssetSymbol"] }}</p>
                 </div>
                 <div class="flex md6 sm6 xs6">
-                  <label>Quantity of Tokens</label>
+                  <label>{{$t('assets.details.quantityOfTokens')}}</label>
                   <p>{{ assetData["QuantityofTokens"] }}</p>
                 </div>
               </div>
             </div>
             <div class="m3">
               <h2 v-bind:style="{ color: colors.primary }">
-                Asset Transparency
+                {{$t('assets.details.transparency.title')}}
               </h2>
             </div>
             <div class="m1">
               <div class="row">
                 <div class="flex md6 sm6 xs6">
-                  <label>Authorized Customers Type</label>
+                  <label>{{$t('assets.details.transparency.authorizedCustomerType')}}</label>
                   <p>
                     {{
                       assetData["Transparency"]["AuthorizedCustomersType"]
@@ -111,19 +111,7 @@
                   </p>
                 </div>
                 <div class="flex md6 sm6 xs6">
-                  <label>Incompatible Customer Types</label>
-                  <p>{{ assetData["Transparency"]["DistributionStrategy"] }}</p>
-                </div>
-              </div>
-            </div>
-            <div class="m1">
-              <div class="row">
-                <div class="flex md6 sm6 xs6">
-                  <label>Distribution Strategy</label>
-                  <p>{{ assetData["Transparency"]["ReferenceMarket"] }}</p>
-                </div>
-                <div class="flex md6 sm6 xs6">
-                  <label>Trader ID</label>
+                  <label>{{$t('assets.details.transparency.incompatibleCustomerType')}}</label>
                   <p>
                     {{ assetData["Transparency"]["IncompatibleCustomerTypes"] }}
                   </p>
@@ -133,11 +121,24 @@
             <div class="m1">
               <div class="row">
                 <div class="flex md6 sm6 xs6">
-                  <label>ReferenceMarket</label>
-                  <p>{{ assetData["Transparency"]["TraderID"] }}</p>
+                  <label>{{$t('assets.details.transparency.distributionStrategy')}}</label>
+                  <p>{{ assetData["Transparency"]["DistributionStrategy"] }}</p>
                 </div>
                 <div class="flex md6 sm6 xs6">
-                  <label>Timestamp</label>
+                  <label>{{$t('assets.details.transparency.traderID')}}</label>
+                  <p>{{ assetData["Transparency"]["TraderID"] }}</p>
+
+                </div>
+              </div>
+            </div>
+            <div class="m1">
+              <div class="row">
+                <div class="flex md6 sm6 xs6">
+                  <label>{{$t('assets.details.transparency.referenceMarket')}}</label>
+                  <p>{{ assetData["Transparency"]["ReferenceMarket"] }}</p>
+                </div>
+                <div class="flex md6 sm6 xs6">
+                  <label>{{$t('assets.details.transparency.updatedAt')}}</label>
                   <p>{{ assetData["Transparency"]["Timestamp"] }}</p>
                 </div>
               </div>

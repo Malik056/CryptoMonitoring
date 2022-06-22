@@ -3,7 +3,7 @@
     <div class="card">
       <div class="imgBx">
         <!-- <img src="../../../assets/crypto_asset.png" /> -->
-        <h1>{{asset.CryptoAssetSymbol}}</h1>
+        <h1>{{ asset.CryptoAssetSymbol }}</h1>
       </div>
       <div class="contentBx">
         <h2>{{ asset.CryptoAssetName }}</h2>
@@ -11,7 +11,7 @@
           <h3>{{ asset.CryptoAssetType }}</h3>
         </div>
         <div class="color">
-          <h3>Total Assets :</h3>
+          <h3>{{ $t("issuers.issuerDetails.totalAssets") }} :</h3>
           <span>{{ asset.CryptoAssetTotalSupply }}</span>
         </div>
       </div>
@@ -46,7 +46,7 @@ export default {
   position: relative;
   width: 320px;
   height: 250px;
-  background: linear-gradient(179.96deg, #144FC1 0.03%, #000000 99.97%);
+  background: linear-gradient(179.96deg, #144fc1 0.03%, #000000 99.97%);
   border-radius: 20px;
   overflow: hidden;
 }
@@ -100,7 +100,6 @@ export default {
   transform: translate(-50%, -50%) rotate(0deg);
   width: 120px;
 }
-
 
 .container .card .contentBx {
   position: absolute;

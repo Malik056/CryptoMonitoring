@@ -69,7 +69,7 @@ export default {
       return this.term;
     },
     headings() {
-      return ["Name", "Emitting Body", "Country", "Asset Type"];
+      return [this.$t('assets.tableHeaders.name'), this.$t('assets.tableHeaders.emittingBody'), this.$t('assets.tableHeaders.country'), this.$t('assets.tableHeaders.type')];
     },
   },
   created() {

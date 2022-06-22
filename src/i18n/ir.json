@@ -67,7 +67,12 @@
     "warning": "هشداری",
     "gray": "خاکستری",
     "dark": "تیره",
-    "addItem": "Add Item"
+    "addItem": "Add Item",
+    "update": "Update",
+    "cancel": "Cancel",
+    "create": "Create",
+    "done": "Done",
+    "ok": "ok"
   },
   "charts": {
     "horizontalBarChart": "نوار افقی نمودار",
@@ -346,7 +351,9 @@
     "right": "راست",
     "bottom": "پایین",
     "left": "چپ",
-    "message": "سه نوع برنامه نویس وجود دارد: البته همه ی آنها بسیار تنبل هستند پشم های خود را به ندرت اصلاح می کنند یک سری ها ادای برنامه نویس را در می آورند آنها از هر زبانی در حد سلام دنیا یادگرفته اند  و لیستی از تمام زبان های برنامه نویسی را در رزومه ی خودشان می آوردند برنامه نویس های جا افتاده و حرفه ای بسیار فروتن هستند و اصلا از خودشون تعریف نمی کنند. مثل علی شریفی نیستانی باشید"
+    "message": "سه نوع برنامه نویس وجود دارد: البته همه ی آنها بسیار تنبل هستند پشم های خود را به ندرت اصلاح می کنند یک سری ها ادای برنامه نویس را در می آورند آنها از هر زبانی در حد سلام دنیا یادگرفته اند  و لیستی از تمام زبان های برنامه نویسی را در رزومه ی خودشان می آوردند برنامه نویس های جا افتاده و حرفه ای بسیار فروتن هستند و اصلا از خودشون تعریف نمی کنند. مثل علی شریفی نیستانی باشید",
+    "addIssuer": "Add Issuer",
+    "updateIssuer": "Update Issuer"
   },
   "dropdown": {
     "default": "پیش فرض",
@@ -505,5 +512,58 @@
       "action1": "اقدام یک",
       "action2": "اقدام دو"
     }
+  },
+  "issuers": {
+    "tableHeaders": {
+      "name": "Entity Name",
+      "country": "Country"
+    },
+    "issuerDetails": {
+      "title": "Issuer Information",
+      "country": "Country",
+      "name": "Name",
+      "type": "Type",
+      "assetsTitle": "Crypto Assets",
+      "totalAssets": "Total Assets"
+    }
+  },
+  "assets": {
+    "tableHeaders": {
+      "name": "Name",
+      "emittingBody": "Emitting Body",
+      "country": "Country",
+      "type": "Asset Type"
+    },
+    "details": {
+      "title": "Asset Information",
+      "name": "Name",
+      "emittingBody": "Emitting Body",
+      "country": "Country",
+      "type": "Asset Type",
+      "symbol": "Crypto Asset Symbol",
+      "quantityOfTokens": "Quantity of Tokens",
+      "transparency": {
+        "title": "Asset Transparency",
+        "authorizedCustomerType": "Authorized Customers Type",
+        "incompatibleCustomerType": "Incompatible Customer Types",
+        "distributionStrategy": "Distribution Strategy",
+        "traderID": "Trader ID",
+        "referenceMarket": "Reference Market",
+        "updatedAt": "Last Updated"
+      }
+    }
+  },
+  "trustRegistry": {
+    "modal": {
+      "address": "Issuer Address",
+      "id": "Issuer ID",
+      "name": "Issuer Name",
+      "competentAuth": "Competent Authority",
+      "offeror": "Offeror",
+      "marketInfraType": "Market Infra Type"
+    }
+  },
+  "errorMessages": {
+    "required": "This field is required"
   }
 }

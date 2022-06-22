@@ -67,7 +67,12 @@
     "warning": "Warning",
     "gray": "Gray",
     "dark": "Dark",
-    "addItem": "Add Item"
+    "addItem": "Add Item",
+    "update": "Update",
+    "cancel": "Cancel",
+    "create": "Create",
+    "done": "Done",
+    "ok": "ok"
   },
   "charts": {
     "horizontalBarChart": "Horizontal Bar Chart",
@@ -358,7 +363,9 @@
     "right": "Right",
     "bottom": "Bottom",
     "left": "Left",
-    "message": "There are three species of zebras: the plains zebra, the mountain zebra and the Grévy's zebra. The plains zebra and the mountain zebra belong to the subgenus Hippotigris, but Grévy's\n        zebra is the sole species of subgenus\n        Dolichohippus. The latter resembles an ass, to which it is closely\n        related, while the former two are more\n        horse-like. All three belong to the genus Equus, along with other living\n        equids."
+    "message": "There are three species of zebras: the plains zebra, the mountain zebra and the Grévy's zebra. The plains zebra and the mountain zebra belong to the subgenus Hippotigris, but Grévy's\n        zebra is the sole species of subgenus\n        Dolichohippus. The latter resembles an ass, to which it is closely\n        related, while the former two are more\n        horse-like. All three belong to the genus Equus, along with other living\n        equids.",
+    "addIssuer": "Add Issuer",
+    "updateIssuer": "Update Issuer"
   },
   "dropdown": {
     "default": "Default",
@@ -391,26 +398,26 @@
   },
   "chips": {
     "chips": {
-    "title": "Chips",
-    "primary": "Primary chip",
-    "secondary": "Secondary chip",
-    "success": "Success chip",
-    "info": "Info chip",
-    "danger": "Danger chip",
-    "warning": "Warning chip",
-    "gray": "Gray chip",
-    "dark": "Dark chip"
+      "title": "Chips",
+      "primary": "Primary chip",
+      "secondary": "Secondary chip",
+      "success": "Success chip",
+      "info": "Info chip",
+      "danger": "Danger chip",
+      "warning": "Warning chip",
+      "gray": "Gray chip",
+      "dark": "Dark chip"
     },
     "badges": {
-    "title": "Badges",
-    "primary": "Primary badge",
-    "secondary": "Secondary badge",
-    "success": "Success badge",
-    "info": "Info badge",
-    "danger": "Danger badge",
-    "warning": "Warning badge",
-    "gray": "Gray badge",
-    "dark": "Dark badge"
+      "title": "Badges",
+      "primary": "Primary badge",
+      "secondary": "Secondary badge",
+      "success": "Success badge",
+      "info": "Info badge",
+      "danger": "Danger badge",
+      "warning": "Warning badge",
+      "gray": "Gray badge",
+      "dark": "Dark badge"
     }
   },
   "navbar": {
@@ -491,7 +498,7 @@
       "monitoring_issuers": {
         "issuer_enabled": "Issuer Enabled",
         "active_issuer": "Active Issuer",
-        "issuer_country" : "Country of the issuing institution",
+        "issuer_country": "Country of the issuing institution",
         "whitepaper_checking": "Checking the Whitepaper",
         "cryptoasset_name": "Official name of the cryptoasset",
         "cryptoasset_type": "Cryptoasset type",
@@ -500,21 +507,21 @@
         "is_eu_currency": "Is eu currency",
         "institutes_lei": "LEI of the issuing institution",
         "issuing_institute_id": "ID (DID) of the issuing institution",
-        "institute_name":"Name of the issuing institution"
+        "institute_name": "Name of the issuing institution"
       },
       "monitor_cryptoassets_claims": {
         "claim_active": "Claim active / inactive",
         "claim_details": "Claim details",
         "claim_timestamp": "Claim details"
       },
-      "monitor_withdrawal" : {
-        "withdraw_active" : "Withdrawal active / inactive",
-        "withdraw_details" : "Details of the withdrawal",
+      "monitor_withdrawal": {
+        "withdraw_active": "Withdrawal active / inactive",
+        "withdraw_details": "Details of the withdrawal",
         "withdraw_timestamp": "Timestamp of the withdrawal"
       },
-      "monitor_authorized_issuers" : {
-        "ragulator_verification" : "Verification of the regulator of the register",
-        "withdraw_details" : "Details of the withdrawal",
+      "monitor_authorized_issuers": {
+        "ragulator_verification": "Verification of the regulator of the register",
+        "withdraw_details": "Details of the withdrawal",
         "withdraw_timestamp": "Timestamp of the withdrawal"
       },
       "monitor_cryptoassets": {
@@ -613,5 +620,58 @@
     "overflow": "Tabs Overflow",
     "hidden": "Tabs with Hidden slider",
     "grow": "Tabs Grow"
+  },
+  "issuers": {
+    "tableHeaders": {
+      "name": "Entity Name",
+      "country": "Country"
+    },
+    "issuerDetails": {
+      "title": "Issuer Information",
+      "country": "Country",
+      "name": "Name",
+      "type": "Type",
+      "assetsTitle": "Crypto Assets",
+      "totalAssets": "Total Assets"
+    }
+  },
+  "assets": {
+    "tableHeaders": {
+      "name": "Name",
+      "emittingBody": "Emitting Body",
+      "country": "Country",
+      "type": "Asset Type"
+    },
+    "details": {
+      "title": "Asset Information",
+      "name": "Name",
+      "emittingBody": "Emitting Body",
+      "country": "Country",
+      "type": "Asset Type",
+      "symbol": "Crypto Asset Symbol",
+      "quantityOfTokens": "Quantity of Tokens",
+      "transparency": {
+        "title": "Asset Transparency",
+        "authorizedCustomerType": "Authorized Customers Type",
+        "incompatibleCustomerType": "Incompatible Customer Types",
+        "distributionStrategy": "Distribution Strategy",
+        "traderID": "Trader ID",
+        "referenceMarket": "Reference Market",
+        "updatedAt": "Last Updated"
+      }
+    },
+    "trustRegistry": {
+      "modal": {
+        "address": "Issuer Address",
+        "id": "Issuer ID",
+        "name": "Issuer Name",
+        "competentAuth": "Competent Authority",
+        "offeror": "Offeror",
+        "marketInfraType": "Market Infra Type"
+      }
+    }
+  },
+  "errorMessages": {
+    "required": "This field is required"
   }
 }

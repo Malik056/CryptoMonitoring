@@ -20,7 +20,12 @@
     "micro": "微型的",
     "pressed": "按下",
     "small": "小的",
-    "addItem": "Add Item"
+    "addItem": "Add Item",
+    "update": "Update",
+    "create": "Create",
+    "cancel": "Cancel",
+    "done": "Done",
+    "ok": "ok"
   },
   "charts": {
     "horizontalBarChart": "横条图",
@@ -193,7 +198,9 @@
     "static": "静态",
     "staticMessage": "这是一个静态对话框，背景点击不会关闭它。",
     "staticTitle": "静态对话框",
-    "title": "模态对话框"
+    "title": "模态对话框",
+    "addIssuer": "Add Issuer",
+    "updateIssuer": "Update Issuer"
   },
   "dropdown": {
     "default": "默认项",
@@ -318,5 +325,58 @@
       "action1": "行为 1",
       "action2": "行为 2"
     }
+  },
+  "issuers": {
+    "tableHeaders": {
+      "name": "Entity Name",
+      "country": "Country"
+    },
+    "issuerDetails": {
+      "title": "Issuer Information",
+      "country": "Country",
+      "name": "Name",
+      "type": "Type",
+      "assetsTitle": "Crypto Assets",
+      "totalAssets": "Total Assets"
+    }
+  },
+  "assets": {
+    "tableHeaders": {
+      "name": "Name",
+      "emittingBody": "Emitting Body",
+      "country": "Country",
+      "type": "Asset Type"
+    },
+    "details": {
+      "title": "Asset Information",
+      "name": "Name",
+      "emittingBody": "Emitting Body",
+      "country": "Country",
+      "type": "Asset Type",
+      "symbol": "Crypto Asset Symbol",
+      "quantityOfTokens": "Quantity of Tokens",
+      "transparency": {
+        "title": "Asset Transparency",
+        "authorizedCustomerType": "Authorized Customers Type",
+        "incompatibleCustomerType": "Incompatible Customer Types",
+        "distributionStrategy": "Distribution Strategy",
+        "traderID": "Trader ID",
+        "referenceMarket": "Reference Market",
+        "updatedAt": "Last Updated"
+      }
+    }
+  },
+  "trustRegistry": {
+    "modal": {
+      "address": "Issuer Address",
+      "id": "Issuer ID",
+      "name": "Issuer Name",
+      "competentAuth": "Competent Authority",
+      "offeror": "Offeror",
+      "marketInfraType": "Market Infra Type"
+    }
+  },
+  "errorMessages": {
+    "required": "This field is required"
   }
 }

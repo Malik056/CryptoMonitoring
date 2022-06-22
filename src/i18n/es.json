@@ -20,7 +20,12 @@
     "micro": "MICRO",
     "pressed": "PRESIONADO",
     "small": "PEQUEÑO",
-    "addItem": "Add Item"
+    "addItem": "Add Item",
+    "update": "Update",
+    "cancel": "Cancel",
+    "create": "Create",
+    "done": "Done",
+    "ok": "ok"
   },
   "charts": {
     "bubbleChart": "Bubble Chart",
@@ -174,7 +179,9 @@
     "smallTitle": "Modal Pequeña",
     "staticMessage": "Esto es un modal estático. No se cerrará haciendo clic en el fondo.",
     "staticTitle": "Modal Estático",
-    "title": "Modals"
+    "title": "Modals",
+    "addIssuer": "Add Issuer",
+    "updateIssuer": "Update Issuer"
   },
   "fileUpload": {
     "advancedMediaGallery": "Avanzado, Galería de medios",
@@ -253,5 +260,58 @@
     "language": "Cambiar Idioma",
     "profile": "Mi Perfil",
     "logout": "Cerrar Sesión"
+  },
+  "issuers": {
+    "tableHeaders": {
+      "name": "Entity Name",
+      "country": "Country"
+    },
+    "issuerDetails": {
+      "title": "Issuer Information",
+      "country": "Country",
+      "name": "Name",
+      "type": "Type",
+      "assetsTitle": "Crypto Assets",
+      "totalAssets": "Total Assets"
+    }
+  },
+  "assets": {
+    "tableHeaders": {
+      "name": "Name",
+      "emittingBody": "Emitting Body",
+      "country": "Country",
+      "type": "Asset Type"
+    },
+    "details": {
+      "title": "Asset Information",
+      "name": "Name",
+      "emittingBody": "Emitting Body",
+      "country": "Country",
+      "type": "Asset Type",
+      "symbol": "Crypto Asset Symbol",
+      "quantityOfTokens": "Quantity of Tokens",
+      "transparency": {
+        "title": "Asset Transparency",
+        "authorizedCustomerType": "Authorized Customers Type",
+        "incompatibleCustomerType": "Incompatible Customer Types",
+        "distributionStrategy": "Distribution Strategy",
+        "traderID": "Trader ID",
+        "referenceMarket": "Reference Market",
+        "updatedAt": "Last Updated"
+      }
+    }
+  },
+  "trustRegistry": {
+    "modal": {
+      "address": "Issuer Address",
+      "id": "Issuer ID",
+      "name": "Issuer Name",
+      "competentAuth": "Competent Authority",
+      "offeror": "Offeror",
+      "marketInfraType": "Market Infra Type"
+    }
+  },
+  "errorMessages": {
+    "required": "This field is required"
   }
 }

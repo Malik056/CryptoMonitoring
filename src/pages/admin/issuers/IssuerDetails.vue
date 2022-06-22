@@ -56,11 +56,11 @@
           <div class="flex sm12 md7 xs12">
             <div>
               <h2 v-bind:style="{ color: colors.primary }">
-                Issuer Information
+                {{ $t("issuers.issuerDetails.title") }}
               </h2>
             </div>
             <div class="m2">
-              <label>Name</label>
+              <label>{{ $t("issuers.issuerDetails.name") }}</label>
               <p>{{ issuerData["Entity Name"] }}</p>
             </div>
             <div class="m1">
@@ -74,17 +74,19 @@
             <div class="m1">
               <div class="row">
                 <div class="flex md6 sm6 xs6">
-                  <label>Country</label>
+                  <label>{{ $t("issuers.issuerDetails.country") }}</label>
                   <p>{{ issuerData["Country"] }}</p>
                 </div>
                 <div class="flex md6 sm6 xs6">
-                  <label>Type</label>
+                  <label>{{ $t("issuers.issuerDetails.type") }}</label>
                   <p>{{ issuerData["Type"] }}</p>
                 </div>
               </div>
             </div>
             <div class="m3">
-              <h2 v-bind:style="{ color: colors.primary }">Crypto Assets</h2>
+              <h2 v-bind:style="{ color: colors.primary }">
+                {{ $t("issuers.issuerDetails.assetsTitle") }}
+              </h2>
             </div>
             <br />
             <div class="assets-container">
@@ -106,7 +108,7 @@
 
 <script>
 import { useColors } from "vuestic-ui";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 import AssetContainer from "./AssetContainer";
 export default {
   components: {
