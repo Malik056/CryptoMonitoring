@@ -48,8 +48,8 @@
             <div class="flex xs-12 md-6 align-content--start">
               <va-input
                 class="mb-4"
-                :label="$t('trustRegistry.modal.address')"
-                v-model="selectedObj.issuerAddress"
+                :label="$t('trustRegistry.modal.name')"
+                v-model="selectedObj.issuerName"
                 :readonly="!newModal"
                 :rules="newModal ? [required] : []"
               />
@@ -57,8 +57,8 @@
             <div class="flex xs-12 md-6 align-content--start">
               <va-input
                 class="mb-4"
-                :label="$t('trustRegistry.modal.id')"
-                v-model="selectedObj.issuerID"
+                :label="$t('trustRegistry.modal.competentAuth')"
+                v-model="selectedObj.competentAuth"
                 :readonly="!newModal"
                 :rules="newModal ? [required] : []"
               />
@@ -66,15 +66,15 @@
           </div>
           <va-input
             class="mb-4"
-            :label="$t('trustRegistry.modal.name')"
-            v-model="selectedObj.issuerName"
+            :label="$t('trustRegistry.modal.address')"
+            v-model="selectedObj.issuerAddress"
             :readonly="!newModal"
             :rules="newModal ? [required] : []"
           />
           <va-input
             class="mb-4"
-            :label="$t('trustRegistry.modal.competentAuth')"
-            v-model="selectedObj.competentAuth"
+            :label="$t('trustRegistry.modal.id')"
+            v-model="selectedObj.issuerID"
             :readonly="!newModal"
             :rules="newModal ? [required] : []"
           />

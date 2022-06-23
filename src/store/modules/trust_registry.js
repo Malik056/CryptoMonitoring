@@ -43,6 +43,7 @@ const actions = {
       const ownerPAName = await methods.ownerPA_Name().call();
       const ownerPAPK = await methods.ownerPA_PK().call();
       const registryDataObj = {};
+      registryDataObj.issuerAddress = issuer.address;
       registryDataObj.issuerName = issuingInstitution.issuerName;
       registryDataObj.competentAuth = issuingInstitution.competentAuth;
       registryDataObj.active = issuingInstitution.active;
