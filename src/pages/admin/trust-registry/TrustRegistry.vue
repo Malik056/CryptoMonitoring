@@ -35,6 +35,7 @@
       :objId="objKey"
       :filterKey="filterKey"
       :showAddButton="true"
+      :addButtonText="'buttons.addIssuer'"
       @clicked="onItemSelected"
       @addItemClicked="onOpenForm"
     ></markup-table>
@@ -282,7 +283,7 @@ export default {
         ownerPAPK: "",
       };
       this.newModal = true;
-      this.$refs.addItem.show();
+      this.$refs.issuerModal.show();
     },
     onItemSelected(obj) {
       this.selectedObj = { ...obj };
@@ -291,7 +292,7 @@ export default {
       this.modalHeight = "100%";
       this.modalDisplay = "none";
       this.showModal = "true";
-      // this.$refs.addItem.show();
+      // this.$refs.issuerModal.show();
     },
   },
 };
