@@ -100,6 +100,13 @@
                   :rounded="false"
                   :disabled="newModal ? false : true"
                 />
+                <label
+                  v-if="offerorError"
+                  style="font-weight: normal"
+                  :style="{ color: colors.danger }"
+                >
+                  {{ $t("errorMessages.required") }}
+                </label>
               </div>
             </div>
             <div class="flex xs-12 md-6 align-content--start">
@@ -189,6 +196,7 @@ export default {
       term: "",
       showModal: false,
       activeError: false,
+      offerorError: false,
       options: [
         { label: "Yes", value: true },
         { label: "No", value: false },
@@ -236,6 +244,7 @@ export default {
     onCancel() {
       this.showModal = false;
       this.activeError = false;
+      this.offerorError = false;
     },
     required(value) {
       if (!value || value.isEmpty) {
@@ -248,9 +257,11 @@ export default {
       let valid = this.$refs.form.validate();
       if (!this.selectedObj.offeror) {
         this.activeError = true;
+        this.offerorError = true;
         valid = false;
       } else {
         this.activeError = false;
+        this.offerorError = false;
       }
       if (!valid) {
         return;
@@ -259,6 +270,7 @@ export default {
         valid = !!this.selectedObj.offeror;
         if (!valid) {
           this.activeError = true;
+          this.offerorError = true;
           return;
         }
       } else {
@@ -267,6 +279,7 @@ export default {
     },
     onChangeValue() {
       this.activeError = false;
+      this.offerorError = false;
     },
     onOpenForm() {
       this.showModal = true;
