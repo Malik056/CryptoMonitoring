@@ -80,8 +80,8 @@
           />
           <label>{{ $t("trustRegistry.modal.offeror") }}</label>
           <va-button-toggle
-            :toggle-color="colors.secondary"
-            :color="colors.primary"
+            :toggle-color="colors.primary"
+            :color="colors.secondary"
             v-model="selectedObj.offeror"
             :options="options"
             @input="onChangeValue"
