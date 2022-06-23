@@ -38,11 +38,90 @@
       @clicked="onItemSelected"
       @addItemClicked="onOpenForm"
     ></markup-table>
-    <div v-if="showModal" :style="{ display: modalDisplay }">
-      <div class="row" style="position: relative">
-        <va-card class="md6 flex"> </va-card>
-      </div>
-    </div>
+    <modal v-if="showModal" @close="onCancel">
+      <template #header>
+        {{ newModal ? $t("modal.addIssuer") : $t("modal.updateIssuer") }}
+      </template>
+      <template #body>
+        <va-form ref="form" style="width: 100%">
+          <div class="row">
+            <div class="flex xs-12 md-6 align-content--start">
+              <va-input
+                class="mb-4"
+                :label="$t('trustRegistry.modal.address')"
+                v-model="selectedObj.issuerAddress"
+                :readonly="!newModal"
+                :rules="newModal ? [required] : []"
+              />
+            </div>
+            <div class="flex xs-12 md-6 align-content--start">
+              <va-input
+                class="mb-4"
+                :label="$t('trustRegistry.modal.id')"
+                v-model="selectedObj.issuerID"
+                :readonly="!newModal"
+                :rules="newModal ? [required] : []"
+              />
+            </div>
+          </div>
+          <va-input
+            class="mb-4"
+            :label="$t('trustRegistry.modal.name')"
+            v-model="selectedObj.issuerName"
+            :readonly="!newModal"
+            :rules="newModal ? [required] : []"
+          />
+          <va-input
+            class="mb-4"
+            :label="$t('trustRegistry.modal.competentAuth')"
+            v-model="selectedObj.competentAuth"
+            :readonly="!newModal"
+            :rules="newModal ? [required] : []"
+          />
+          <label>{{ $t("trustRegistry.modal.offeror") }}</label>
+          <va-button-toggle
+            :toggle-color="colors.secondary"
+            :color="colors.primary"
+            v-model="selectedObj.offeror"
+            :options="options"
+            @input="onChangeValue"
+            size="small"
+          />
+          <label
+            v-if="offerorError"
+            style="font-weight: normal"
+            :style="{ color: colors.danger }"
+          >
+            {{ $t("errorMessages.required") }}
+          </label>
+          <va-input
+            class="mb-4 mt-4"
+            :label="$t('trustRegistry.modal.marketInfraType')"
+            v-model="selectedObj.marketInfraType"
+            :readonly="!newModal"
+            :rules="newModal ? [required] : []"
+          />
+          <div class="row">
+            <div class="flex">
+              <va-button @click="onCancel" outline>{{
+                $t("buttons.cancel")
+              }}</va-button>
+            </div>
+            <div class="flex">
+              <va-button
+                @click="saveIssuer"
+                outline
+                :disabled="newModal ? false : !updateAvailable">{{
+                newModal ? $t("buttons.create") : $t("buttons.update")
+              }}</va-button>
+            </div>
+          </div>
+        </va-form>
+      </template>
+      <template #footer>
+        <div></div>
+      </template>
+    </modal>
   </div>
 </template>
 
@@ -51,11 +130,14 @@ import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
 import { mapGetters } from "vuex";
 import { UPDATE_ISSUERS } from "@/store/actions/issuers";
 import { UPDATE_REGISTRY } from "@/store/actions/trust_registry";
+import Modal from "./TestDialog.vue";
+import { useColors } from "vuestic-ui";
 
 export default {
   name: "trust_registry",
   components: {
     MarkupTable,
+    Modal,
   },
   data() {
     return {
@@ -63,14 +145,15 @@ export default {
       showModal: false,
       offerorError: false,
       options: [
-        { label: "Yes", value: 0 },
-        { label: "No", value: 0 },
+        { label: "Yes", value: true },
+        { label: "No", value: false },
       ],
       labels: ["issuerName", "competentAuth", "active"],
       objKey: "issuerName",
       filterKey: "issuerName",
       newModal: false,
       selectedObj: {},
+      originalObj: {},
     };
   },
   computed: {
@@ -84,6 +167,21 @@ export default {
     headings() {
       return ["Issuer Name", "Competent Authority", "Active"];
     },
+    colors() {
+      const { getColors } = useColors();
+      const colors = getColors();
+      return colors;
+    },
+    updateAvailable() {
+      const keys = Object.keys(this.selectedObj);
+      for (let index = 0; index < keys.length; index++) {
+        const key = keys[index];
+        if (this.selectedObj[key] != this.originalObj[key]) {
+          return true;
+        }
+      }
+      return false;
+    },
   },
   created() {
     this.$store.dispatch(UPDATE_ISSUERS);
@@ -91,8 +189,8 @@ export default {
   },
   methods: {
     onCancel() {
-      this.modalHeight = "0%";
-      this.modalDisplay = "block";
+      this.showModal = false;
+      this.offerorError = false;
     },
     required(value) {
       if (!value || value.isEmpty) {
@@ -103,7 +201,12 @@ export default {
     saveIssuer() {
       console.log("Saving Issuer");
       let valid = this.$refs.form.validate();
-
+      if (!this.selectedObj.offeror) {
+        this.offerorError = true;
+        valid = false;
+      } else {
+        this.offerorError = false;
+      }
       if (!valid) {
         return;
       }
@@ -114,8 +217,6 @@ export default {
           return;
         }
       } else {
-        this.modalHeight = "0%";
-        this.modalDisplay = "none";
         console.log("Update");
       }
     },
@@ -123,31 +224,29 @@ export default {
       this.offerorError = false;
     },
     onOpenForm() {
-      // this.$emit('openModal');
       this.showModal = true;
-      return;
-      // console.log("Opening popup");
-      // this.selectedObj = {
-      //   issuerName: "",
-      //   competentAuth: "",
-      //   active: false,
-      //   issuerID: "",
-      //   issuerPK: "",
-      //   offeror: false,
-      //   marketInfrastructureType: "",
-      //   ownerPAName: "",
-      //   ownerPAPK: "",
-      // };
-      // this.newModal = true;
-      // // this.modalHeight = "100%";
-      // // this.modalDisplay = "block";
-      // this.$refs.addItem.show();
+      console.log("Opening popup");
+      this.selectedObj = {
+        issuerName: "",
+        competentAuth: "",
+        active: false,
+        issuerID: "",
+        issuerPK: "",
+        offeror: false,
+        marketInfrastructureType: "",
+        ownerPAName: "",
+        ownerPAPK: "",
+      };
+      this.newModal = true;
+      this.$refs.addItem.show();
     },
     onItemSelected(obj) {
-      this.selectedObj = obj;
+      this.selectedObj = { ...obj };
+      this.originalObj = obj;
       this.newModal = false;
       this.modalHeight = "100%";
       this.modalDisplay = "none";
+      this.showModal = "true";
       // this.$refs.addItem.show();
     },
   },
@@ -167,7 +266,7 @@ export default {
 .loading {
   padding: 1rem;
 }
-.label {
+label {
   font-size: 12px;
   font-weight: 700;
   line-height: 12px;

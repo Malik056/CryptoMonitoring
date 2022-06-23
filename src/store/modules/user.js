@@ -9,7 +9,8 @@ const state = {
 
 const getters = {
   getProfile: state => state.profile,
-  isProfileLoaded: state => !!state.profile.name
+  isProfileLoaded: state => !!state.profile.name,
+  isSidebarMinimized: state => state.isSidebarMinimized
 };
 
 const actions = {
