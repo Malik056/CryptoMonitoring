@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <dashboard-charts />
-    <dashboard-info-block />
+    <!-- <dashboard-info-block />
     <div class="row row-equal">
       <div class="flex xs12 lg6">
         <dashboard-tabs @submit="addAddressToMap" />
@@ -14,16 +14,16 @@
       <div class="flex lg12 xs12">
         <dashboard-table></dashboard-table>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import DashboardCharts from "./DashboardCharts";
-import DashboardInfoBlock from "./DashboardInfoBlock";
-import DashboardTabs from "./DashboardTabs";
-import DashboardMap from "./DashboardMap";
-import DashboardTable from "./DashboardTable";
+// import DashboardInfoBlock from "./DashboardInfoBlock";
+// import DashboardTabs from "./DashboardTabs";
+// import DashboardMap from "./DashboardMap";
+// import DashboardTable from "./DashboardTable";
 import { UPDATE_ISSUERS } from "@/store/actions/issuers";
 import { UPDATE_REGISTRY } from "@/store/actions/trust_registry";
 
@@ -31,10 +31,10 @@ export default {
   name: "dashboard",
   components: {
     DashboardCharts,
-    DashboardInfoBlock,
-    DashboardTabs,
-    DashboardMap,
-    DashboardTable,
+    // DashboardInfoBlock,
+    // DashboardTabs,
+    // DashboardMap,
+    // DashboardTable,
   },
   created() {
     this.$store.dispatch(UPDATE_ISSUERS);

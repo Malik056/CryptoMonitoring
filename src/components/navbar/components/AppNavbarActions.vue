@@ -1,6 +1,5 @@
 <template>
   <div class="app-navbar-actions">
-    <a href="#" v-on:click.prevent="gotoTestPage">Test page</a>
     <color-dropdown class="app-navbar-actions__item"/>
     <message-dropdown class="app-navbar-actions__item"/>
     <notification-dropdown class="app-navbar-actions__item"/>
@@ -53,9 +52,6 @@ export default {
     },
   },
   methods: {
-    gotoTestPage() {
-      this.$router.push({name: 'testPage'});
-    }
   }
 }
 </script>
