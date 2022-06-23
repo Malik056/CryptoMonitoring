@@ -78,26 +78,70 @@
             :readonly="!newModal"
             :rules="newModal ? [required] : []"
           />
-          <label>{{ $t("trustRegistry.modal.offeror") }}</label>
-          <va-button-toggle
-            :toggle-color="colors.primary"
-            :color="colors.secondary"
-            v-model="selectedObj.offeror"
-            :options="options"
-            @input="onChangeValue"
-            size="small"
+          <va-input
+            class="mb-4"
+            :label="$t('trustRegistry.modal.pk')"
+            v-model="selectedObj.issuerPK"
+            :readonly="!newModal"
+            :rules="newModal ? [required] : []"
           />
-          <label
-            v-if="offerorError"
-            style="font-weight: normal"
-            :style="{ color: colors.danger }"
-          >
-            {{ $t("errorMessages.required") }}
-          </label>
+          <div class="row">
+            <div class="flex xs-12 md-6 align-content--start">
+              <div>
+                <label>{{ $t("trustRegistry.modal.offeror") }}</label>
+                <va-button-toggle
+                  :toggle-color="colors.primary"
+                  :color="colors.secondary"
+                  v-model="selectedObj.offeror"
+                  :options="options"
+                  @input="onChangeValue"
+                  size="small"
+                  :rounded="false"
+                  :disabled="newModal ? false : true"
+                />
+              </div>
+            </div>
+            <div class="flex xs-12 md-6 align-content--start">
+              <div>
+                <label>{{ $t("trustRegistry.modal.active") }}</label>
+                <va-button-toggle
+                  :toggle-color="colors.primary"
+                  :color="colors.secondary"
+                  v-model="selectedObj.active"
+                  :options="options"
+                  @input="onChangeValue"
+                  :rounded="false"
+                  size="small"
+                />
+
+                <label
+                  v-if="activeError"
+                  style="font-weight: normal"
+                  :style="{ color: colors.danger }"
+                >
+                  {{ $t("errorMessages.required") }}
+                </label>
+              </div>
+            </div>
+          </div>
           <va-input
             class="mb-4 mt-4"
             :label="$t('trustRegistry.modal.marketInfraType')"
             v-model="selectedObj.marketInfraType"
+            :readonly="!newModal"
+            :rules="newModal ? [required] : []"
+          />
+          <va-input
+            class="mb-4 mt-4"
+            :label="$t('trustRegistry.modal.ownerName')"
+            v-model="selectedObj.ownerPAName"
+            :readonly="!newModal"
+            :rules="newModal ? [required] : []"
+          />
+          <va-input
+            class="mb-4 mt-4"
+            :label="$t('trustRegistry.modal.ownerPK')"
+            v-model="selectedObj.ownerPAPK"
             :readonly="!newModal"
             :rules="newModal ? [required] : []"
           />
@@ -143,7 +187,7 @@ export default {
     return {
       term: "",
       showModal: false,
-      offerorError: false,
+      activeError: false,
       options: [
         { label: "Yes", value: true },
         { label: "No", value: false },
@@ -190,7 +234,7 @@ export default {
   methods: {
     onCancel() {
       this.showModal = false;
-      this.offerorError = false;
+      this.activeError = false;
     },
     required(value) {
       if (!value || value.isEmpty) {
@@ -202,10 +246,10 @@ export default {
       console.log("Saving Issuer");
       let valid = this.$refs.form.validate();
       if (!this.selectedObj.offeror) {
-        this.offerorError = true;
+        this.activeError = true;
         valid = false;
       } else {
-        this.offerorError = false;
+        this.activeError = false;
       }
       if (!valid) {
         return;
@@ -213,7 +257,7 @@ export default {
       if (this.newModal) {
         valid = !!this.selectedObj.offeror;
         if (!valid) {
-          this.offerorError = true;
+          this.activeError = true;
           return;
         }
       } else {
@@ -221,7 +265,7 @@ export default {
       }
     },
     onChangeValue() {
-      this.offerorError = false;
+      this.activeError = false;
     },
     onOpenForm() {
       this.showModal = true;

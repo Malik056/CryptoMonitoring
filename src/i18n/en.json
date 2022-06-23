@@ -68,6 +68,7 @@
     "gray": "Gray",
     "dark": "Dark",
     "addItem": "Add Item",
+    "addIssuer": "Add Issuer",
     "update": "Update",
     "create": "Create",
     "cancel": "Cancel",
@@ -665,7 +666,11 @@
     "modal": {
       "address": "Issuer Address",
       "id": "Issuer ID",
+      "pk": "Issuer PK",
       "name": "Issuer Name",
+      "ownerName": "Owner PA Name",
+      "ownerPK": "Owner PA PK",
+      "active": "Active",
       "competentAuth": "Competent Authority",
       "offeror": "Offeror",
       "marketInfraType": "Market Infra Type"
