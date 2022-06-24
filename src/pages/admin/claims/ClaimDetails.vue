@@ -2,20 +2,20 @@
   <div class="main-container">
     <va-card>
       <div class="row align--center">
-        <!-- <div class="flex md2 xs2 align-left">
+        <div class="flex md2 xs2 align-left">
           <button
             class="btn-back"
             type="button"
             @click="close"
             aria-label="Close modal"
           >
-            <va-icon class="material-icons" color="primary" size="large">arrow_back</va-icon>
+            <va-icon class="material-icons" color="primary" size="large" >arrow_back</va-icon>
           </button>
-        </div> -->
-        <div class="flex md12 xs12 align-center">
+        </div>
+        <div class="flex md8 xs8 align-center">
           <h2>{{ $t("issuers.issuerDetails.title") }}</h2>
         </div>
-        <!-- <div class="flex md2 xs2"></div> -->
+        <div class="flex md2 xs2"></div>
       </div>
     </va-card>
     <br />
@@ -54,15 +54,12 @@
       <h2>{{ $t("issuers.issuerDetails.assetsTitle") }}</h2>
     </va-card>
     <br />
-    <div class="asset-container">
-      <asset-container
-        class="mr-4"
-        v-for="(asset, index) in issuerData['Cryptos'] ?? []"
-        v-bind:key="index"
-        :asset="asset"
-        @click="openAsset(asset)"
-      ></asset-container>
-    </div>
+    <asset-container
+      v-for="(asset, index) in issuerData['Cryptos'] ?? []"
+      v-bind:key="index"
+      :asset="asset"
+      @click="openAsset(asset)"
+    ></asset-container>
   </div>
 </template>
 
@@ -192,10 +189,5 @@ h2 {
   border: none;
   background: transparent;
   text-align: right;
-}
-.asset-container {
-  display: flex;
-  flex-direction: row;
-  overflow: scroll;
 }
 </style>

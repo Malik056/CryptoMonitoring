@@ -36,33 +36,64 @@
       :objId="objKey"
       @clicked="onItemSelected"
     ></markup-table>
+    <modal v-if="modalShown" @close="closeDialog">
+      <template #header><div></div></template>
+      <template #body>
+        <va-form ref="form" style="width: 20rem">
+          <va-input
+            class="mb-4 mt-4"
+            :label="$t('trustRegistry.modal.address')"
+            v-model="address"
+            :rules="[required]"
+          >
+          </va-input>
+          <div class="row">
+            <div class="flex">
+              <va-button @click="onCancel" outline>{{
+                $t("buttons.cancel")
+              }}</va-button>
+            </div>
+            <div class="flex">
+              <va-button @click="submit" outline>{{
+                $t("buttons.ok")
+              }}</va-button>
+            </div>
+          </div>
+        </va-form>
+      </template>
+      <template #footer><div></div></template>
+    </modal>
+    <!-- <modal-full-screen @close="closeDetailsDialog" v-if="fullScreenModalShow">
+      <template #body>
+        <claim-details @close="closeDetailsDialog"
+          :issuer="params"
+        ></claim-details>
+      </template>
+      <template #header>
+        <div style="display: none"></div>
+      </template>
+      <template #footer>
+        <div style="display: none"></div>
+      </template>
+    </modal-full-screen> -->
   </div>
-  <!-- <modal-full-screen @close="closeDetailsDialog" v-if="fullScreenModalShow">
-    <template #body>
-      <issuer-details
-        @close="closeDetailsDialog"
-        :issuer="params"
-      ></issuer-details>
-    </template>
-    <template #footer>
-      <div style="display: none"></div>
-    </template>
-  </modal-full-screen> -->
 </template>
 
 <script>
 import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
 import { mapGetters } from "vuex";
 import { UPDATE_ISSUERS } from "@/store/actions/issuers";
+import Modal from "../../../components/modals/Modal";
 // import ModalFullScreen from "../../../components/modals/ModalFullScreen";
-// import IssuerDetails from "./IssuerDetails";
+// import ClaimDetails from "./ClaimDetails";
 
 export default {
-  name: "issuers",
+  name: "claims",
   components: {
     MarkupTable,
+    Modal,
     // ModalFullScreen,
-    // IssuerDetails,
+    // ClaimDetails,
   },
   data() {
     return {
@@ -70,8 +101,10 @@ export default {
       searchQuery: "",
       objKey: "DID",
       filterKey: "Entity Name",
+      modalShown: false,
       // fullScreenModalShow: false,
-      params: null,
+      address: "",
+      selectedItem: null,
     };
   },
   computed: {
@@ -97,15 +130,39 @@ export default {
     this.$store.dispatch(UPDATE_ISSUERS);
   },
   methods: {
+    submit() {
+      this.$router.push();
+    },
+    onCancel() {
+      this.closeDialog();
+    },
     onItemSelected(value) {
-      this.$router.push({
-        name: "issuerDetails",
-        params: { issuer: JSON.stringify(value) },
-      });
+      //  this.$router.push({
+      //   name: "claimDetails",
+      //   params: { claimInfo: JSON.stringify(value) },
+      // });
+      // this.params = JSON.stringify(value);
+      // this.fullScreenModalShow = true;
+      this.selectedItem = value;
+      // this.modalShown = true;
+      this.address = "";
+    },
+    closeDialog() {
+      this.modalShown = false;
+      this.address = "";
     },
     // closeDetailsDialog() {
-      // this.fullScreenModalShow = false;
+    //   this.fullScreenModalShow = false;
     // },
+    required(value) {
+      if (!value || value.isEmpty) {
+        return this.$t("errorMessages.required");
+      }
+      return true;
+    },
+    // async submit() {
+
+    // }
   },
 };
 </script>

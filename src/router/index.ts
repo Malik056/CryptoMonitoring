@@ -74,14 +74,24 @@ const routes: Array<RouteRecordRaw> = [
         props: route => ({ ...route.params })
       },
       {
-        name: "page3",
-        path: "page3",
-        component: () => import("@/pages/admin/cryptoassets/CryptoAssets.vue")
+        name: "claims",
+        path: "claims",
+        component: () => import("@/pages/admin/claims/Claims.vue")
       },
       {
-        name: "page4",
-        path: "page4",
-        component: () => import("@/pages/admin/cryptoassets/CryptoAssets.vue")
+        name: "claimInfo",
+        path: "claimInfo",
+        component: () => import("@/pages/admin/claims/ClaimDetails.vue")
+      },
+      {
+        name: "withdrawals",
+        path: "withdrawals",
+        component: () => import("@/pages/admin/withdrawals/Withdrawals.vue")
+      },
+      {
+        name: "withdrawalInfo",
+        path: "withdrawalInfo",
+        component: () => import("@/pages/admin/withdrawals/WithdrawalDetails.vue")
       },
       {
         name: "trustRegistry",

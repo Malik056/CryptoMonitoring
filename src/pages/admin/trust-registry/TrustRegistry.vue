@@ -135,7 +135,7 @@
           <va-input
             class="mb-4 mt-4"
             :label="$t('trustRegistry.modal.marketInfraType')"
-            v-model="selectedObj.marketInfraType"
+            v-model="selectedObj.marketInfrastructureType"
             :readonly="!newModal"
             :rules="newModal ? [required] : []"
           />
@@ -181,8 +181,11 @@
 import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
 import { mapGetters } from "vuex";
 import { UPDATE_ISSUERS } from "@/store/actions/issuers";
-import { UPDATE_REGISTRY } from "@/store/actions/trust_registry";
-import Modal from "./TestDialog.vue";
+import {
+  CHANGE_ISSUER_STATE,
+  UPDATE_REGISTRY,
+} from "@/store/actions/trust_registry";
+import Modal from "../../../components/modals/Modal";
 import { useColors } from "vuestic-ui";
 
 export default {
@@ -275,6 +278,10 @@ export default {
         }
       } else {
         console.log("Update");
+        this.$store.dispatch(CHANGE_ISSUER_STATE, {
+          address: this.selectedObj.issuerAddress,
+          enable: this.selectedObj.active,
+        });
       }
     },
     onChangeValue() {
@@ -285,6 +292,7 @@ export default {
       this.showModal = true;
       console.log("Opening popup");
       this.selectedObj = {
+        issuerAddress: "",
         issuerName: "",
         competentAuth: "",
         active: false,

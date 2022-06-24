@@ -26,15 +26,15 @@ export default {
       },
     },
     {
-      name: 'page3',
-      displayName: 'Withdrawals',
+      name: 'claims',
+      displayName: 'Claims',
       meta: {
         icon: 'vuestic-iconset-tables',
       },
     },
     {
-      name: 'page4',
-      displayName: 'Claims',
+      name: 'withdrawals',
+      displayName: 'Withdrawals',
       meta: {
         icon: 'vuestic-iconset-tables',
       },

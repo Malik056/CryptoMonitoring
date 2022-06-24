@@ -27,85 +27,88 @@
     <markup-table
       v-else
       :headings="headings"
+      :labels="labels"
       :query="query"
       :initialPage="1"
       :key="tableKey"
-      :items="getIssuers"
-      :filterKey="filterKey"
-      :labels="labels"
+      :items="getAssets"
       :objId="objKey"
+      :filterKey="filterKey"
       @clicked="onItemSelected"
     ></markup-table>
   </div>
-  <!-- <modal-full-screen @close="closeDetailsDialog" v-if="fullScreenModalShow">
+  <modal-full-screen @close="closeDetailsDialog" v-if="fullScreenModalShow">
     <template #body>
-      <issuer-details
+      <withdrawal-details
         @close="closeDetailsDialog"
-        :issuer="params"
-      ></issuer-details>
+        :asset="params"
+      ></withdrawal-details>
     </template>
     <template #footer>
       <div style="display: none"></div>
     </template>
-  </modal-full-screen> -->
+  </modal-full-screen>
 </template>
 
 <script>
 import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
 import { mapGetters } from "vuex";
 import { UPDATE_ISSUERS } from "@/store/actions/issuers";
-// import ModalFullScreen from "../../../components/modals/ModalFullScreen";
-// import IssuerDetails from "./IssuerDetails";
+import { UPDATE_REGISTRY } from "@/store/actions/trust_registry";
+import ModalFullScreen from "../../../components/modals/ModalFullScreen";
+import WithdrawalDetails from "./WithdrawalDetails";
 
 export default {
-  name: "issuers",
+  name: "withdrawals",
   components: {
     MarkupTable,
-    // ModalFullScreen,
-    // IssuerDetails,
+    ModalFullScreen,
+    WithdrawalDetails,
   },
   data() {
     return {
       term: "",
-      searchQuery: "",
-      objKey: "DID",
-      filterKey: "Entity Name",
-      // fullScreenModalShow: false,
+      labels: ["CryptoAssetName", "EmittingBody", "Country", "CryptoAssetType"],
+      objKey: "CryptoAssetName",
+      filterKey: "CryptoAssetName",
+      fullScreenModalShow: false,
       params: null,
     };
   },
   computed: {
-    ...mapGetters(["getIssuers", "isLoading"]),
+    ...mapGetters(["getAssets", "isLoading"]),
     tableKey() {
-      return this.query + this.getIssuers.toString();
+      return this.query + this.getAssets.toString();
     },
     query() {
       return this.term;
     },
-    labels() {
-      return ["DID", "Entity Name", "Country"];
-    },
     headings() {
       return [
-        "DID",
-        this.$t("issuers.tableHeaders.name"),
-        this.$t("issuers.tableHeaders.country"),
+        this.$t("assets.tableHeaders.name"),
+        this.$t("assets.tableHeaders.emittingBody"),
+        this.$t("assets.tableHeaders.country"),
+        this.$t("assets.tableHeaders.type"),
       ];
     },
   },
   created() {
     this.$store.dispatch(UPDATE_ISSUERS);
+    this.$store.dispatch(UPDATE_REGISTRY);
   },
   methods: {
     onItemSelected(value) {
       this.$router.push({
-        name: "issuerDetails",
-        params: { issuer: JSON.stringify(value) },
+        name: "assetDetails",
+        params: { asset: JSON.stringify(value) },
       });
+      // this.params = JSON.stringify(value);
+      // this.fullScreenModalShow = true;
+
     },
-    // closeDetailsDialog() {
-      // this.fullScreenModalShow = false;
-    // },
+  },
+  closeDetailsDialog() {
+    this.fullScreenModalShow = false;
   },
 };
 </script>

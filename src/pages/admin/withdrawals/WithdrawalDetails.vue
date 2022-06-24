@@ -2,21 +2,20 @@
   <div class="main-container">
     <va-card>
       <div class="row align--center">
-        <!-- <div class="flex md2 xs2 align-left">
+        <div class="flex md2 xs2 align-left">
           <button
             class="btn-back"
             type="button"
             @click="close"
             aria-label="Close modal"
           >
-            <va-icon class="material-icons" color="primary" size="large">arrow_back</va-icon
-            >
+            <va-icon class="material-icons" color="primary" size="large">arrow_back</va-icon>
           </button>
-        </div> -->
-        <div class="flex md12 xs12 align-center">
+        </div>
+        <div class="flex md6 xs8 align-center">
           <h2>{{ $t("assets.details.title") }}</h2>
         </div>
-        <!-- <div class="flex md2 xs2"></div> -->
+        <div class="flex md2 xs2"></div>
       </div>
     </va-card>
     <br />
@@ -115,10 +114,10 @@
 import { useColors } from "vuestic-ui";
 import { mapGetters } from "vuex";
 export default {
-  name: "assetDetails",
+  name: "withdrawalDetails",
   components: {},
   props: {
-    asset: {
+    withdrawalDetails: {
       type: String,
       required: true,
     },
@@ -128,7 +127,7 @@ export default {
       logo: process.env.BASE_URL,
       windowHeight: window.innerHeight,
       windowWidth: window.innerWidth,
-      issuerData: JSON.parse(this.asset),
+      withdrawalData: JSON.parse(this.withdrawalDetails),
     };
   },
   watch: {
@@ -147,22 +146,6 @@ export default {
   methods: {
     close() {
       this.$emit("close");
-    },
-    openIssuer(asset) {
-      const issuers = this.getIssuers;
-      let foundIssuer;
-      for (let i = 0; i < issuers.length; i++) {
-        const element = issuers[i];
-        if (element.id === asset.EmittingBodyId) {
-          foundIssuer = element;
-        }
-      }
-      if (foundIssuer) {
-        this.$router.push({
-          name: "issuerDetails",
-          params: { issuer: JSON.stringify(foundIssuer) },
-        });
-      }
     },
     onResize() {
       this.windowHeight = window.innerHeight;
