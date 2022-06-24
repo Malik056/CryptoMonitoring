@@ -2,6 +2,8 @@ import { createStore } from 'vuex'
 import user from "./modules/user";
 import auth from "./modules/auth";
 import issuers from "./modules/issuers";
+import claims from "./modules/claim";
+import withdrawals from "./modules/withdrawal";
 import registry from "./modules/trust_registry";
 
 
@@ -14,7 +16,9 @@ export default createStore({
     user,
     auth,
     issuers,
-    registry
+    registry,
+    claims,
+    withdrawals,
   },
   // state: {
 

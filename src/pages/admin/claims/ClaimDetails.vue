@@ -2,78 +2,82 @@
   <div class="main-container">
     <va-card>
       <div class="row align--center">
-        <div class="flex md2 xs2 align-left">
+        <!-- <div class="flex md2 xs2 align-left">
           <button
             class="btn-back"
             type="button"
             @click="close"
             aria-label="Close modal"
           >
-            <va-icon class="material-icons" color="primary" size="large" >arrow_back</va-icon>
+            <va-icon class="material-icons" color="primary" size="large"
+              >arrow_back</va-icon
+            >
           </button>
+        </div> -->
+        <div class="flex md12 xs12 align-center">
+          <h2>{{ $t("issuers.claimedDetails.title") }}</h2>
         </div>
-        <div class="flex md8 xs8 align-center">
-          <h2>{{ $t("issuers.issuerDetails.title") }}</h2>
-        </div>
-        <div class="flex md2 xs2"></div>
+        <!-- <div class="flex md2 xs2"></div> -->
       </div>
     </va-card>
     <br />
     <va-card>
       <div class="row">
         <div class="flex md6 xs12">
-          <label>{{ $t("issuers.issuerDetails.name") }}</label>
-          <p>{{ issuerData["Entity Name"] }}</p>
-        </div>
-        <div class="flex md3 xs6">
-          <label>{{ $t("issuers.issuerDetails.type") }}</label>
+          <label>{{ $t("issuers.claimedDetails.claimedCA") }}</label>
           <p>
-            {{ (issuerData["Type"] ?? "") === "" ? "NIL" : issuerData["Type"] }}
+            {{
+              isEmptyOrNull(claimedInfoData["claimedCA"])
+                ? "NIL"
+                : claimedInfoData["claimedCA"]
+            }}
           </p>
         </div>
-        <div class="flex md3 xs6">
-          <label>{{ $t("issuers.issuerDetails.country") }}</label>
-          <p>{{ issuerData["Country"] }}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="flex">
-          <label>{{ $t("DID") }}</label>
-          <p>{{ issuerData["DID"] }}</p>
+        <div class="flex md6 xs12">
+          <label>{{ $t("issuers.claimedDetails.active") }}</label>
+          <p>
+            {{
+              isEmptyOrNull(claimedInfoData["active"])
+                ? "NIL"
+                : claimedInfoData["active"]
+            }}
+          </p>
         </div>
       </div>
       <div class="row">
         <div class="flex md6 xs12">
-          <label>LEI</label>
-          <p>{{ issuerData["LEI"] }}</p>
+          <label>{{ $t("issuers.claimedDetails.details") }}</label>
+          <p>
+            {{
+              isEmptyOrNull(claimedInfoData["details"])
+                ? "NIL"
+                : claimedInfoData["details"]
+            }}
+          </p>
+        </div>
+        <div class="flex md6 xs12">
+          <label>{{ $t("issuers.claimedDetails.timestamp") }}</label>
+          <p>
+            {{
+              isEmptyOrNull(claimedInfoData["timestamp"])
+                ? "NIL"
+                : claimedInfoData["timestamp"]
+            }}
+          </p>
         </div>
       </div>
     </va-card>
-    <br />
-    <va-card class="align-center">
-      <h2>{{ $t("issuers.issuerDetails.assetsTitle") }}</h2>
-    </va-card>
-    <br />
-    <asset-container
-      v-for="(asset, index) in issuerData['Cryptos'] ?? []"
-      v-bind:key="index"
-      :asset="asset"
-      @click="openAsset(asset)"
-    ></asset-container>
   </div>
 </template>
 
 <script>
 import { useColors } from "vuestic-ui";
 import { mapGetters } from "vuex";
-import AssetContainer from "../issuers/AssetContainer";
 export default {
   name: "claimDetails",
-  components: {
-    AssetContainer,
-  },
+  components: {},
   props: {
-    issuer: {
+    claimedInfo: {
       type: String,
       required: true,
     },
@@ -83,7 +87,7 @@ export default {
       logo: process.env.BASE_URL,
       windowHeight: window.innerHeight,
       windowWidth: window.innerWidth,
-      issuerData: JSON.parse(this.issuer),
+      claimedInfoData: JSON.parse(this.claimedInfo),
     };
   },
   watch: {
@@ -100,28 +104,15 @@ export default {
     });
   },
   methods: {
-    close() {
-      this.$emit("close");
-    },
-    openAsset(asset) {
-      const assetList = this.getAssets;
-      let foundAsset;
-      for (let i = 0; i < assetList.length; i++) {
-        const element = assetList[i];
-        if (element.id === asset.id) {
-          foundAsset = element;
-        }
-      }
-      if (foundAsset) {
-        this.$router.push({
-          name: "assetDetails",
-          params: { asset: JSON.stringify(foundAsset) },
-        });
-      }
-    },
     onResize() {
       this.windowHeight = window.innerHeight;
       this.windowWidth = window.innerWidth;
+    },
+    isEmptyOrNull(value) {
+      if (!value || value == "") {
+        return true;
+      }
+      return false;
     },
   },
   computed: {

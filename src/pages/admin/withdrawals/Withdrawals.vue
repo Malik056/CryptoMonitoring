@@ -27,88 +27,144 @@
     <markup-table
       v-else
       :headings="headings"
-      :labels="labels"
       :query="query"
       :initialPage="1"
       :key="tableKey"
-      :items="getAssets"
-      :objId="objKey"
+      :items="getIssuers"
       :filterKey="filterKey"
+      :labels="labels"
+      :objId="objKey"
       @clicked="onItemSelected"
     ></markup-table>
+    <modal v-if="modalShown" @close="closeDialog">
+      <template #header><div></div></template>
+      <template #body>
+        <va-form ref="form" style="width: 20rem">
+          <va-input
+            class="mb-4 mt-4"
+            :label="$t('User PK')"
+            v-model="address"
+            :rules="[required]"
+          >
+          </va-input>
+          <div class="row">
+            <div class="flex">
+              <va-button @click="onCancel" outline>{{
+                $t("buttons.cancel")
+              }}</va-button>
+            </div>
+            <div class="flex">
+              <va-button @click="submit" outline>{{
+                $t("buttons.ok")
+              }}</va-button>
+            </div>
+          </div>
+        </va-form>
+      </template>
+      <template #footer><div></div></template>
+    </modal>
+    <!-- <modal-full-screen @close="closeDetailsDialog" v-if="fullScreenModalShow">
+      <template #body>
+        <claim-details @close="closeDetailsDialog"
+          :issuer="params"
+        ></claim-details>
+      </template>
+      <template #header>
+        <div style="display: none"></div>
+      </template>
+      <template #footer>
+        <div style="display: none"></div>
+      </template>
+    </modal-full-screen> -->
   </div>
-  <modal-full-screen @close="closeDetailsDialog" v-if="fullScreenModalShow">
-    <template #body>
-      <withdrawal-details
-        @close="closeDetailsDialog"
-        :asset="params"
-      ></withdrawal-details>
-    </template>
-    <template #footer>
-      <div style="display: none"></div>
-    </template>
-  </modal-full-screen>
 </template>
 
 <script>
 import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
 import { mapGetters } from "vuex";
 import { UPDATE_ISSUERS } from "@/store/actions/issuers";
-import { UPDATE_REGISTRY } from "@/store/actions/trust_registry";
-import ModalFullScreen from "../../../components/modals/ModalFullScreen";
-import WithdrawalDetails from "./WithdrawalDetails";
+import Modal from "../../../components/modals/Modal";
+import { WITHDRAW_ISSUER } from "../../../store/actions/withdrawal";
+// import ModalFullScreen from "../../../components/modals/ModalFullScreen";
+// import ClaimDetails from "./ClaimDetails";
 
 export default {
-  name: "withdrawals",
+  name: "claims",
   components: {
     MarkupTable,
-    ModalFullScreen,
-    WithdrawalDetails,
+    Modal,
+    // ModalFullScreen,
+    // ClaimDetails,
   },
   data() {
     return {
       term: "",
-      labels: ["CryptoAssetName", "EmittingBody", "Country", "CryptoAssetType"],
-      objKey: "CryptoAssetName",
-      filterKey: "CryptoAssetName",
-      fullScreenModalShow: false,
-      params: null,
+      searchQuery: "",
+      objKey: "DID",
+      filterKey: "Entity Name",
+      modalShown: false,
+      // fullScreenModalShow: false,
+      address: "",
+      selectedItem: null,
     };
   },
   computed: {
-    ...mapGetters(["getAssets", "isLoading"]),
+    ...mapGetters(["getIssuers", "isLoading", "isClaiming", "getClaimedInfo"]),
     tableKey() {
-      return this.query + this.getAssets.toString();
+      return this.query + this.getIssuers.toString();
     },
     query() {
       return this.term;
     },
+    labels() {
+      return ["DID", "Entity Name", "Country"];
+    },
     headings() {
       return [
-        this.$t("assets.tableHeaders.name"),
-        this.$t("assets.tableHeaders.emittingBody"),
-        this.$t("assets.tableHeaders.country"),
-        this.$t("assets.tableHeaders.type"),
+        "DID",
+        this.$t("issuers.tableHeaders.name"),
+        this.$t("issuers.tableHeaders.country"),
       ];
     },
   },
   created() {
     this.$store.dispatch(UPDATE_ISSUERS);
-    this.$store.dispatch(UPDATE_REGISTRY);
   },
   methods: {
-    onItemSelected(value) {
+    async submit() {
+      const valid = this.$refs.form.validate();
+      if (!valid) {
+        return;
+      }
+      const withdrawalResult = await this.$store.dispatch(
+        WITHDRAW_ISSUER,
+        {issuerDAPP: this.selectedItem.id, userPK: this.address}
+      );
+      debugger;
       this.$router.push({
-        name: "assetDetails",
-        params: { asset: JSON.stringify(value) },
+        name: "withdrawalInfo",
+        params: { withdrawalInfo: JSON.stringify(withdrawalResult) },
       });
-      // this.params = JSON.stringify(value);
-      // this.fullScreenModalShow = true;
 
     },
-  },
-  closeDetailsDialog() {
-    this.fullScreenModalShow = false;
+    onCancel() {
+      this.closeDialog();
+    },
+    onItemSelected(value) {
+      this.selectedItem = value;
+      this.modalShown = true;
+      this.address = "";
+    },
+    closeDialog() {
+      this.modalShown = false;
+      this.address = "";
+    },
+    required(value) {
+      if (!value || value.isEmpty) {
+        return this.$t("errorMessages.required");
+      }
+      return true;
+    },
   },
 };
 </script>

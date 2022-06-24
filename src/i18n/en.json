@@ -634,6 +634,20 @@
       "type": "Type",
       "assetsTitle": "Crypto Assets",
       "totalAssets": "Total Assets"
+    },
+    "withdrawalDetails": {
+      "title": "Withdrawal Request",
+      "claimedWR": "Claimed WR",
+      "active": "Active",
+      "timestamp": "Timestamp",
+      "details": "Details"
+    },
+    "claimedDetails": {
+      "title": "Claimed Crypto Asset",
+      "claimedCA": "Claimed CA",
+      "active": "Active",
+      "timestamp": "Timestamp",
+      "details": "Details"
     }
   },
   "assets": {

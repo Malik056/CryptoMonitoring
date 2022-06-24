@@ -81,7 +81,8 @@ const routes: Array<RouteRecordRaw> = [
       {
         name: "claimInfo",
         path: "claimInfo",
-        component: () => import("@/pages/admin/claims/ClaimDetails.vue")
+        component: () => import("@/pages/admin/claims/ClaimDetails.vue"),
+        props: route => ({ ...route.params })
       },
       {
         name: "withdrawals",
@@ -91,7 +92,8 @@ const routes: Array<RouteRecordRaw> = [
       {
         name: "withdrawalInfo",
         path: "withdrawalInfo",
-        component: () => import("@/pages/admin/withdrawals/WithdrawalDetails.vue")
+        component: () => import("@/pages/admin/withdrawals/WithdrawalDetails.vue"),
+        props: route => ({ ...route.params })
       },
       {
         name: "trustRegistry",

@@ -42,7 +42,7 @@
         <va-form ref="form" style="width: 20rem">
           <va-input
             class="mb-4 mt-4"
-            :label="$t('trustRegistry.modal.address')"
+            :label="$t('User PK')"
             v-model="address"
             :rules="[required]"
           >
@@ -83,6 +83,7 @@
 import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
 import { mapGetters } from "vuex";
 import { UPDATE_ISSUERS } from "@/store/actions/issuers";
+import { CLAIM_ISSUER } from "@/store/actions/claim";
 import Modal from "../../../components/modals/Modal";
 // import ModalFullScreen from "../../../components/modals/ModalFullScreen";
 // import ClaimDetails from "./ClaimDetails";
@@ -108,7 +109,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getIssuers", "isLoading"]),
+    ...mapGetters(["getIssuers", "isLoading", "isClaiming", "getClaimedInfo"]),
     tableKey() {
       return this.query + this.getIssuers.toString();
     },
@@ -130,39 +131,40 @@ export default {
     this.$store.dispatch(UPDATE_ISSUERS);
   },
   methods: {
-    submit() {
-      this.$router.push();
+    async submit() {
+      const valid = this.$refs.form.validate();
+      if (!valid) {
+        return;
+      }
+      const claimedResult = await this.$store.dispatch(
+        CLAIM_ISSUER,
+        {issuerDAPP: this.selectedItem.id, userPK: this.address}
+      );
+      debugger;
+      this.$router.push({
+        name: "claimInfo",
+        params: { claimedInfo: JSON.stringify(claimedResult) },
+      });
+
     },
     onCancel() {
       this.closeDialog();
     },
     onItemSelected(value) {
-      //  this.$router.push({
-      //   name: "claimDetails",
-      //   params: { claimInfo: JSON.stringify(value) },
-      // });
-      // this.params = JSON.stringify(value);
-      // this.fullScreenModalShow = true;
       this.selectedItem = value;
-      // this.modalShown = true;
+      this.modalShown = true;
       this.address = "";
     },
     closeDialog() {
       this.modalShown = false;
       this.address = "";
     },
-    // closeDetailsDialog() {
-    //   this.fullScreenModalShow = false;
-    // },
     required(value) {
       if (!value || value.isEmpty) {
         return this.$t("errorMessages.required");
       }
       return true;
     },
-    // async submit() {
-
-    // }
   },
 };
 </script>

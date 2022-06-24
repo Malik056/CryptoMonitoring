@@ -109,12 +109,6 @@ export default {
 
     };
   },
-  methods: {
-    openModal() {
-      debugger;
-      this.refs.addItem.open();
-    }
-  }
 };
 </script>
 

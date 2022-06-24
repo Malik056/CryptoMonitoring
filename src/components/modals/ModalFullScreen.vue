@@ -68,7 +68,7 @@ export default {
   </transition>
 </template>
 
-<style>
+<style scoped>
 .modal-backdrop {
   position: fixed;
   top: 0;

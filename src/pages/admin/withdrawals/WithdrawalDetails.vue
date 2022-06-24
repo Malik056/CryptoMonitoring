@@ -2,122 +2,81 @@
   <div class="main-container">
     <va-card>
       <div class="row align--center">
-        <div class="flex md2 xs2 align-left">
+        <!-- <div class="flex md2 xs2 align-left">
           <button
             class="btn-back"
             type="button"
             @click="close"
             aria-label="Close modal"
           >
-            <va-icon class="material-icons" color="primary" size="large">arrow_back</va-icon>
+            <va-icon class="material-icons" color="primary" size="large"
+              >arrow_back</va-icon
+            >
           </button>
-        </div>
-        <div class="flex md6 xs8 align-center">
-          <h2>{{ $t("assets.details.title") }}</h2>
-        </div>
-        <div class="flex md2 xs2"></div>
-      </div>
-    </va-card>
-    <br />
-    <va-card>
-      <div class="row">
-        <div class="flex md6 xs12">
-          <label>{{ $t("assets.details.name") }}</label>
-          <p>{{ issuerData["CryptoAssetName"] }}</p>
-        </div>
-        <div class="flex md6 xs12">
-          <label>{{ $t("assets.details.type") }}</label>
-          <p>{{ issuerData["CryptoAssetType"] }}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="flex md6 xs12">
-          <label>{{ $t("assets.details.emittingBody") }}</label>
-          <p>
-            <a href="" @click.prevent="openIssuer(issuerData)">{{
-              issuerData["EmittingBody"]
-            }}</a>
-          </p>
-        </div>
-        <div class="flex md6 xs12">
-          <label>{{ $t("issuers.issuerDetails.country") }}</label>
-          <p>{{ issuerData["Country"] }}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="flex md6 xs12">
-          <label>{{ $t("assets.details.symbol") }}</label>
-          <p>{{ issuerData["CryptoAssetSymbol"] }}</p>
-        </div>
-        <div class="flex md6 xs12">
-          <label>{{ $t("assets.details.quantityOfTokens") }}</label>
-          <p>{{ issuerData["QuantityofTokens"] }}</p>
-        </div>
-      </div>
-    </va-card>
-    <br />
-    <va-card>
-      <div class="row align--center">
+        </div> -->
         <div class="flex md12 xs12 align-center">
-          <h2>{{ $t("assets.details.transparency.title") }}</h2>
+          <h2>{{ $t("issuers.withdrawalDetails.title") }}</h2>
         </div>
+        <!-- <div class="flex md2 xs2"></div> -->
       </div>
     </va-card>
     <br />
     <va-card>
       <div class="row">
         <div class="flex md6 xs12">
-          <label>{{
-            $t("assets.details.transparency.authorizedCustomerType")
-          }}</label>
+          <label>{{ $t("issuers.withdrawalDetails.claimedWR") }}</label>
           <p>
-            {{ issuerData["Transparency"]["AuthorizedCustomersType"] }}&nbsp;
+            {{
+              isEmptyOrNull(withdrawalInfoData["claimedWR"])
+                ? "NIL"
+                : withdrawalInfoData["claimedWR"]
+            }}
           </p>
         </div>
         <div class="flex md6 xs12">
-          <label>{{
-            $t("assets.details.transparency.incompatibleCustomerType")
-          }}</label>
+          <label>{{ $t("issuers.withdrawalDetails.active") }}</label>
           <p>
-            {{ issuerData["Transparency"]["IncompatibleCustomerTypes"] }}
+            {{
+              isEmptyOrNull(withdrawalInfoData["active"])
+                ? "NIL"
+                : withdrawalInfoData["active"]
+            }}
           </p>
         </div>
       </div>
       <div class="row">
         <div class="flex md6 xs12">
-          <label>{{
-            $t("assets.details.transparency.distributionStrategy")
-          }}</label>
-          <p>{{ issuerData["Transparency"]["DistributionStrategy"] }}</p>
+          <label>{{ $t("issuers.withdrawalDetails.details") }}</label>
+          <p>
+            {{
+              isEmptyOrNull(withdrawalInfoData["details"])
+                ? "NIL"
+                : withdrawalInfoData["details"]
+            }}
+          </p>
         </div>
         <div class="flex md6 xs12">
-          <label>{{ $t("assets.details.transparency.traderID") }}</label>
-          <p>{{ issuerData["Transparency"]["TraderID"] }}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="flex md6 xs12">
-          <label>{{ $t("assets.details.transparency.referenceMarket") }}</label>
-          <p>{{ issuerData["Transparency"]["ReferenceMarket"] }}</p>
-        </div>
-        <div class="flex md6 xs12">
-          <label>{{ $t("assets.details.transparency.updatedAt") }}</label>
-          <p>{{ issuerData["Transparency"]["Timestamp"] }}</p>
+          <label>{{ $t("issuers.withdrawalDetails.timestamp") }}</label>
+          <p>
+            {{
+              isEmptyOrNull(withdrawalInfoData["timestamp"])
+                ? "NIL"
+                : withdrawalInfoData["timestamp"]
+            }}
+          </p>
         </div>
       </div>
     </va-card>
-    <br />
   </div>
 </template>
 
 <script>
 import { useColors } from "vuestic-ui";
-import { mapGetters } from "vuex";
 export default {
-  name: "withdrawalDetails",
+  name: "withdrawalInfo",
   components: {},
   props: {
-    withdrawalDetails: {
+    withdrawalInfo: {
       type: String,
       required: true,
     },
@@ -127,7 +86,7 @@ export default {
       logo: process.env.BASE_URL,
       windowHeight: window.innerHeight,
       windowWidth: window.innerWidth,
-      withdrawalData: JSON.parse(this.withdrawalDetails),
+      withdrawalInfoData: JSON.parse(this.withdrawalInfo),
     };
   },
   watch: {
@@ -144,16 +103,18 @@ export default {
     });
   },
   methods: {
-    close() {
-      this.$emit("close");
-    },
     onResize() {
       this.windowHeight = window.innerHeight;
       this.windowWidth = window.innerWidth;
     },
+    isEmptyOrNull(value) {
+      if (!value || value == "") {
+        return true;
+      }
+      return false;
+    },
   },
   computed: {
-    ...mapGetters([["getIssuers"]]),
     colors() {
       const { getColors } = useColors();
       const colors = getColors();
