@@ -140,7 +140,6 @@ export default {
         CLAIM_ISSUER,
         {issuerDAPP: this.selectedItem.id, userPK: this.address}
       );
-      debugger;
       this.$router.push({
         name: "claimInfo",
         params: { claimedInfo: JSON.stringify(claimedResult) },

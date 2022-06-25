@@ -8,7 +8,7 @@
       <div class="contentBx">
         <h2>{{ asset.CryptoAssetName }}</h2>
         <div class="size">
-          <h3>{{ asset.CryptoAssetType }}</h3>
+          <h3>Type: {{ asset.CryptoAssetType }}</h3>
         </div>
         <div class="color">
           <h3>{{ $t("issuers.issuerDetails.totalAssets") }} :</h3>
@@ -44,8 +44,8 @@ export default {
 
 .container .card {
   position: relative;
-  width: 320px;
-  height: 250px;
+  width: 280px;
+  height: 210px;
   background: linear-gradient(179.96deg, #144fc1 0.03%, #000000 99.97%);
   border-radius: 20px;
   overflow: hidden;
@@ -59,12 +59,12 @@ export default {
   width: 100%;
   height: 100%;
   background: #fff;
-  clip-path: circle(150px at 80% 20%);
+  clip-path: circle(110px at 80% 20%);
   transition: 0.5s ease-in-out;
 }
 
 .container .card:hover:before {
-  clip-path: circle(280px at 50% -50%);
+  clip-path: circle(220px at 50% -50%);
 }
 
 .container .card:after {
@@ -84,7 +84,7 @@ export default {
   transform: translateY(-70%) rotate(45deg);
   /* z-index: 10000; */
   width: 100%;
-  height: 220px;
+  height: 180px;
   transition: 0.5s;
 }
 
@@ -96,7 +96,7 @@ export default {
   position: absolute;
   top: 30%;
   left: 70%;
-  font-size: 4em;
+  font-size: 2em;
   transform: translate(-50%, -50%) rotate(0deg);
   width: 120px;
 }

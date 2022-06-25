@@ -61,7 +61,7 @@
             {{
               isEmptyOrNull(claimedInfoData["timestamp"])
                 ? "NIL"
-                : claimedInfoData["timestamp"]
+                : new Date(claimedInfoData["timestamp"] * 1000).toLocaleDateString()
             }}
           </p>
         </div>

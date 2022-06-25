@@ -1,6 +1,9 @@
 <template>
   <div class="dashboard">
-    <dashboard-charts />
+    <va-card v-if="isLoading">
+      <va-progress-bar indeterminate></va-progress-bar>
+    </va-card>
+    <dashboard-charts v-else />
     <!-- <dashboard-info-block />
     <div class="row row-equal">
       <div class="flex xs12 lg6">
@@ -26,6 +29,7 @@ import DashboardCharts from "./DashboardCharts";
 // import DashboardTable from "./DashboardTable";
 import { UPDATE_ISSUERS } from "@/store/actions/issuers";
 import { UPDATE_REGISTRY } from "@/store/actions/trust_registry";
+import { mapGetters } from "vuex";
 
 export default {
   name: "dashboard",
@@ -35,6 +39,9 @@ export default {
     // DashboardTabs,
     // DashboardMap,
     // DashboardTable,
+  },
+  computed: {
+    ...mapGetters(["isLoading", "getIssuers", "getAssets"]),
   },
   created() {
     this.$store.dispatch(UPDATE_ISSUERS);

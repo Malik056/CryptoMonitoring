@@ -140,7 +140,6 @@ export default {
         WITHDRAW_ISSUER,
         {issuerDAPP: this.selectedItem.id, userPK: this.address}
       );
-      debugger;
       this.$router.push({
         name: "withdrawalInfo",
         params: { withdrawalInfo: JSON.stringify(withdrawalResult) },

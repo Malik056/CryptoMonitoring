@@ -56,6 +56,7 @@ import { getLineChartData } from "@/data/charts/LineChartData";
 import VaChart from "@/components/va-charts/VaChart.vue";
 import DashboardContributorsChart from "./DashboardContributorsList";
 import { useGlobalConfig } from "vuestic-ui";
+import { mapGetters } from 'vuex';
 
 export default {
   name: "dashboard-charts",
@@ -69,7 +70,7 @@ export default {
   },
   mounted() {
     this.lineChartData = getLineChartData(this.theme);
-    this.donutChartData = getDonutChartData(this.theme);
+    this.donutChartData = getDonutChartData(this.theme, this.getIssuers, this.$t);
   },
   watch: {
     "$themes.primary"() {
@@ -108,6 +109,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(["getIssuers", "getAssets"]),
     theme() {
       return useGlobalConfig().getGlobalConfig().colors;
     },

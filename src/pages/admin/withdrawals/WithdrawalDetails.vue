@@ -61,7 +61,7 @@
             {{
               isEmptyOrNull(withdrawalInfoData["timestamp"])
                 ? "NIL"
-                : withdrawalInfoData["timestamp"]
+                : new Date(withdrawalInfoData["timestamp"] * 1000).toLocaleDateString()
             }}
           </p>
         </div>

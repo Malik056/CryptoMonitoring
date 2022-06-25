@@ -1,30 +1,26 @@
 <template>
   <va-card class="d-flex dashboard-contributors-list">
     <va-card-title>
-      <h1>{{ $t('dashboard.charts.topContributors') }}</h1>
+      <h1>{{ $t("dashboard.charts.topContributors") }}</h1>
       <div class="mr-0 text-right">
         <a
           class="mr-0 link"
           :disabled="contributors.length <= step"
           @click="showNext"
         >
-          {{ $t('dashboard.charts.showNextFive') }}
+          {{ $t("dashboard.charts.showNextFive") }}
         </a>
       </div>
     </va-card-title>
 
     <va-card-content>
-      <va-inner-loading :loading="loading" style="width: 100%;">
-        <div
-          class="mb-3"
-          v-for="(contributor, idx) in visibleList"
-          :key="idx"
-        >
+      <va-inner-loading :loading="loading" style="width: 100%">
+        <div class="mb-3" v-for="(contributor, idx) in visibleList" :key="idx">
           <va-progress-bar
             :modelValue="getPercent(contributor.contributions)"
             :color="getProgressBarColor(idx)"
           >
-            {{ contributor.contributions }} {{ $t('dashboard.charts.commits') }}
+            {{ contributor.contributions }} {{ $t("dashboard.charts.commits") }}
           </va-progress-bar>
           <p class="mt-2">{{ contributor.name }}</p>
         </div>
@@ -34,63 +30,81 @@
 </template>
 
 <script>
-import { useGlobalConfig } from 'vuestic-ui';
-import contributors from '@/data/tables/markup-table/assets_data.json';
+import { useGlobalConfig } from "vuestic-ui";
+import { mapGetters } from "vuex";
+// import contributors from '@/data/tables/markup-table/assets_data.json';
 export default {
-  name: 'DashboardContributorsList',
-  data () {
+  name: "DashboardContributorsList",
+  data() {
     return {
-      contributors: contributors,
+      contributors: [],
       loading: false,
       progressMax: 392,
       visibleList: [],
       step: 5,
       page: 0,
-    }
+    };
   },
-  mounted () {
-    this.loadContributorsList()
+  mounted() {
+    this.loadContributorsList();
   },
   computed: {
+    ...mapGetters(["getIssuers"]),
     theme() {
-      return useGlobalConfig().getGlobalConfig().colors
-    }
+      return useGlobalConfig().getGlobalConfig().colors;
+    },
   },
   methods: {
-    async loadContributorsList () {
-      this.loading = true
+    async loadContributorsList() {
+      this.loading = true;
       // const { data } = @
       // this.contributors = data
-      this.progressMax = Math.max(...this.contributors.map(({ contributions }) => contributions))
-      this.showNext()
-      this.loading = false
+      const issuers = this.getIssuers;
+      const contributors = [];
+      for (let i = 0; i < issuers.length; i++) {
+        const issuer = issuers[i];
+        const obj = {};
+        obj.id = `${i}`;
+        obj.name = issuer["Entity Name"];
+        obj.contributions = issuer["Cryptos"].length;
+        contributors.push(obj);
+      }
+      this.contributors = contributors;
+      this.progressMax = Math.max(
+        ...this.contributors.map(({ contributions }) => contributions)
+      );
+      this.showNext();
+      this.loading = false;
     },
-    getPercent (val) {
-      return (val / this.progressMax) * 100
+    getPercent(val) {
+      return (val / this.progressMax) * 100;
     },
-    showNext () {
-      this.visibleList = this.contributors.slice(this.page * this.step, this.page * this.step + this.step)
-      this.page += 1
+    showNext() {
+      this.visibleList = this.contributors.slice(
+        this.page * this.step,
+        this.page * this.step + this.step
+      );
+      this.page += 1;
 
-      const maxPages = (this.contributors.length - 1) / this.step
+      const maxPages = (this.contributors.length - 1) / this.step;
 
       if (this.page > maxPages) {
-        this.page = 0
+        this.page = 0;
       }
     },
-    getProgressBarColor (idx) {
-      const themeColors = ["primary", "success", "info", "danger", "warning"]
+    getProgressBarColor(idx) {
+      const themeColors = ["primary", "success", "info", "danger", "warning"];
 
       if (idx < themeColors.length) {
-        return themeColors[idx]
+        return themeColors[idx];
       }
 
       // Get random color if idx out of colors array
-      const keys = Object.keys(themeColors)
-      return themeColors[keys[keys.length * Math.random() << 0]]
+      const keys = Object.keys(themeColors);
+      return themeColors[keys[(keys.length * Math.random()) << 0]];
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">

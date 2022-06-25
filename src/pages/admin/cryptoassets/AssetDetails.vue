@@ -103,7 +103,7 @@
         </div>
         <div class="flex md6 xs12">
           <label>{{ $t("assets.details.transparency.updatedAt") }}</label>
-          <p>{{ issuerData["Transparency"]["Timestamp"] }}</p>
+          <p>{{ new Date(issuerData["Transparency"]["Timestamp"] * 1000).toLocaleDateString() }}</p>
         </div>
       </div>
     </va-card>
