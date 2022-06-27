@@ -74,38 +74,51 @@ const actions = {
     const account = web3.eth.accounts.privateKeyToAccount(
       "0xc8dcd2e6e15635db81aff322328890b44c72907bb907ca224072835d202eedfe"
     );
-    const byteCode = await web3.eth.getCode(address);
-    const gasPrice = await web3.eth.getGasPrice();
-    const gasPriceHex = web3.utils.toHex(gasPrice);
-    const gasLimitHex = web3.utils.toHex(3000000);
+    const gas = 100000;
+    let trx;
+    if (enable) {
+      trx = contract.methods.enableIssuer(address);
+    } else {
+      trx = contract.methods.disableIssuer(address);
+    }
     debugger;
-    const tra = {
-      data: byteCode,
-      gasPrice: gasPriceHex,
-      gasLimit: gasLimitHex,
-    };
-    contract.defaultAccount = account.address;
+    console.log(trx);
+    const signedTrx = await account.signTransaction({
+      gas,
+      data: await trx.encodeABI(),
+      value: 0,
+    });
+    const result = await web3.eth.sendSignedTransaction(
+      signedTrx.rawTransaction
+    );
+    console.log(result);
+    // const tra = {
+    //   data: encodedABI,
+    //   gas
+    // };
+    // contract.defaultAccount = account.address;
 
     // const tx = new Tx(tra);
     // tx.sign(key);
-    const signedTrx = await account.signTransaction(tra);
-    console.log(signedTrx);
-    const result2 = await web3.eth.sendSignedTransaction(signedTrx);
-    console.log(result2);
+    // const signedTrx = await account.signTransaction(tra);
+    // const receipt = await web3.eth.sendSignedTransaction(signedTrx);
+    // console.log(receipt);
+    // const result2 = await web3.eth.sendSignedTransaction(signedTrx);
+    // console.log(result2);
 
-    if (enable) {
-      const result = await contract.methods.enableIssuer(address).call();
-      console.log(result);
-    } else {
-      debugger;
-      const obj = await contract.methods.disableIssuer(address);
-      debugger;
-      const obj2 = obj.call();
-      const signedTrx = await account.signTransaction(obj);
-      console.log(signedTrx);
-      const result = await web3.eth.sendSignedTransaction(signedTrx);
-      console.log(result);
-    }
+    // if (enable) {
+    //   const result = await contract.methods.enableIssuer(address).call();
+    //   console.log(result);
+    // } else {
+    //   debugger;
+    //   const obj = await contract.methods.disableIssuer(address);
+    //   debugger;
+    //   const obj2 = obj.call();
+    //   const signedTrx = await account.signTransaction(obj);
+    //   console.log(signedTrx);
+    //   const result = await web3.eth.sendSignedTransaction(signedTrx);
+    //   console.log(result);
+    // }
   }
 };
 

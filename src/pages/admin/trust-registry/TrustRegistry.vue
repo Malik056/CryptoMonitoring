@@ -278,8 +278,10 @@ export default {
         }
       } else {
         console.log("Update");
+        const indexOf = this.selectedObj.issuerID.indexOf('0x');
+
         this.$store.dispatch(CHANGE_ISSUER_STATE, {
-          address: this.selectedObj.issuerAddress,
+          address: this.selectedObj.issuerID.substr(indexOf),
           enable: this.selectedObj.active,
         });
       }
