@@ -163,7 +163,7 @@ label {
 p {
   font-size: 24px;
   font-weight: 400;
-  line-height: 22px;
+  line-height: 26px;
   letter-spacing: 0em;
   text-align: left;
   color: black;

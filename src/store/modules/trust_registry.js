@@ -8,7 +8,7 @@ import {
   UPDATE_REGISTRY
 } from "../actions/trust_registry.js";
 import Web3 from "web3";
-import { blockChainAddress } from "../index";
+import { blockChainAddress, marketInfrastructureType } from "../index";
 
 const state = {
   trustRegistryData: [],
@@ -56,8 +56,7 @@ const actions = {
       registryDataObj.issuerID = issuingInstitution.issuerID;
       registryDataObj.issuerPK = issuingInstitution.issuerPK;
       registryDataObj.offeror = issuingInstitution.offeror;
-      registryDataObj.marketInfrastructureType =
-        issuingInstitution.marketInfrastructureType;
+      registryDataObj.marketInfrastructureType = issuingInstitution.marketInfrastructureType == 0 ? marketInfrastructureType[0] : marketInfrastructureType[issuingInstitution.marketInfrastructureType-1];
       registryDataObj.ownerPAName = ownerPAName;
       registryDataObj.ownerPAPK = ownerPAPK;
       registries.push(registryDataObj);
@@ -74,7 +73,7 @@ const actions = {
     const account = web3.eth.accounts.privateKeyToAccount(
       "0xc8dcd2e6e15635db81aff322328890b44c72907bb907ca224072835d202eedfe"
     );
-    const gas = 100000;
+    const gas = 5000000;
     let trx;
     if (enable) {
       trx = contract.methods.enableIssuer(address);
@@ -84,9 +83,10 @@ const actions = {
     debugger;
     console.log(trx);
     const signedTrx = await account.signTransaction({
+      from: account.address,
       gas,
       data: await trx.encodeABI(),
-      value: 0,
+      value: 0
     });
     const result = await web3.eth.sendSignedTransaction(
       signedTrx.rawTransaction

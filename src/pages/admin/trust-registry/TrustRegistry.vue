@@ -281,7 +281,7 @@ export default {
         const indexOf = this.selectedObj.issuerID.indexOf('0x');
 
         this.$store.dispatch(CHANGE_ISSUER_STATE, {
-          address: this.selectedObj.issuerID.substr(indexOf),
+          address: '0x9fB0f7088b660d289c7404cb27Ff140999384D36',
           enable: this.selectedObj.active,
         });
       }

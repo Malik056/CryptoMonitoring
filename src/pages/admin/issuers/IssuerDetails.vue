@@ -33,7 +33,7 @@
         </div>
         <div class="flex md3 xs6">
           <label>{{ $t("issuers.issuerDetails.country") }}</label>
-          <p>{{ issuerData["Country"] }}</p>
+          <p>{{ $t(issuerData["Country"]) }}</p>
         </div>
       </div>
       <div class="row">
@@ -49,6 +49,74 @@
         </div>
       </div>
     </va-card>
+    <br />
+    <va-card class="align-center">
+      <h2>{{ $t("issuers.issuerDetails.claimsAndWDRequest") }}</h2>
+    </va-card>
+    <div class="row">
+      <div class="flex md6 xs6 lg3">
+        <va-card :color="colors.primary" style="padding: 0px">
+          <va-card-content style="padding: 10px 4px 10px 4px">
+            <p class="text--center" style="color: white; margin: 0px">
+              Managed/Cancelled
+            </p>
+            <h3 class="display-2 mb-1 text--center" style="color: white">
+              {{ issuerData["managedClaims"] }}
+            </h3>
+            <p class="text--center" style="color: white">
+              {{ $t("Claims") }}
+            </p>
+          </va-card-content>
+        </va-card>
+      </div>
+      <div class="flex md6 xs6 lg3">
+        <va-card :color="colors.info" style="padding: 0px">
+          <va-card-content style="padding: 10px 4px 10px 4px">
+            <p class="text--center" style="color: white; margin: 0px">
+              Total
+            </p>
+            <h3 class="display-2 mb-1 text--center" style="color: white">
+              {{ issuerData["totalClaims"] }}
+            </h3>
+            <p class="text--center" style="color: white">
+              {{ $t("Claims") }}
+            </p>
+          </va-card-content>
+        </va-card>
+      </div>
+      <div class="flex md6 xs6 lg3">
+        <va-card :color="colors.danger" style="padding: 0px">
+          <va-card-content style="padding: 10px 4px 10px 4px">
+            <p class="text--center" style="color: white; margin: 0px">
+              Managed/Cancelled
+            </p>
+            <h3 class="display-2 mb-1 text--center" style="color: white">
+              {{ issuerData["managedWDR"] }}
+            </h3>
+            <p class="text--center" style="color: white">
+              {{ $t("WD Requests") }}
+            </p>
+          </va-card-content>
+        </va-card>
+      </div>
+      <div class="flex md6 xs6 lg3">
+        <va-card :color="colors.warning" style="padding: 0px">
+          <va-card-content style="padding: 10px 4px 10px 4px">
+            <p class="text--center" style="color: white; margin: 0px">
+              Total
+            </p>
+            <h3 class="display-2 mb-1 text--center" style="color: white">
+              {{ issuerData["totalWDR"] }}
+            </h3>
+            <p class="text--center" style="color: white">
+              {{ $t("WD Requests") }}
+            </p>
+          </va-card-content>
+        </va-card>
+      </div>
+
+
+    </div>
     <br />
     <va-card class="align-center">
       <h2>{{ $t("issuers.issuerDetails.assetsTitle") }}</h2>
@@ -175,7 +243,7 @@ label {
 p {
   font-size: 24px;
   font-weight: 400;
-  line-height: 22px;
+  line-height: 26px;
   letter-spacing: 0em;
   text-align: left;
   color: black;
@@ -183,6 +251,11 @@ p {
 }
 
 h2 {
+  color: var(--va-primary);
+}
+h3 {
+  font-weight: normal;
+  font-size: 3rem;
   color: var(--va-primary);
 }
 .align-left {

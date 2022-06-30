@@ -42,7 +42,7 @@
         </div>
         <div class="flex md6 xs12">
           <label>{{ $t("issuers.issuerDetails.country") }}</label>
-          <p>{{ issuerData["Country"] }}</p>
+          <p>{{ $t(issuerData["Country"]) }}</p>
         </div>
       </div>
       <div class="row">
@@ -72,7 +72,11 @@
             $t("assets.details.transparency.authorizedCustomerType")
           }}</label>
           <p>
-            {{ issuerData["Transparency"]["AuthorizedCustomersType"] }}&nbsp;
+            {{
+              formatCustomerType(
+                issuerData["Transparency"]["AuthorizedCustomersType"]
+              )
+            }}&nbsp;
           </p>
         </div>
         <div class="flex md6 xs12">
@@ -80,7 +84,11 @@
             $t("assets.details.transparency.incompatibleCustomerType")
           }}</label>
           <p>
-            {{ issuerData["Transparency"]["IncompatibleCustomerTypes"] }}
+            {{
+              formatCustomerType(
+                issuerData["Transparency"]["IncompatibleCustomerTypes"]
+              )
+            }}
           </p>
         </div>
       </div>
@@ -89,7 +97,18 @@
           <label>{{
             $t("assets.details.transparency.distributionStrategy")
           }}</label>
-          <p>{{ issuerData["Transparency"]["DistributionStrategy"] }}</p>
+          <p
+            v-if="!issuerData['Transparency']['DistributionStrategy'] ||issuerData['Transparency']['DistributionStrategy'] == ''">
+            NIL
+          </p>
+          <p v-else>
+            <a
+              :href="
+                linkify(issuerData['Transparency']['DistributionStrategy'])
+              "
+              target="_blank">{{ issuerData["Transparency"]["DistributionStrategy"] }}</a
+            >
+          </p>
         </div>
         <div class="flex md6 xs12">
           <label>{{ $t("assets.details.transparency.traderID") }}</label>
@@ -99,11 +118,26 @@
       <div class="row">
         <div class="flex md6 xs12">
           <label>{{ $t("assets.details.transparency.referenceMarket") }}</label>
-          <p>{{ issuerData["Transparency"]["ReferenceMarket"] }}</p>
+          <p
+            v-if="!issuerData['Transparency']['ReferenceMarket'] ||issuerData['Transparency']['ReferenceMarket'] == ''">
+            NIL
+          </p>
+          <p v-else>
+            <a
+              :href="linkify(issuerData['Transparency']['ReferenceMarket'])"
+              target="_blank">{{ issuerData["Transparency"]["ReferenceMarket"] }}</a
+            >
+          </p>
         </div>
         <div class="flex md6 xs12">
           <label>{{ $t("assets.details.transparency.updatedAt") }}</label>
-          <p>{{ new Date(issuerData["Transparency"]["Timestamp"] * 1000).toLocaleDateString() }}</p>
+          <p>
+            {{
+              new Date(
+                issuerData["Transparency"]["Timestamp"] * 1000
+              ).toLocaleDateString()
+            }}
+          </p>
         </div>
       </div>
     </va-card>
@@ -112,6 +146,7 @@
 </template>
 
 <script>
+import { assetTypes } from "@/store";
 import { useColors } from "vuestic-ui";
 import { mapGetters } from "vuex";
 export default {
@@ -129,6 +164,7 @@ export default {
       windowHeight: window.innerHeight,
       windowWidth: window.innerWidth,
       issuerData: JSON.parse(this.asset),
+      assetTypes: assetTypes,
     };
   },
   watch: {
@@ -145,6 +181,12 @@ export default {
     });
   },
   methods: {
+    linkify(link) {
+      if (!link.startsWith("http")) {
+        return "http://" + link;
+      }
+      return link;
+    },
     close() {
       this.$emit("close");
     },
@@ -163,6 +205,16 @@ export default {
           params: { issuer: JSON.stringify(foundIssuer) },
         });
       }
+    },
+    formatCustomerType(data) {
+      if(!data || data === '') {
+        return "NIL";
+      }
+      const list = data.split(",");
+      for (let i = 0; i < list.length; i++) {
+        list[i] = this.$t("customerTypes." + list[i].trim());
+      }
+      return list.join(", ");
     },
     onResize() {
       this.windowHeight = window.innerHeight;
@@ -217,7 +269,7 @@ label {
 p {
   font-size: 24px;
   font-weight: 400;
-  line-height: 22px;
+  line-height: 26px;
   letter-spacing: 0em;
   text-align: left;
   color: black;

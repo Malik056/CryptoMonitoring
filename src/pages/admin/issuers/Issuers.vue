@@ -83,13 +83,13 @@ export default {
       return this.term;
     },
     labels() {
-      return ["DID", "Entity Name", "Country"];
+      return ["Entity Name", "Country", "LEI"];
     },
     headings() {
       return [
-        "DID",
         this.$t("issuers.tableHeaders.name"),
         this.$t("issuers.tableHeaders.country"),
+        "LEI"
       ];
     },
   },

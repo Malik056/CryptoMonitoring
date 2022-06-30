@@ -42,7 +42,7 @@
         <va-form ref="form" style="width: 20rem">
           <va-input
             class="mb-4 mt-4"
-            :label="$t('User PK')"
+            :label="$t('modal.requestingPersonPK')"
             v-model="address"
             :rules="[required]"
           >

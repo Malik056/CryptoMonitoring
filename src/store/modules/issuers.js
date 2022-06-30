@@ -3,6 +3,8 @@ import { LOAD_SUCCESS, UPDATE_ISSUERS } from "../actions/issuers.js";
 import issuerList from "@/data/tables/markup-table/issuers_list.json";
 import issuersAbi from "@/data/abis/issuerabi.json";
 import assetsAbi from "@/data/abis/assetsabi.json";
+import { i18n } from "@/translation/index.ts";
+import { assetTypes } from "../index.ts";
 
 const state = {
   issuers: [],
@@ -47,13 +49,25 @@ const actions = {
       const country = await methods.institutionCountry().call();
       const did = await methods.institutionID().call();
       const lei = await methods.institutionLEI().call();
+      const trackClaims0 = await methods.trackClaims(0).call();
+      const trackClaims1 = await methods.trackClaims(1).call();
+      const trackWDR0 = await methods.trackWDR(0).call();
+      const trackWDR1 = await methods.trackWDR(1).call();
+      console.log("Track Claims0: ", trackClaims0);
+      console.log("Track Claims1: ", trackClaims1);
+      console.log("Track WDR0: ", trackWDR0);
+      console.log("Track WDR1: ", trackWDR1);
       const issuerData = {};
       issuerData["id"] = issuerObj.dapp;
       issuerData["DID"] = did;
       issuerData["Entity Name"] = name;
-      issuerData["Country"] = country;
+      issuerData["Country"] = i18n.global.t("countries."+country);
       issuerData["LEI"] = lei;
       issuerData["Cryptos"] = [];
+      issuerData["managedClaims"] = trackClaims0;
+      issuerData["totalClaims"] = trackClaims1;
+      issuerData["managedWDR"] = trackWDR0;
+      issuerData["totalWDR"] = trackWDR1;
       const tokens = issuerObj.tokens;
       for (let i = 0; i < tokens.length; i++) {
         const assetsContract = getSmartContract({
@@ -65,11 +79,12 @@ const actions = {
         crypto.id = tokens[i];
         crypto.CryptoAssetName = await assetsMethods.name().call();
         crypto.CryptoAssetType = await assetsMethods.tokenType().call();
+        crypto.CryptoAssetType = (crypto.CryptoAssetType || crypto.CryptoAssetType !== '') ? assetTypes[parseInt(crypto.CryptoAssetType)] : "NIL"
         crypto.CryptoAssetSymbol = await assetsMethods.symbol().call();
         crypto.CryptoAssetTotalSupply = await assetsMethods
           .totalSupply()
           .call();
-        crypto.Country = country;
+        crypto.Country = i18n.global.t("countries."+country);
         crypto.EmittingBody = name;
         crypto.EmittingBodyId = issuerObj.dapp;
         const transparency = {};
