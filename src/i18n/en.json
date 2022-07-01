@@ -367,7 +367,9 @@
     "message": "There are three species of zebras: the plains zebra, the mountain zebra and the Grévy's zebra. The plains zebra and the mountain zebra belong to the subgenus Hippotigris, but Grévy's\n        zebra is the sole species of subgenus\n        Dolichohippus. The latter resembles an ass, to which it is closely\n        related, while the former two are more\n        horse-like. All three belong to the genus Equus, along with other living\n        equids.",
     "addIssuer": "Add Issuer",
     "updateIssuer": "Update Issuer",
-    "requestingPersonPK": "insert the Public Key of the requesting person"
+    "requestingPersonPK": "insert the Public Key of the requesting person",
+    "offerVerification": "Small Offer Verification"
+
   },
   "dropdown": {
     "default": "Default",
@@ -635,7 +637,9 @@
       "type": "Infrastructure Type",
       "assetsTitle": "Crypto Assets",
       "totalAssets": "Total Assets",
-      "claimsAndWDRequest": "Claims and WD Requests"
+      "claimsAndWDRequest": "Claims and WD Requests",
+      "managed": "Managed/Cancelled",
+      "total": "Total"
     },
     "withdrawalDetails": {
       "title": "Withdrawal Request",
@@ -669,6 +673,7 @@
       "quantityOfTokens": "Quantity of Tokens",
       "whitePaperHash": "White Paper Signature (Hash)",
       "whitePaperToken": "White Paper Authorization Token",
+      "smallOfferVerify": "Verify if this is a small offer",
       "transparency": {
         "title": "Asset Transparency",
         "authorizedCustomerType": "Authorized Customers Type",

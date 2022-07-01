@@ -143,10 +143,10 @@
     </va-card>
     <br />
     <va-button @click="openPopup">
-      Verify if this is a small offer
+      {{$t("assets.details.smallOfferVerify")}}
     </va-button>
     <modal v-if="modalShown" @close="closeDialog">
-      <template #header><div></div></template>
+      <template #header>{{$t('modal.offerVerification')}}</template>
       <template #body>
         <va-form ref="form" style="width: 20rem">
           <va-input
@@ -159,7 +159,7 @@
           <p>{{result}}</p>
           <div class="row">
             <div class="flex">
-              <va-button @click="onCancel" outline>{{
+              <va-button @click="closeDialog" outline>{{
                 $t("buttons.cancel")
               }}</va-button>
             </div>
@@ -223,9 +223,6 @@ export default {
         return "http://" + link;
       }
       return link;
-    },
-    close() {
-      this.$emit("close");
     },
     openIssuer(asset) {
       const issuers = this.getIssuers;

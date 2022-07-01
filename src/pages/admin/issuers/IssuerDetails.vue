@@ -61,7 +61,7 @@
         <va-card :color="colors.primary" style="padding: 0px">
           <va-card-content style="padding: 10px 4px 10px 4px">
             <p class="text--center" style="color: white; margin: 0px">
-              Managed/Cancelled
+              {{$t('issuers.issuerDetails.managed')}}
             </p>
             <h3 class="display-2 mb-1 text--center" style="color: white">
               {{ issuerData["managedClaims"] }}
@@ -76,7 +76,7 @@
         <va-card :color="colors.info" style="padding: 0px">
           <va-card-content style="padding: 10px 4px 10px 4px">
             <p class="text--center" style="color: white; margin: 0px">
-              Total
+              {{$t('issuers.issuerDetails.total')}}
             </p>
             <h3 class="display-2 mb-1 text--center" style="color: white">
               {{ issuerData["totalClaims"] }}
@@ -91,7 +91,7 @@
         <va-card :color="colors.danger" style="padding: 0px">
           <va-card-content style="padding: 10px 4px 10px 4px">
             <p class="text--center" style="color: white; margin: 0px">
-              Managed/Cancelled
+              {{$t('issuers.issuerDetails.managed')}}
             </p>
             <h3 class="display-2 mb-1 text--center" style="color: white">
               {{ issuerData["managedWDR"] }}
@@ -106,7 +106,7 @@
         <va-card :color="colors.warning" style="padding: 0px">
           <va-card-content style="padding: 10px 4px 10px 4px">
             <p class="text--center" style="color: white; margin: 0px">
-              Total
+              {{$t('issuers.issuerDetails.total')}}
             </p>
             <h3 class="display-2 mb-1 text--center" style="color: white">
               {{ issuerData["totalWDR"] }}
