@@ -97,17 +97,13 @@
           <label>{{
             $t("assets.details.transparency.distributionStrategy")
           }}</label>
-          <p
-            v-if="!issuerData['Transparency']['DistributionStrategy'] ||issuerData['Transparency']['DistributionStrategy'] == ''">
+          <p v-if="!issuerData['Transparency']['DistributionStrategy'] || issuerData['Transparency']['DistributionStrategy'] == ''">
             NIL
           </p>
           <p v-else>
-            <a
-              :href="
-                linkify(issuerData['Transparency']['DistributionStrategy'])
-              "
-              target="_blank">{{ issuerData["Transparency"]["DistributionStrategy"] }}</a
-            >
+            <a :href="linkify(issuerData['Transparency']['DistributionStrategy'])" target="_blank">
+              {{ issuerData["Transparency"]["DistributionStrategy"] }}
+            </a>
           </p>
         </div>
         <div class="flex md6 xs12">
@@ -118,30 +114,54 @@
       <div class="row">
         <div class="flex md6 xs12">
           <label>{{ $t("assets.details.transparency.referenceMarket") }}</label>
-          <p
-            v-if="!issuerData['Transparency']['ReferenceMarket'] ||issuerData['Transparency']['ReferenceMarket'] == ''">
+          <p v-if="!issuerData['Transparency']['ReferenceMarket'] || issuerData['Transparency']['ReferenceMarket'] == ''">
             NIL
           </p>
           <p v-else>
-            <a
-              :href="linkify(issuerData['Transparency']['ReferenceMarket'])"
-              target="_blank">{{ issuerData["Transparency"]["ReferenceMarket"] }}</a
-            >
+            <a :href="linkify(issuerData['Transparency']['ReferenceMarket'])"
+              target="_blank">{{ issuerData["Transparency"]["ReferenceMarket"] }}
+            </a>
           </p>
         </div>
         <div class="flex md6 xs12">
           <label>{{ $t("assets.details.transparency.updatedAt") }}</label>
           <p>
-            {{
-              new Date(
-                issuerData["Transparency"]["Timestamp"] * 1000
-              ).toLocaleDateString()
-            }}
+            {{ new Date(issuerData["Transparency"]["Timestamp"] * 1000).toLocaleDateString() }}
           </p>
         </div>
       </div>
     </va-card>
     <br />
+    <va-button @click="openPopup">
+      Verify if this is a small offer
+    </va-button>
+    <modal v-if="modalShown" @close="closeDialog">
+      <template #header><div></div></template>
+      <template #body>
+        <va-form ref="form" style="width: 20rem">
+          <va-input
+            class="mb-4 mt-4"
+            :label="'Exchange Value'"
+            v-model="exchangeValue"
+            :rules="[required]"
+          >
+          </va-input>
+          <div class="row">
+            <div class="flex">
+              <va-button @click="onCancel" outline>{{
+                $t("buttons.cancel")
+              }}</va-button>
+            </div>
+            <div class="flex">
+              <va-button @click="submit" outline>{{
+                $t("buttons.ok")
+              }}</va-button>
+            </div>
+          </div>
+        </va-form>
+      </template>
+      <template #footer><div></div></template>
+    </modal>
   </div>
 </template>
 
@@ -149,9 +169,12 @@
 import { assetTypes } from "@/store";
 import { useColors } from "vuestic-ui";
 import { mapGetters } from "vuex";
+import Modal from "../../../components/modals/Modal";
 export default {
   name: "assetDetails",
-  components: {},
+  components: {
+    Modal
+  },
   props: {
     asset: {
       type: String,
@@ -165,6 +188,8 @@ export default {
       windowWidth: window.innerWidth,
       issuerData: JSON.parse(this.asset),
       assetTypes: assetTypes,
+      modalShown: false,
+      exchangeValue: "",
     };
   },
   watch: {
@@ -207,7 +232,7 @@ export default {
       }
     },
     formatCustomerType(data) {
-      if(!data || data === '') {
+      if (!data || data === "") {
         return "NIL";
       }
       const list = data.split(",");
@@ -219,6 +244,30 @@ export default {
     onResize() {
       this.windowHeight = window.innerHeight;
       this.windowWidth = window.innerWidth;
+    },
+    async submit() {
+      const valid = this.$refs.form.validate();
+      if(!valid) {
+        return;
+      }
+      const address = this.issuerData.id; const number = this.exchangeValue
+      const result = await this.$store.dispatch("smallOffer", {address, number});
+      console.log("Result: ", result);
+      window.alert(result);
+      this.exchangeValue = "";
+      this.modalShown = false;
+    },
+    closeDialog() {
+      this.modalShown = false;
+    },
+    openPopup() {
+      this.modalShown = true;
+    },
+    required(value) {
+      if (!value || value.isEmpty) {
+        return this.$t("errorMessages.required");
+      }
+      return true;
     },
   },
   computed: {

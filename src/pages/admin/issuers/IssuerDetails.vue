@@ -131,36 +131,6 @@
         @click="openAsset(asset)"
       ></asset-container>
     </div>
-    <div>
-      <va-button @click="openPopup"> Verify if this is a small offer </va-button>
-    </div>
-    <modal v-if="modalShown" @close="closeDialog">
-      <template #header><div></div></template>
-      <template #body>
-        <va-form ref="form" style="width: 20rem">
-          <va-input
-            class="mb-4 mt-4"
-            :label="'Exchange Value'"
-            v-model="address"
-            :rules="[required]"
-          >
-          </va-input>
-          <div class="row">
-            <div class="flex">
-              <va-button @click="onCancel" outline>{{
-                $t("buttons.cancel")
-              }}</va-button>
-            </div>
-            <div class="flex">
-              <va-button @click="submit" outline>{{
-                $t("buttons.ok")
-              }}</va-button>
-            </div>
-          </div>
-        </va-form>
-      </template>
-      <template #footer><div></div></template>
-    </modal>
   </div>
 </template>
 
@@ -202,15 +172,6 @@ export default {
     });
   },
   methods: {
-    submit() {
-      this.$store.dispatch('smallOffer');
-    },
-    closeDialog() {
-      this.modalShown = false;
-    },
-    openPopup() {
-      this.modalShown = true;
-    },
     close() {
       this.$emit("close");
     },

@@ -109,8 +109,11 @@ const actions = {
     }
     commit(LOAD_SUCCESS, { fetchedIssuers, fetchedAssets });
   },
-  smallOffer(context) {
-    //
+  async smallOffer(context, {address, number}) {
+    const sc = getSmartContract({address, abi: assetsAbi});
+    const isSmallOffer = await sc.methods.smallOffer(parseInt(number)).call();
+    console.log("isSmallOffer: ", isSmallOffer);
+    return isSmallOffer;
   }
 };
 
