@@ -85,6 +85,8 @@ const actions = {
         crypto.CryptoAssetTotalSupply = await assetsMethods
           .totalSupply()
           .call();
+        crypto.whitePaperHash = await assetsMethods.whitePaperHash().call();
+        crypto.whitePaperToken = await assetsMethods.whitePaperToken().call();
         crypto.Country = i18n.global.t("countries."+country);
         crypto.EmittingBody = name;
         crypto.EmittingBodyId = issuerObj.dapp;

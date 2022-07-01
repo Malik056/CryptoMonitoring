@@ -667,6 +667,8 @@
       "type": "Asset Type",
       "symbol": "Crypto Asset Symbol",
       "quantityOfTokens": "Quantity of Tokens",
+      "whitePaperHash": "White Paper Signature (Hash)",
+      "whitePaperToken": "White Paper Authorization Token",
       "transparency": {
         "title": "Asset Transparency",
         "authorizedCustomerType": "Authorized Customers Type",

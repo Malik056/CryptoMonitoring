@@ -55,6 +55,16 @@
           <p>{{ issuerData["QuantityofTokens"] }}</p>
         </div>
       </div>
+      <div class="row">
+        <div class="flex lg12">
+          <label>{{ $t("assets.details.whitePaperHash") }}</label>
+          <p>{{ issuerData["whitePaperHash"] }}</p>
+        </div>
+        <div class="flex lg12">
+          <label>{{ $t("assets.details.whitePaperToken") }}</label>
+          <p>{{ issuerData["whitePaperToken"] }}</p>
+        </div>
+      </div>
     </va-card>
     <br />
     <va-card>
@@ -146,6 +156,7 @@
             :rules="[required]"
           >
           </va-input>
+          <p>{{result}}</p>
           <div class="row">
             <div class="flex">
               <va-button @click="onCancel" outline>{{
@@ -190,6 +201,7 @@ export default {
       assetTypes: assetTypes,
       modalShown: false,
       exchangeValue: "",
+      result: "",
     };
   },
   watch: {
@@ -252,13 +264,12 @@ export default {
       }
       const address = this.issuerData.id; const number = this.exchangeValue
       const result = await this.$store.dispatch("smallOffer", {address, number});
-      console.log("Result: ", result);
-      window.alert(result);
-      this.exchangeValue = "";
-      this.modalShown = false;
+      this.result = result;
     },
     closeDialog() {
       this.modalShown = false;
+      this.exchangeValue = "";
+      this.result = "";
     },
     openPopup() {
       this.modalShown = true;
