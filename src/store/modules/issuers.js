@@ -108,6 +108,9 @@ const actions = {
       fetchedIssuers.push(issuerData);
     }
     commit(LOAD_SUCCESS, { fetchedIssuers, fetchedAssets });
+  },
+  smallOffer(context) {
+    //
   }
 };
 
