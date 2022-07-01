@@ -37,7 +37,7 @@
       @clicked="onItemSelected"
     ></markup-table>
     <modal v-if="modalShown" @close="closeDialog">
-      <template #header><div></div></template>
+      <template #header><div>{{$t('modal.checkClaims')}}</div></template>
       <template #body>
         <va-form ref="form" style="width: 20rem">
           <va-input

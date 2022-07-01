@@ -368,7 +368,9 @@
     "addIssuer": "Add Issuer",
     "updateIssuer": "Update Issuer",
     "requestingPersonPK": "insert the Public Key of the requesting person",
-    "offerVerification": "Small Offer Verification"
+    "offerVerification": "Small Offer Verification",
+    "checkClaims": "Check Claims",
+    "checkWithdrawals": "Check Withdrawals"
 
   },
   "dropdown": {
