@@ -60,6 +60,7 @@ const actions = {
       const issuerData = {};
       issuerData["id"] = issuerObj.dapp;
       issuerData["DID"] = did;
+      issuerData["address"] = issuerObj.address;
       issuerData["Entity Name"] = name;
       issuerData["Country"] = i18n.global.t("countries."+country);
       issuerData["LEI"] = lei;

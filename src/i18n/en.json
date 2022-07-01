@@ -632,7 +632,7 @@
       "title": "Issuer Information",
       "country": "Country",
       "name": "Name",
-      "type": "Type",
+      "type": "Infrastructure Type",
       "assetsTitle": "Crypto Assets",
       "totalAssets": "Total Assets",
       "claimsAndWDRequest": "Claims and WD Requests"

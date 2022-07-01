@@ -2,6 +2,7 @@ import { getSmartContract } from "../../utils/api.js";
 import registryAbi from "@/data/abis/trust_registryabi.json";
 import issuerList from "@/data/tables/markup-table/issuers_list.json";
 import {
+  ADD_TO_HASH,
   CHANGE_ISSUER_STATE,
   REGISTRY_LOAD_SUCCESS,
   SET_CONTRACT,
@@ -12,6 +13,7 @@ import { blockChainAddress, marketInfrastructureType } from "../index";
 
 const state = {
   trustRegistryData: [],
+  hashedRegistryData: {},
   page: 0,
   loading: false,
   trustRegistryContract: null
@@ -20,6 +22,9 @@ const state = {
 const getters = {
   getRegistry: state => {
     return state.trustRegistryData;
+  },
+  getHashedRegistry: state => {
+    return state.hashedRegistryData;
   },
   isTrustRegistryLoading: state => {
     return state.loading && state.trustRegistryData.length == 0;
@@ -56,10 +61,16 @@ const actions = {
       registryDataObj.issuerID = issuingInstitution.issuerID;
       registryDataObj.issuerPK = issuingInstitution.issuerPK;
       registryDataObj.offeror = issuingInstitution.offeror;
-      registryDataObj.marketInfrastructureType = issuingInstitution.marketInfrastructureType == 0 ? marketInfrastructureType[0] : marketInfrastructureType[issuingInstitution.marketInfrastructureType-1];
+      registryDataObj.marketInfrastructureType =
+        issuingInstitution.marketInfrastructureType == 0
+          ? marketInfrastructureType[0]
+          : marketInfrastructureType[
+              issuingInstitution.marketInfrastructureType - 1
+            ];
       registryDataObj.ownerPAName = ownerPAName;
       registryDataObj.ownerPAPK = ownerPAPK;
       registries.push(registryDataObj);
+      commit(ADD_TO_HASH, registryDataObj);
     }
 
     commit(REGISTRY_LOAD_SUCCESS, registries);
@@ -123,6 +134,9 @@ const actions = {
 };
 
 const mutations = {
+  [ADD_TO_HASH]: (state, obj) => {
+    state.hashedRegistryData[obj.issuerAddress] = obj;
+  },
   [UPDATE_REGISTRY]: state => {
     state.loading = true;
   },

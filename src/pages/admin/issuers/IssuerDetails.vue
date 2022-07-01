@@ -21,19 +21,18 @@
     <br />
     <va-card>
       <div class="row">
-        <div class="flex md6 xs12">
+        <div class="flex md6 sm12 xs12">
           <label>{{ $t("issuers.issuerDetails.name") }}</label>
           <p>{{ issuerData["Entity Name"] }}</p>
         </div>
-        <div class="flex md3 xs6">
+        <div class="flex md6 sm12 xs12">
           <label>{{ $t("issuers.issuerDetails.type") }}</label>
-          <p>
-            {{ (issuerData["Type"] ?? "") === "" ? "NIL" : issuerData["Type"] }}
+          <p v-if="!isTrustRegistryLoading">
+            {{ getType() }}
           </p>
-        </div>
-        <div class="flex md3 xs6">
-          <label>{{ $t("issuers.issuerDetails.country") }}</label>
-          <p>{{ $t(issuerData["Country"]) }}</p>
+          <p v-else>
+            <va-progress-circle indeterminate />
+          </p>
         </div>
       </div>
       <div class="row">
@@ -43,9 +42,13 @@
         </div>
       </div>
       <div class="row">
-        <div class="flex md6 xs12">
+        <div class="flex lg6 md12">
           <label>LEI</label>
           <p>{{ issuerData["LEI"] }}</p>
+        </div>
+        <div class="flex lg6 md12">
+          <label>{{ $t("issuers.issuerDetails.country") }}</label>
+          <p>{{ $t(issuerData["Country"]) }}</p>
         </div>
       </div>
     </va-card>
@@ -172,24 +175,34 @@ export default {
     });
   },
   methods: {
+    getType() {
+      const hashedReg = this.getHashedRegistry;
+      const address = this.issuerData.issuerAddress;
+      console.log("HashedReg: ", hashedReg);
+      console.log("address: ", address);
+      if(!this.getHashedRegistry) {
+        return "NIL";
+      }
+      return this.getHashedRegistry[this.issuerData.address??""]?.marketInfrastructureType ?? "NIL";
+    },
     close() {
       this.$emit("close");
     },
     openAsset(asset) {
-      const assetList = this.getAssets;
-      let foundAsset;
-      for (let i = 0; i < assetList.length; i++) {
-        const element = assetList[i];
-        if (element.id === asset.id) {
-          foundAsset = element;
-        }
-      }
-      if (foundAsset) {
+      // const assetList = this.getAssets;
+      // let foundAsset;
+      // for (let i = 0; i < assetList.length; i++) {
+      //   const element = assetList[i];
+      //   if (element.id === asset.id) {
+      //     foundAsset = element;
+      //   }
+      // }
+      // if (foundAsset) {
         this.$router.push({
           name: "assetDetails",
-          params: { asset: JSON.stringify(foundAsset) },
+          params: { asset: JSON.stringify(asset) },
         });
-      }
+      // }
     },
     onResize() {
       this.windowHeight = window.innerHeight;
@@ -197,7 +210,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters([["getAssets"]]),
+    ...mapGetters(["getAssets", "getHashedRegistry", "isTrustRegistryLoading"]),
     colors() {
       const { getColors } = useColors();
       const colors = getColors();
