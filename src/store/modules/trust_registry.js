@@ -77,7 +77,7 @@ const actions = {
   },
   [CHANGE_ISSUER_STATE]: async (state, { enable, address }) => {
     const contract = getSmartContract({
-      address: "0x4118dEf0C4b335f6B0acF6fE1743c0B24F48ad94",
+      address: "0x399EB5F63BaD5018bB4F082277D948519DF0cdaC",
       abi: registryAbi
     });
     const web3 = new Web3(blockChainAddress);

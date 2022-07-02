@@ -39,6 +39,7 @@ const actions = {
       const issuerObj = issuers[i];
       const abi1 = issuersAbi;
       console.log(abi1);
+      if(!issuerObj.dapp) {continue;}
       const contract = getSmartContract({
         address: issuerObj.dapp,
         abi: issuersAbi

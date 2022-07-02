@@ -118,7 +118,12 @@
         </div>
         <div class="flex md6 xs12">
           <label>{{ $t("assets.details.transparency.traderID") }}</label>
-          <p>{{ issuerData["Transparency"]["TraderID"] }}</p>
+          <p v-if="!issuerData['Transparency']['TraderID'] || issuerData['Transparency']['TraderID'] == ''">
+            NIL
+          </p>
+          <p v-else>
+            {{ issuerData["Transparency"]["TraderID"] }}
+          </p>
         </div>
       </div>
       <div class="row">

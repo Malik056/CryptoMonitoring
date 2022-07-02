@@ -2,27 +2,43 @@
   "issuers": [
     {
       "address": "0x89499a02B0892cfB3902D29851c1f03CbC96238B",
-      "dapp": "0xd830b9D8e890D290be7e7365fE3D7bbDD94cF7f9",
+      "dapp": "0x777598B6c4a34A423C39542a5Fb457B6EB8B45ab",
       "did": "ibsi2:0x89499a02B0892cfB3902D29851c1f03CbC96238B",
       "tokens": [
-        "0xff9C171905e8bB4E1aa4BCA9D5c7cA8a1379d782",
-        "0xF800699D096DCBa07b5dc7020f0c79448596e184"
+        "0x770e9622e45EA523031f93a90d3810FEF7AE64ae",
+        "0x0ac2060799B6F51ce1835662D6E226fea19A1724"
+      ]
+    },
+    {
+      "address": "0x3d7201049aa892B89aDF9b492eEd0680148b3ca9",
+      "dapp": "0x610D5BBbE4B2d616B078035c09fce25a0Ce1FF6d",
+      "did": "ibsi:0x3d7201049aa892B89aDF9b492eEd0680148b3ca9",
+      "tokens": [
+        "0x3c3F6dc740735ad8dAdD9cD439AD3038563C1805"
       ]
     },
     {
       "address": "0x9fB0f7088b660d289c7404cb27Ff140999384D36",
       "dapp": "0x700DCdf29b29823Def70F8608aDA9A51f9aDB14f",
-      "did": "ibsi:0x9fB0f7088b660d289c7404cb27Ff140999384D36",
+      "did": "ibsi2:0x9fB0f7088b660d289c7404cb27Ff140999384D36",
       "tokens": [
-        "0xcB9dEC6EebAe618e5241DfdcF979C9Cae889C674"
+        "0xE5d30dF14e7a495A6D4A32f65E31d03F378B02c0"
       ]
     },
     {
-      "address": "0x3d7201049aa892B89aDF9b492eEd0680148b3ca9",
-      "dapp": "0xd6b982dA22f63f9E9647B5976d27E7cAe38db732",
-      "did": "ibsi2:0x3d7201049aa892B89aDF9b492eEd0680148b3ca9",
+      "address": "0x21A24b02e7a86d9B9dA4Fb00433d185AAdd57952",
+      "dapp": null,
+      "did": "ibsi2:0x21A24b02e7a86d9B9dA4Fb00433d185AAdd57952",
       "tokens": [
-        "0x76e705E72d6095a15F95Dd7C39b8C90687273e09"
+
+      ]
+    },
+    {
+      "address": "0x0226CcA942930DDEA156ec8A2EF2853F9e3CC47e",
+      "dapp": null,
+      "did": "ibsi2:0x0226CcA942930DDEA156ec8A2EF2853F9e3CC47e",
+      "tokens": [
+
       ]
     }
   ]
