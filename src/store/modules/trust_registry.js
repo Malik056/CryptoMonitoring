@@ -1,15 +1,16 @@
-import { getSmartContract } from "../../utils/api.js";
+import { getSmartContract, sendTrx } from "../../utils/api.js";
 import registryAbi from "@/data/abis/trust_registryabi.json";
 import issuerList from "@/data/tables/markup-table/issuers_list.json";
 import {
+  ADD_NEW_ISSUER,
   ADD_TO_HASH,
   CHANGE_ISSUER_STATE,
   REGISTRY_LOAD_SUCCESS,
   SET_CONTRACT,
   UPDATE_REGISTRY
 } from "../actions/trust_registry.js";
-import Web3 from "web3";
-import { blockChainAddress, marketInfrastructureType } from "../index";
+import { marketInfrastructureType } from "../index";
+import { UPDATE_ISSUER_STATE } from "../actions/issuers.js";
 
 const state = {
   trustRegistryData: [],
@@ -75,61 +76,44 @@ const actions = {
 
     commit(REGISTRY_LOAD_SUCCESS, registries);
   },
-  [CHANGE_ISSUER_STATE]: async (state, { enable, address }) => {
-    const contract = getSmartContract({
-      address: "0x399EB5F63BaD5018bB4F082277D948519DF0cdaC",
-      abi: registryAbi
+  [CHANGE_ISSUER_STATE]: async (context, { enable, address, callback }) => {
+    const trx = await sendTrx({
+      path: `issuer/${address}/${enable ? "enable" : "disable"}`,
+      method: "patch"
     });
-    const web3 = new Web3(blockChainAddress);
-    const account = web3.eth.accounts.privateKeyToAccount(
-      "0xc8dcd2e6e15635db81aff322328890b44c72907bb907ca224072835d202eedfe"
-    );
-    const gas = 5000000;
-    let trx;
-    if (enable) {
-      trx = contract.methods.enableIssuer(address);
-    } else {
-      trx = contract.methods.disableIssuer(address);
+    if (trx) {
+      if (trx.status == 200) {
+        callback(true);
+        context.commit(CHANGE_ISSUER_STATE, {
+          address: address,
+          enabled: enable
+        });
+        context.commit(UPDATE_ISSUER_STATE, { address, active: enable });
+        return;
+      }
     }
-    debugger;
-    console.log(trx);
-    const signedTrx = await account.signTransaction({
-      from: account.address,
-      gas,
-      data: await trx.encodeABI(),
-      value: 0
+    callback(false);
+  },
+  [ADD_NEW_ISSUER]: async ({ commit, state }, { issuer, callback }) => {
+    const trx = await sendTrx({
+      path: "issuer",
+      method: "post",
+      body: JSON.stringify(issuer),
+      headers: { "Content-Type": "application/json" }
     });
-    const result = await web3.eth.sendSignedTransaction(
-      signedTrx.rawTransaction
-    );
-    console.log(result);
-    // const tra = {
-    //   data: encodedABI,
-    //   gas
-    // };
-    // contract.defaultAccount = account.address;
 
-    // const tx = new Tx(tra);
-    // tx.sign(key);
-    // const signedTrx = await account.signTransaction(tra);
-    // const receipt = await web3.eth.sendSignedTransaction(signedTrx);
-    // console.log(receipt);
-    // const result2 = await web3.eth.sendSignedTransaction(signedTrx);
-    // console.log(result2);
+    if(trx.status == 200) {
+      // const list = issuerList.issuers;
+      // const issuerObj = {
+      //   address: issuer.issuerAddress,
+      //   did: issuer.issuerID,
 
-    // if (enable) {
-    //   const result = await contract.methods.enableIssuer(address).call();
-    //   console.log(result);
-    // } else {
-    //   debugger;
-    //   const obj = await contract.methods.disableIssuer(address);
-    //   debugger;
-    //   const obj2 = obj.call();
-    //   const signedTrx = await account.signTransaction(obj);
-    //   console.log(signedTrx);
-    //   const result = await web3.eth.sendSignedTransaction(signedTrx);
-    //   console.log(result);
-    // }
+      // };
+      callback(true);
+    }
+    else {
+      callback(false);
+    }
   }
 };
 
@@ -146,6 +130,9 @@ const mutations = {
   },
   [SET_CONTRACT]: (state, contract) => {
     state.trustRegistryContract = contract;
+  },
+  [CHANGE_ISSUER_STATE]: (state, { address, enabled }) => {
+    state.hashedRegistryData[address].active = enabled;
   }
 };
 

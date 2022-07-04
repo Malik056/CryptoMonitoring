@@ -13,6 +13,13 @@ export default {
       modalTop: "4rem",
     };
   },
+  props: {
+    isLoading: {
+      type: Boolean,
+      required: false,
+      default: false,
+    }
+  },
   mounted() {
     this.onResize();
     window.addEventListener("resize", this.onResize);
@@ -89,6 +96,9 @@ export default {
             </button>
           </footer>
         </slot>
+        <div class="overlay" v-if="isLoading">
+          <va-progress-circle class="loader" indeterminate/>
+        </div>
       </div>
     </div>
   </transition>
@@ -112,6 +122,7 @@ export default {
   box-shadow: 2px 2px 20px 1px;
   overflow-x: auto;
   display: flex;
+  position: relative;
   flex-direction: column;
 }
 
@@ -163,5 +174,18 @@ export default {
 .modal-fade-enter-active,
 .modal-fade-leave-active {
   transition: opacity 0.5s ease;
+}
+.overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #00000066;
+}
+.loader {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>

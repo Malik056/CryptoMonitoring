@@ -1,5 +1,5 @@
 import { getSmartContract } from "../../utils/api.js";
-import { LOAD_SUCCESS, UPDATE_ISSUERS } from "../actions/issuers.js";
+import { LOAD_SUCCESS, SET_ISSUER, UPDATE_ISSUERS, UPDATE_ISSUER_STATE } from "../actions/issuers.js";
 import issuerList from "@/data/tables/markup-table/issuers_list.json";
 import issuersAbi from "@/data/abis/issuerabi.json";
 import assetsAbi from "@/data/abis/assetsabi.json";
@@ -8,6 +8,7 @@ import { assetTypes } from "../index.ts";
 
 const state = {
   issuers: [],
+  hashedIssuers: {},
   cryptoAssets: [],
   issuersPage: 0,
   cryptoAssetsPage: 0,
@@ -109,6 +110,7 @@ const actions = {
         issuerData["Cryptos"].push(crypto);
         fetchedAssets.push(crypto);
       }
+      commit(SET_ISSUER, {address: issuerData.address, obj: issuerData});
       fetchedIssuers.push(issuerData);
     }
     commit(LOAD_SUCCESS, { fetchedIssuers, fetchedAssets });
@@ -129,6 +131,16 @@ const mutations = {
     state.loading = false;
     state.issuers = data.fetchedIssuers;
     state.cryptoAssets = data.fetchedAssets;
+  },
+  [UPDATE_ISSUER_STATE]: (state, {address, active}) => {
+    const obj = state.hashedIssuers[address];
+    if(!obj) {
+      return;
+    }
+    obj.active = active;
+  },
+  [SET_ISSUER]: (state, {address, obj}) => {
+    state.hashedIssuers[address] = obj;
   }
 };
 

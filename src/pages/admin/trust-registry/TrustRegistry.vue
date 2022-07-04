@@ -39,9 +39,11 @@
       @clicked="onItemSelected"
       @addItemClicked="onOpenForm"
     ></markup-table>
-    <modal v-if="showModal" @close="onCancel">
+    <modal @close="onCancel" v-if="showModal" :isLoading="isLoading">
       <template #header>
-        {{ newModal ? $t("modal.addIssuer") : $t("modal.updateIssuer") }}
+        <div>
+          {{ newModal ? $t("modal.addIssuer") : $t("modal.updateIssuer") }}
+        </div>
       </template>
       <template #body>
         <va-form ref="form" style="width: 100%">
@@ -110,7 +112,7 @@
               </div>
             </div>
             <div class="flex xs-12 md-6 align-content--start">
-              <div>
+              <div v-if="!newModal">
                 <label>{{ $t("trustRegistry.modal.active") }}</label>
                 <va-button-toggle
                   :toggle-color="colors.primary"
@@ -139,7 +141,7 @@
             :readonly="!newModal"
             :rules="newModal ? [required] : []"
           />
-          <va-input
+          <va-input v-if="!newModal"
             class="mb-4 mt-4"
             :label="$t('trustRegistry.modal.ownerName')"
             v-model="selectedObj.ownerPAName"
@@ -147,6 +149,7 @@
             :rules="newModal ? [required] : []"
           />
           <va-input
+            v-if="!newModal"
             class="mb-4 mt-4"
             :label="$t('trustRegistry.modal.ownerPK')"
             v-model="selectedObj.ownerPAPK"
@@ -163,9 +166,10 @@
               <va-button
                 @click="saveIssuer"
                 outline
-                :disabled="newModal ? false : !updateAvailable">{{
-                newModal ? $t("buttons.create") : $t("buttons.update")
-              }}</va-button>
+                :disabled="newModal ? false : !updateAvailable"
+              >
+                {{ newModal ? $t("buttons.create") : $t("buttons.update") }}
+              </va-button>
             </div>
           </div>
         </va-form>
@@ -182,6 +186,7 @@ import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
 import { mapGetters } from "vuex";
 import { UPDATE_ISSUERS } from "@/store/actions/issuers";
 import {
+  ADD_NEW_ISSUER,
   CHANGE_ISSUER_STATE,
   UPDATE_REGISTRY,
 } from "@/store/actions/trust_registry";
@@ -210,6 +215,7 @@ export default {
       newModal: false,
       selectedObj: {},
       originalObj: {},
+      isLoading: false,
     };
   },
   computed: {
@@ -245,6 +251,7 @@ export default {
   },
   methods: {
     onCancel() {
+      this.isLoading = false;
       this.showModal = false;
       this.activeError = false;
       this.offerorError = false;
@@ -255,7 +262,7 @@ export default {
       }
       return true;
     },
-    saveIssuer() {
+    async saveIssuer() {
       console.log("Saving Issuer");
       let valid = this.$refs.form.validate();
       if (!this.selectedObj.offeror) {
@@ -269,6 +276,7 @@ export default {
       if (!valid) {
         return;
       }
+
       if (this.newModal) {
         valid = !!this.selectedObj.offeror;
         if (!valid) {
@@ -276,13 +284,37 @@ export default {
           this.offerorError = true;
           return;
         }
+        this.isLoading = true;
+        this.$store.dispatch(ADD_NEW_ISSUER, {
+          issuer: this.selectedObj,
+          callback: (result) => {
+            debugger;
+            this.isLoading = false;
+            if(result) {
+              this.showModal = false;
+              this.$vaToast.init({ message: "Successful", position: 'top-right', color: this.colors.success})
+            }
+            else {
+              this.$vaToast.init({ message: 'Failed', position: 'top-right', color: this.colors.danger})
+            }
+          }
+        });
       } else {
         console.log("Update");
-        const indexOf = this.selectedObj.issuerID.indexOf('0x');
-
+        this.isLoading = true;
         this.$store.dispatch(CHANGE_ISSUER_STATE, {
-          address: '0x9fB0f7088b660d289c7404cb27Ff140999384D36',
+          address: this.selectedObj.issuerAddress,
           enable: this.selectedObj.active,
+          callback: (result) => {
+            this.isLoading = false;
+            if(result) {
+              this.showModal = false;
+              this.$vaToast.init({ message: "Successful", position: 'top-right', color: this.colors.success})
+            }
+            else {
+              this.$vaToast.init({ message: 'Failed', position: 'top-right', color: this.colors.danger})
+            }
+          }
         });
       }
     },
@@ -294,16 +326,16 @@ export default {
       this.showModal = true;
       console.log("Opening popup");
       this.selectedObj = {
+        issuerID: "",
         issuerAddress: "",
+        offeror: false,
+        issuerPK: "",
         issuerName: "",
         competentAuth: "",
-        active: false,
-        issuerID: "",
-        issuerPK: "",
-        offeror: false,
         marketInfrastructureType: "",
-        ownerPAName: "",
-        ownerPAPK: "",
+        // active: false,
+        // ownerPAName: "",
+        // ownerPAPK: "",
       };
       this.newModal = true;
       this.$refs.issuerModal.show();
@@ -314,7 +346,7 @@ export default {
       this.newModal = false;
       this.modalHeight = "100%";
       this.modalDisplay = "none";
-      this.showModal = "true";
+      this.showModal = true;
       // this.$refs.issuerModal.show();
     },
   },
