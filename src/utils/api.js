@@ -62,10 +62,8 @@ export const sendTrx = async ({ path, method, body, headers }) => {
     // debugger;
     const endPoint = apiEndpoint;
     let result;
-    const formData = new FormData();
-    formData.append("_method", "PATCH");
     if (method.toLowerCase() == "PATCH".toLowerCase()) {
-      result = await axios.patch(endPoint + "/" + path, formData, {
+      result = await axios.patch(endPoint+ "/" + path, null, {
         headers: headers
       });
     } else if (method.toLowerCase() == "POST".toLowerCase()) {
