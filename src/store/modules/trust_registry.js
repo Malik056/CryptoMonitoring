@@ -103,7 +103,7 @@ const actions = {
       headers: { "Content-Type": "application/json" }
     });
 
-    if(trx.status == 200) {
+    if(trx && trx.status == 200) {
       // const list = issuerList.issuers;
       // const issuerObj = {
       //   address: issuer.issuerAddress,

@@ -97,7 +97,7 @@
                   :color="colors.secondary"
                   v-model="selectedObj.offeror"
                   :options="options"
-                  @input="onChangeValue"
+                  @update:model-value="onChangeValue"
                   size="small"
                   :rounded="false"
                   :disabled="newModal ? false : true"
@@ -119,7 +119,7 @@
                   :color="colors.secondary"
                   v-model="selectedObj.active"
                   :options="options"
-                  @input="onChangeValue"
+                  @update:model-value="onChangeValue"
                   :rounded="false"
                   size="small"
                 />
@@ -265,7 +265,7 @@ export default {
     async saveIssuer() {
       console.log("Saving Issuer");
       let valid = this.$refs.form.validate();
-      if (!this.selectedObj.offeror) {
+      if (this.selectedObj.offeror == null || this.selectedObj.offeror == undefined) {
         this.activeError = true;
         this.offerorError = true;
         valid = false;
@@ -278,17 +278,10 @@ export default {
       }
 
       if (this.newModal) {
-        valid = !!this.selectedObj.offeror;
-        if (!valid) {
-          this.activeError = true;
-          this.offerorError = true;
-          return;
-        }
         this.isLoading = true;
         this.$store.dispatch(ADD_NEW_ISSUER, {
           issuer: this.selectedObj,
           callback: (result) => {
-            debugger;
             this.isLoading = false;
             if(result) {
               this.showModal = false;
@@ -328,7 +321,7 @@ export default {
       this.selectedObj = {
         issuerID: "",
         issuerAddress: "",
-        offeror: false,
+        offeror: null,
         issuerPK: "",
         issuerName: "",
         competentAuth: "",
