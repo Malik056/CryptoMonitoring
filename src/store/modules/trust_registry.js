@@ -41,7 +41,7 @@ const actions = {
     commit(UPDATE_REGISTRY);
     const registries = [];
     const contract = getSmartContract({
-      address: "0x4118dEf0C4b335f6B0acF6fE1743c0B24F48ad94",
+      address: "0x399EB5F63BaD5018bB4F082277D948519DF0cdaC",
       abi: registryAbi
     });
     commit(SET_CONTRACT, contract);
