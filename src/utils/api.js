@@ -60,7 +60,7 @@ export const sendTrx = async ({ path, method, body, headers }) => {
       path.replace('/', '');
     }
     debugger;
-    const endPoint = apiEndpoint + ':80';
+    const endPoint = apiEndpoint;
     const result = await fetch(endPoint + '/' + path, {
       method,
       body,
