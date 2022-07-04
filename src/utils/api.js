@@ -61,12 +61,22 @@ export const sendTrx = async ({ path, method, body, headers }) => {
     }
     // debugger;
     const endPoint = apiEndpoint;
-    const result = await axios({
-      url: endPoint + '/' + path,
-      method: method,
-      data: body,
-      headers: headers ?? { "Content-Type": "application/json" },
-    });
+    let result;
+    if(method.toLowerCase() == "PATCH".toLowerCase()) {
+      result = await axios.patch(endPoint + '/' + path, body, {headers: headers});
+    }
+    else if(method.toLowerCase() == "POST".toLowerCase()) {
+      result = await axios.post(endPoint + '/' + path, body, {headers: headers});
+    }
+    else {
+      return null;
+    }
+    // result = await axios({
+    //   url: endPoint + '/' + path,
+    //   method: method,
+    //   data: body,
+    //   headers: headers ?? { "Content-Type": "application/json" },
+    // });
     // const result = await fetch(endPoint + '/' + path, {
     //   method,
     //   body,
@@ -81,7 +91,6 @@ export const sendTrx = async ({ path, method, body, headers }) => {
     // });
     return result;
   } catch (ex) {
-    debugger;
     console.log(ex);
     return null;
   }
