@@ -79,7 +79,8 @@ const actions = {
   [CHANGE_ISSUER_STATE]: async (context, { enable, address, callback }) => {
     const trx = await sendTrx({
       path: `issuer/${address}/${enable ? "enable" : "disable"}`,
-      method: "patch"
+      method: "PATCH",
+      headers: {},
     });
     if (trx) {
       if (trx.status == 200) {

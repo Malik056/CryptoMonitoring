@@ -59,14 +59,20 @@ export const sendTrx = async ({ path, method, body, headers }) => {
     if(path.startsWith('/')) {
       path.replace('/', '');
     }
-    debugger;
+    // debugger;
     const endPoint = apiEndpoint;
-    const result = await fetch(endPoint + '/' + path, {
-      method,
-      body,
+    const result = await axios({
+      url: endPoint + '/' + path,
+      method: method,
+      data: body,
       headers: headers ?? { "Content-Type": "application/json" },
     });
-    debugger;
+    // const result = await fetch(endPoint + '/' + path, {
+    //   method,
+    //   body,
+    //   headers: headers ?? { "Content-Type": "application/json" },
+    // });
+    // debugger;
     // const result = await axios({
     //   url: apiEndpoint + "/" + path,
     //   headers: headers ?? { "Content-Type": "application/json" },
