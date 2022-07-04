@@ -80,7 +80,7 @@ const actions = {
     const trx = await sendTrx({
       path: `issuer/${address}/${enable ? "enable" : "disable"}`,
       method: "PATCH",
-      headers: {},
+      headers: { "Content-Type": "application/json" }
     });
     if (trx) {
       if (trx.status == 200) {

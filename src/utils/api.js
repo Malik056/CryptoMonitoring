@@ -56,19 +56,23 @@ export const getSmartContract = ({ address, abi }) => {
 
 export const sendTrx = async ({ path, method, body, headers }) => {
   try {
-    if(path.startsWith('/')) {
-      path.replace('/', '');
+    if (path.startsWith("/")) {
+      path.replace("/", "");
     }
     // debugger;
     const endPoint = apiEndpoint;
     let result;
-    if(method.toLowerCase() == "PATCH".toLowerCase()) {
-      result = await axios.patch(endPoint + '/' + path, body, {headers: headers});
-    }
-    else if(method.toLowerCase() == "POST".toLowerCase()) {
-      result = await axios.post(endPoint + '/' + path, body, {headers: headers});
-    }
-    else {
+    const formData = new FormData();
+    formData.append("_method", "PATCH");
+    if (method.toLowerCase() == "PATCH".toLowerCase()) {
+      result = await axios.patch(endPoint + "/" + path, formData, {
+        headers: headers
+      });
+    } else if (method.toLowerCase() == "POST".toLowerCase()) {
+      result = await axios.post(endPoint + "/" + path, body, {
+        headers: headers
+      });
+    } else {
       return null;
     }
     // result = await axios({
