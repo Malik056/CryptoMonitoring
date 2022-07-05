@@ -19,7 +19,7 @@
         </div>
       </div>
     </va-card>
-    <va-card class="xs12 loading" v-if="isLoading">
+    <va-card class="xs12 loading" v-if="isAllLoading">
       <div class="flex md12 xs12">
         <va-progress-bar indeterminate>Loading</va-progress-bar>
       </div>
@@ -75,7 +75,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getIssuers", "isLoading"]),
+    ...mapGetters(["getIssuers", "isLoading", 'isTrustRegistryLoading']),
     tableKey() {
       return this.query + this.getIssuers.toString();
     },
@@ -97,6 +97,9 @@ export default {
     this.$store.dispatch(UPDATE_ISSUERS);
   },
   methods: {
+    isAllLoading() {
+      return this.isLoading || this.isTrustRegistryLoading;
+    },
     onItemSelected(value) {
       this.$router.push({
         name: "issuerDetails",
