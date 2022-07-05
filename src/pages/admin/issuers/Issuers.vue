@@ -92,14 +92,15 @@ export default {
         "LEI"
       ];
     },
+    isAllLoading() {
+      return this.isLoading || this.isTrustRegistryLoading;
+    },
   },
   created() {
     this.$store.dispatch(UPDATE_ISSUERS);
   },
   methods: {
-    isAllLoading() {
-      return this.isLoading || this.isTrustRegistryLoading;
-    },
+
     onItemSelected(value) {
       this.$router.push({
         name: "issuerDetails",
