@@ -27,15 +27,16 @@
     },
     {
       "address": "0x21A24b02e7a86d9B9dA4Fb00433d185AAdd57952",
-      "dapp": null,
+      "dapp": "0x9CF78e308ecb42732C7b7e70Af67280832B2c53D",
       "did": "ibsi2:0x21A24b02e7a86d9B9dA4Fb00433d185AAdd57952",
       "tokens": [
-
+        "0xE5d30dF14e7a495A6D4A32f65E31d03F378B02c0",
+        "0xAE23b453aFa3b52F98cB18b6215Cc100E2D80C31"
       ]
     },
     {
       "address": "0x0226CcA942930DDEA156ec8A2EF2853F9e3CC47e",
-      "dapp": null,
+      "dapp": "0x3A0Fb145Dc3DdAC763B6705f909E1Bf899b43E9A",
       "did": "ibsi2:0x0226CcA942930DDEA156ec8A2EF2853F9e3CC47e",
       "tokens": [
 
