@@ -245,7 +245,7 @@ export default {
 }
 
 label {
-  font-size: 20px;
+  font-size: 20px; /*LABEL-SIZE-MANAGEMENT (headings)*/
   font-weight: 700;
   line-height: 20px;
   letter-spacing: 0em;

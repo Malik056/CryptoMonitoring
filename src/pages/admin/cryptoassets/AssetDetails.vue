@@ -359,7 +359,7 @@ export default {
 label {
   font-size: 18px;
   font-weight: 700;
-  line-height: 20px;
+  line-height: 20px; /*LABEL-SIZE-MANAGEMENT (headings)*/
   letter-spacing: 0em;
   text-align: left;
   color: #999999;

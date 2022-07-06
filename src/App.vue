@@ -20,7 +20,7 @@ body {
   background: var(--va-background);
 }
 th {
-  font-size: 0.9rem !important;
+  font-size: 0.9rem !important; //LABEL-SIZE-MANAGEMENT for Table Headers
   line-height: 1.2rem !important;
 }
 </style>
