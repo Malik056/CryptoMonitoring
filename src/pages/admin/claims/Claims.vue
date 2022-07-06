@@ -40,6 +40,7 @@
       <template #header><div>{{$t('modal.checkClaims')}}</div></template>
       <template #body>
         <va-form ref="form" style="width: 20rem">
+          <label>{{selectedItem["Entity Name"]}}</label>
           <va-input
             class="mb-4 mt-4"
             :label="$t('modal.requestingPersonPK')"
