@@ -69,6 +69,23 @@ export default {
         obj.contributions = issuer["Cryptos"].length;
         contributors.push(obj);
       }
+      contributors.sort((a,b) => {
+        if(a.contributions < b.contributions) {
+          return 1;
+        }
+        else if(a.contributions > b.contributions) {
+          return -1;
+        }
+        else {
+          if(a.name < b.name) {
+            return -1;
+          }
+          else if(a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        }
+      });
       this.contributors = contributors;
       this.progressMax = Math.max(
         ...this.contributors.map(({ contributions }) => contributions)
