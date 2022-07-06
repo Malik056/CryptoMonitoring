@@ -625,15 +625,32 @@
   "issuers": {
     "tableHeaders": {
       "name": "Entity Name",
-      "country": "Country"
+      "country": "Nazione"
     },
     "issuerDetails": {
       "title": "Issuer Information",
       "country": "Country",
       "name": "Name",
-      "type": "Type",
+      "type": "Infrastructure Type",
       "assetsTitle": "Crypto Assets",
-      "totalAssets": "Total Assets"
+      "totalAssets": "Total Assets",
+      "claimsAndWDRequest": "Claims and Withdrawal Requests",
+      "managed": "Managed/Cancelled",
+      "total": "Total"
+    },
+    "withdrawalDetails": {
+      "title": "Withdrawal Request",
+      "claimedWR": "Claimed WR",
+      "active": "Active",
+      "timestamp": "Timestamp",
+      "details": "Details"
+    },
+    "claimedDetails": {
+      "title": "Claimed Crypto Asset",
+      "claimedCA": "Claimed CA",
+      "active": "Active",
+      "timestamp": "Timestamp",
+      "details": "Details"
     }
   },
   "assets": {
@@ -674,7 +691,7 @@
         "offeror": "Offeror",
         "marketInfraType": "Market Infra Type"
       }
-    }
+    } 
   },
   "errorMessages": {
     "required": "This field is required"

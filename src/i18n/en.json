@@ -639,7 +639,7 @@
       "type": "Infrastructure Type",
       "assetsTitle": "Crypto Assets",
       "totalAssets": "Total Assets",
-      "claimsAndWDRequest": "Claims and WD Requests",
+      "claimsAndWDRequest": "Claims and Withdrawal Requests",
       "managed": "Managed/Cancelled",
       "total": "Total"
     },
