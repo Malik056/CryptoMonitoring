@@ -5,8 +5,7 @@ let generatedData: {
 
 export const getDonutChartData = (
   themes: ColorThemes,
-  issuersData: any[],
-  t: any
+  issuersData: any[]
 ) => {
   const countriesAndIssuers: any = {};
   const data: number[] = [];
@@ -24,15 +23,17 @@ export const getDonutChartData = (
     themes.gray,
     themes.dark
   ];
-  const labels = issuersData.map(e => {
-    const label: string = t("countries." + e.Country);
+  const labels = [];
+  for (let index = 0; index < issuersData.length; index++) {
+    const e = issuersData[index];
+    const label: string = e.Country;
     if (!countriesAndIssuers[label]) {
       countriesAndIssuers[label] = 1;
+      labels.push(label);
     } else {
       countriesAndIssuers[label] = countriesAndIssuers[label] + 1;
     }
-    return label;
-  });
+  }
   const totalColors = availableColors.length;
   for (let i = 0; i < labels.length; i++) {
     colors.push(availableColors[i % totalColors]);

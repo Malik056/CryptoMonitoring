@@ -4,16 +4,6 @@
       <va-card v-if="lineChartData">
         <va-card-title>
           <h1>{{ $t("dashboard.charts.trendyTrends") }}</h1>
-          <div class="mr-0 text-right">
-            <va-button
-              size="small"
-              color="danger"
-              @click="deleteSection"
-              :disabled="lineChartData.labels.length < 2"
-            >
-              {{ $t("dashboard.charts.showInMoreDetail") }}
-            </va-button>
-          </div>
         </va-card-title>
         <va-card-content>
           <va-chart
@@ -70,21 +60,21 @@ export default {
   },
   mounted() {
     this.lineChartData = getLineChartData(this.theme);
-    this.donutChartData = getDonutChartData(this.theme, this.getIssuers, this.$t);
+    this.donutChartData = getDonutChartData(this.theme, this.getIssuers);
   },
   watch: {
     "$themes.primary"() {
       this.lineChartData = getLineChartData(this.theme);
-      this.donutChartData = getDonutChartData(this.theme);
+      this.donutChartData = getDonutChartData(this.theme, this.getIssuers);
     },
 
     "$themes.info"() {
       this.lineChartData = getLineChartData(this.theme);
-      this.donutChartData = getDonutChartData(this.theme);
+      this.donutChartData = getDonutChartData(this.theme, this.getIssuers);
     },
 
     "$themes.danger"() {
-      this.donutChartData = getDonutChartData(this.theme);
+      this.donutChartData = getDonutChartData(this.theme, this.getIssuers);
     },
   },
   methods: {

@@ -40,8 +40,9 @@
       <template #header><div>{{$t('modal.checkWithdrawals')}}</div></template>
       <template #body>
         <va-form ref="form" style="width: 20rem">
+          <label>{{selectedItem["Entity Name"]}}</label>
           <va-input
-            class="mb-4 mt-4"
+            class="mb-4 mt-2"
             :label="$t('modal.requestingPersonPK')"
             v-model="address"
             :rules="[required]"
@@ -117,13 +118,13 @@ export default {
       return this.term;
     },
     labels() {
-      return ["DID", "Entity Name", "Country"];
+      return ["Entity Name", "Country", "LEI"];
     },
     headings() {
       return [
-        "DID",
         this.$t("issuers.tableHeaders.name"),
         this.$t("issuers.tableHeaders.country"),
+        "LEI"
       ];
     },
   },

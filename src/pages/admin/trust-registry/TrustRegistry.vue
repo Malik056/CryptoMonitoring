@@ -359,13 +359,4 @@ export default {
 .loading {
   padding: 1rem;
 }
-label {
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 12px;
-  letter-spacing: 0em;
-  text-align: left;
-  color: #999999;
-  font-family: "Source Sans Pro";
-}
 </style>

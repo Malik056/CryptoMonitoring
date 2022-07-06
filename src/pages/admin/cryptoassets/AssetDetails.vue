@@ -107,18 +107,33 @@
           <label>{{
             $t("assets.details.transparency.distributionStrategy")
           }}</label>
-          <p v-if="!issuerData['Transparency']['DistributionStrategy'] || issuerData['Transparency']['DistributionStrategy'] == ''">
+          <p
+            v-if="
+              !issuerData['Transparency']['DistributionStrategy'] ||
+                issuerData['Transparency']['DistributionStrategy'] == ''
+            "
+          >
             NIL
           </p>
           <p v-else>
-            <a :href="linkify(issuerData['Transparency']['DistributionStrategy'])" target="_blank">
+            <a
+              :href="
+                linkify(issuerData['Transparency']['DistributionStrategy'])
+              "
+              target="_blank"
+            >
               {{ issuerData["Transparency"]["DistributionStrategy"] }}
             </a>
           </p>
         </div>
         <div class="flex md6 xs12">
           <label>{{ $t("assets.details.transparency.traderID") }}</label>
-          <p v-if="!issuerData['Transparency']['TraderID'] || issuerData['Transparency']['TraderID'] == ''">
+          <p
+            v-if="
+              !issuerData['Transparency']['TraderID'] ||
+                issuerData['Transparency']['TraderID'] == ''
+            "
+          >
             NIL
           </p>
           <p v-else>
@@ -129,29 +144,40 @@
       <div class="row">
         <div class="flex md6 xs12">
           <label>{{ $t("assets.details.transparency.referenceMarket") }}</label>
-          <p v-if="!issuerData['Transparency']['ReferenceMarket'] || issuerData['Transparency']['ReferenceMarket'] == ''">
+          <p
+            v-if="
+              !issuerData['Transparency']['ReferenceMarket'] ||
+                issuerData['Transparency']['ReferenceMarket'] == ''
+            "
+          >
             NIL
           </p>
           <p v-else>
-            <a :href="linkify(issuerData['Transparency']['ReferenceMarket'])"
-              target="_blank">{{ issuerData["Transparency"]["ReferenceMarket"] }}
+            <a
+              :href="linkify(issuerData['Transparency']['ReferenceMarket'])"
+              target="_blank">
+              {{ issuerData["Transparency"]["ReferenceMarket"] }}
             </a>
           </p>
         </div>
         <div class="flex md6 xs12">
           <label>{{ $t("assets.details.transparency.updatedAt") }}</label>
           <p>
-            {{ new Date(issuerData["Transparency"]["Timestamp"] * 1000).toLocaleDateString() }}
+            {{
+              new Date(
+                issuerData["Transparency"]["Timestamp"] * 1000
+              ).toLocaleDateString()
+            }}
           </p>
         </div>
       </div>
     </va-card>
     <br />
     <va-button @click="openPopup">
-      {{$t("assets.details.smallOfferVerify")}}
+      {{ $t("assets.details.smallOfferVerify") }}
     </va-button>
     <modal v-if="modalShown" @close="closeDialog">
-      <template #header>{{$t('modal.offerVerification')}}</template>
+      <template #header>{{ $t("modal.offerVerification") }}</template>
       <template #body>
         <va-form ref="form" style="width: 20rem">
           <va-input
@@ -161,7 +187,13 @@
             :rules="[required]"
           >
           </va-input>
-          <p>{{result}}</p>
+          <p v-if="result">
+            Total: {{ result }}
+            <label v-if="parseInt(result) > 1000000" style="color: red">
+              Not Small Offer
+            </label>
+            <label v-else style="color: green"> Small Offer </label>
+          </p>
           <div class="row">
             <div class="flex">
               <va-button @click="closeDialog" outline>{{
@@ -176,7 +208,9 @@
           </div>
         </va-form>
       </template>
-      <template #footer><div></div></template>
+      <template #footer>
+        <div></div>
+      </template>
     </modal>
   </div>
 </template>
@@ -194,8 +228,8 @@ export default {
   props: {
     asset: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
@@ -206,7 +240,7 @@ export default {
       assetTypes: assetTypes,
       modalShown: false,
       exchangeValue: "",
-      result: "",
+      result: ""
     };
   },
   watch: {
@@ -215,7 +249,7 @@ export default {
     },
     windowWidth(newWidth, oldWidth) {
       console.log(`width changed to ${newWidth} from ${oldWidth}`);
-    },
+    }
   },
   mounted() {
     this.$nextTick(() => {
@@ -241,7 +275,7 @@ export default {
       if (foundIssuer) {
         this.$router.push({
           name: "issuerDetails",
-          params: { issuer: JSON.stringify(foundIssuer) },
+          params: { issuer: JSON.stringify(foundIssuer) }
         });
       }
     },
@@ -261,11 +295,15 @@ export default {
     },
     async submit() {
       const valid = this.$refs.form.validate();
-      if(!valid) {
+      if (!valid) {
         return;
       }
-      const address = this.issuerData.id; const number = this.exchangeValue
-      const result = await this.$store.dispatch("smallOffer", {address, number});
+      const address = this.issuerData.id;
+      const number = this.exchangeValue;
+      const result = await this.$store.dispatch("smallOffer", {
+        address,
+        number
+      });
       this.result = result;
     },
     closeDialog() {
@@ -281,7 +319,7 @@ export default {
         return this.$t("errorMessages.required");
       }
       return true;
-    },
+    }
   },
   computed: {
     ...mapGetters([["getIssuers"]]),
@@ -289,8 +327,8 @@ export default {
       const { getColors } = useColors();
       const colors = getColors();
       return colors;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -319,9 +357,9 @@ export default {
 }
 
 label {
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 700;
-  line-height: 12px;
+  line-height: 20px;
   letter-spacing: 0em;
   text-align: left;
   color: #999999;
@@ -341,9 +379,11 @@ p {
 h2 {
   color: var(--va-primary);
 }
+
 .align-left {
   text-align: left;
 }
+
 .btn-back {
   border: none;
   background: transparent;

@@ -19,4 +19,8 @@ body {
   margin: 0;
   background: var(--va-background);
 }
+th {
+  font-size: 0.9rem !important;
+  line-height: 1.2rem !important;
+}
 </style>

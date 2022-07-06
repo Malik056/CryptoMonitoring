@@ -12,6 +12,13 @@ export default {
       },
     },
     {
+      name: 'trustRegistry',
+      displayName: 'Trust Registry',
+      meta: {
+        icon: 'vuestic-iconset-tables',
+      },
+    },
+    {
       name: 'issuers',
       displayName: 'Issuers',
       meta: {
@@ -35,13 +42,6 @@ export default {
     {
       name: 'withdrawals',
       displayName: 'Withdrawals',
-      meta: {
-        icon: 'vuestic-iconset-tables',
-      },
-    },
-    {
-      name: 'trustRegistry',
-      displayName: 'Trust Registry',
       meta: {
         icon: 'vuestic-iconset-tables',
       },

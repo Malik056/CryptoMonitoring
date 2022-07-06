@@ -12,14 +12,14 @@
           <router-link to="dashboard">
             <!-- <vuestic-logo class="logo"/> -->
             <h2 v-bind:style="{ color: colors.primary }">
-              CRYPTOASSETS MONITOR
+              CONSOB MULTI-LEDGER MONITOR
             </h2>
           </router-link>
         </div>
       </template>
       <template #right>
         <app-navbar-actions
-          class="app-navbar__actions md5 lg4"
+          class="app-navbar__actions md6 lg4"
           :user-name="userName"
         />
       </template>
