@@ -43,8 +43,6 @@
 import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
 import CryptoAssets from "@/data/tables/markup-table/assets.json";
 import { mapGetters } from "vuex";
-import { UPDATE_ISSUERS } from '@/store/actions/issuers';
-import { UPDATE_REGISTRY } from '@/store/actions/trust_registry';
 
 export default {
   name: "crypto_assets",
@@ -71,10 +69,6 @@ export default {
     headings() {
       return [this.$t('assets.tableHeaders.name'), this.$t('assets.tableHeaders.emittingBody'), this.$t('assets.tableHeaders.country'), this.$t('assets.tableHeaders.type')];
     },
-  },
-  created() {
-    this.$store.dispatch(UPDATE_ISSUERS);
-    this.$store.dispatch(UPDATE_REGISTRY);
   },
   methods: {
     onItemSelected(value) {

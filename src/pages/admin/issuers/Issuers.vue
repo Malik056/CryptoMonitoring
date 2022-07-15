@@ -53,7 +53,6 @@
 <script>
 import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
 import { mapGetters } from "vuex";
-import { UPDATE_ISSUERS } from "@/store/actions/issuers";
 // import ModalFullScreen from "../../../components/modals/ModalFullScreen";
 // import IssuerDetails from "./IssuerDetails";
 
@@ -95,9 +94,6 @@ export default {
     isAllLoading() {
       return this.isLoading || this.isTrustRegistryLoading;
     },
-  },
-  created() {
-    this.$store.dispatch(UPDATE_ISSUERS);
   },
   methods: {
 

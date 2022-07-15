@@ -23,7 +23,7 @@
       </div>
       <div class="app-layout__page">
         <div class="layout fluid gutter--xl">
-          <router-view @openModel="openModal"/>
+          <router-view @openModel="openModal" />
         </div>
       </div>
     </div>
@@ -36,13 +36,15 @@ import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { onBeforeRouteUpdate } from "vue-router";
 import Sidebar from "@/components/sidebar/Sidebar";
 import Navbar from "@/components/navbar/Navbar.vue";
+import { GET_ISSUER_LIST, UPDATE_ISSUERS } from "@/store/actions/issuers";
+import { UPDATE_REGISTRY } from "@/store/actions/trust_registry";
 
 export default {
   name: "app-layout",
 
   components: {
     Navbar,
-    Sidebar,
+    Sidebar
   },
 
   setup() {
@@ -96,19 +98,22 @@ export default {
     };
 
     return {
-
       isSidebarMinimized,
       sidebarWidth,
       sidebarMinimizedWidth,
       isFullScreenSidebar,
-      onCloseSidebarButtonClick,
+      onCloseSidebarButtonClick
     };
   },
   data() {
-    return {
-
-    };
+    return {};
   },
+  created() {
+    this.$store.dispatch(GET_ISSUER_LIST).then(() => {
+      this.$store.dispatch(UPDATE_ISSUERS);
+      this.$store.dispatch(UPDATE_REGISTRY);
+    });
+  }
 };
 </script>
 

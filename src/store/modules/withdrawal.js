@@ -11,7 +11,7 @@ const getters = {
   isWithdrawing: state => {
     return state.withdrawing;
   },
-  getClaimedInfo: state => {
+  getWithdrawalInfo: state => {
     return state.withdrawRequests;
   }
 };

@@ -34,7 +34,7 @@ const getters = {
 };
 
 const actions = {
-  [UPDATE_REGISTRY]: async ({ commit, state }) => {
+  [UPDATE_REGISTRY]: async ({ commit, state, rootState }) => {
     if (state.loading) {
       return;
     }
@@ -46,7 +46,7 @@ const actions = {
     });
     commit(SET_CONTRACT, contract);
     const methods = contract.methods;
-    const issuers = state.issuerList.issuers;
+    const issuers = rootState.issuers.issuersList.issuers;
     for (let i = 0; i < issuers.length; i++) {
       const issuer = issuers[i];
       const issuingInstitution = await methods

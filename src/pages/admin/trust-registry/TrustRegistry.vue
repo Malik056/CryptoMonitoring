@@ -141,7 +141,8 @@
             :readonly="!newModal"
             :rules="newModal ? [required] : []"
           />
-          <va-input v-if="!newModal"
+          <va-input
+            v-if="!newModal"
             class="mb-4 mt-4"
             :label="$t('trustRegistry.modal.ownerName')"
             v-model="selectedObj.ownerPAName"
@@ -184,11 +185,9 @@
 <script>
 import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
 import { mapGetters } from "vuex";
-import { UPDATE_ISSUERS } from "@/store/actions/issuers";
 import {
   ADD_NEW_ISSUER,
   CHANGE_ISSUER_STATE,
-  UPDATE_REGISTRY,
 } from "@/store/actions/trust_registry";
 import Modal from "../../../components/modals/Modal";
 import { useColors } from "vuestic-ui";
@@ -197,7 +196,7 @@ export default {
   name: "trust_registry",
   components: {
     MarkupTable,
-    Modal,
+    Modal
   },
   data() {
     return {
@@ -207,7 +206,7 @@ export default {
       offerorError: false,
       options: [
         { label: "Yes", value: true },
-        { label: "No", value: false },
+        { label: "No", value: false }
       ],
       labels: ["issuerName", "competentAuth", "active"],
       objKey: "issuerName",
@@ -215,7 +214,7 @@ export default {
       newModal: false,
       selectedObj: {},
       originalObj: {},
-      isLoading: false,
+      isLoading: false
     };
   },
   computed: {
@@ -243,11 +242,7 @@ export default {
         }
       }
       return false;
-    },
-  },
-  created() {
-    this.$store.dispatch(UPDATE_ISSUERS);
-    this.$store.dispatch(UPDATE_REGISTRY);
+    }
   },
   methods: {
     onCancel() {
@@ -265,7 +260,10 @@ export default {
     async saveIssuer() {
       console.log("Saving Issuer");
       let valid = this.$refs.form.validate();
-      if (this.selectedObj.offeror == null || this.selectedObj.offeror == undefined) {
+      if (
+        this.selectedObj.offeror == null ||
+        this.selectedObj.offeror == undefined
+      ) {
         this.activeError = true;
         this.offerorError = true;
         valid = false;
@@ -281,14 +279,21 @@ export default {
         this.isLoading = true;
         this.$store.dispatch(ADD_NEW_ISSUER, {
           issuer: this.selectedObj,
-          callback: (result) => {
+          callback: result => {
             this.isLoading = false;
-            if(result) {
+            if (result) {
               this.showModal = false;
-              this.$vaToast.init({ message: "Successful", position: 'top-right', color: this.colors.success})
-            }
-            else {
-              this.$vaToast.init({ message: 'Failed', position: 'top-right', color: this.colors.danger})
+              this.$vaToast.init({
+                message: "Successful",
+                position: "top-right",
+                color: this.colors.success
+              });
+            } else {
+              this.$vaToast.init({
+                message: "Failed",
+                position: "top-right",
+                color: this.colors.danger
+              });
             }
           }
         });
@@ -298,14 +303,21 @@ export default {
         this.$store.dispatch(CHANGE_ISSUER_STATE, {
           address: this.selectedObj.issuerAddress,
           enable: this.selectedObj.active,
-          callback: (result) => {
+          callback: result => {
             this.isLoading = false;
-            if(result) {
+            if (result) {
               this.showModal = false;
-              this.$vaToast.init({ message: "Successful", position: 'top-right', color: this.colors.success})
-            }
-            else {
-              this.$vaToast.init({ message: 'Failed', position: 'top-right', color: this.colors.danger})
+              this.$vaToast.init({
+                message: "Successful",
+                position: "top-right",
+                color: this.colors.success
+              });
+            } else {
+              this.$vaToast.init({
+                message: "Failed",
+                position: "top-right",
+                color: this.colors.danger
+              });
             }
           }
         });
@@ -325,7 +337,7 @@ export default {
         issuerPK: "",
         issuerName: "",
         competentAuth: "",
-        marketInfrastructureType: "",
+        marketInfrastructureType: ""
         // active: false,
         // ownerPAName: "",
         // ownerPAPK: "",
@@ -341,8 +353,8 @@ export default {
       this.modalDisplay = "none";
       this.showModal = true;
       // this.$refs.issuerModal.show();
-    },
-  },
+    }
+  }
 };
 </script>
 

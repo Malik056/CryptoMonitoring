@@ -83,7 +83,6 @@
 <script>
 import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
 import { mapGetters } from "vuex";
-import { UPDATE_ISSUERS } from "@/store/actions/issuers";
 import { CLAIM_ISSUER } from "@/store/actions/claim";
 import Modal from "../../../components/modals/Modal";
 // import ModalFullScreen from "../../../components/modals/ModalFullScreen";
@@ -127,9 +126,6 @@ export default {
         "LEI"
       ];
     },
-  },
-  created() {
-    this.$store.dispatch(UPDATE_ISSUERS);
   },
   methods: {
     async submit() {

@@ -38,7 +38,7 @@ const getters = {
 const actions = {
   [UPDATE_ISSUERS]: async ({ commit, state }) => {
     commit(UPDATE_ISSUERS);
-    const issuers = state.issuersList.issuers;
+    const issuers = state.issuersList?.issuers ?? [];
     const fetchedIssuers = [];
     const fetchedAssets = [];
     for (let i = 0; i < issuers.length; i++) {
@@ -134,7 +134,8 @@ const actions = {
   [GET_ISSUER_LIST]: async ({ state, commit }) => {
     const promise = await getRequest({ pathAndQuery: issuersEndPoint, withPort: false });
     if (promise.status == 200) {
-      commit(SET_ISSUER_LIST, JSON.parse(promise.data));
+      const data = promise.data;
+      commit(SET_ISSUER_LIST, data);
     }
     return promise;
   }
