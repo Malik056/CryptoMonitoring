@@ -27,7 +27,7 @@ import DashboardCharts from "./DashboardCharts";
 // import DashboardTabs from "./DashboardTabs";
 // import DashboardMap from "./DashboardMap";
 // import DashboardTable from "./DashboardTable";
-import { UPDATE_ISSUERS } from "@/store/actions/issuers";
+import { GET_ISSUER_LIST, UPDATE_ISSUERS } from "@/store/actions/issuers";
 import { UPDATE_REGISTRY } from "@/store/actions/trust_registry";
 import { mapGetters } from "vuex";
 
@@ -43,7 +43,8 @@ export default {
   computed: {
     ...mapGetters(["isLoading", "getIssuers", "getAssets"]),
   },
-  created() {
+  async created() {
+    await this.$store.dispatch(GET_ISSUER_LIST);
     this.$store.dispatch(UPDATE_ISSUERS);
     this.$store.dispatch(UPDATE_REGISTRY);
   },

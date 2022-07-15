@@ -1,10 +1,17 @@
-import { getSmartContract } from "../../utils/api.js";
-import { LOAD_SUCCESS, SET_ISSUER, UPDATE_ISSUERS, UPDATE_ISSUER_STATE } from "../actions/issuers.js";
-import issuerList from "@/data/tables/markup-table/issuers_list.json";
+import { getRequest, getSmartContract } from "../../utils/api.js";
+import {
+  GET_ISSUER_LIST,
+  LOAD_SUCCESS,
+  SET_ISSUER,
+  SET_ISSUER_LIST,
+  UPDATE_ISSUERS,
+  UPDATE_ISSUER_STATE
+} from "../actions/issuers.js";
+// import issuerList from "@/data/tables/markup-table/issuers_list.json";
 import issuersAbi from "@/data/abis/issuerabi.json";
 import assetsAbi from "@/data/abis/assetsabi.json";
 import { i18n } from "@/translation/index.ts";
-import { assetTypes } from "../index.ts";
+import { issuersEndPoint, assetTypes } from "../index.ts";
 
 const state = {
   issuers: [],
@@ -12,7 +19,8 @@ const state = {
   cryptoAssets: [],
   issuersPage: 0,
   cryptoAssetsPage: 0,
-  loading: false
+  loading: false,
+  issuersList: null
 };
 
 const getters = {
@@ -29,18 +37,17 @@ const getters = {
 
 const actions = {
   [UPDATE_ISSUERS]: async ({ commit, state }) => {
-    if (state.loading) {
-      return;
-    }
     commit(UPDATE_ISSUERS);
-    const issuers = issuerList.issuers;
+    const issuers = state.issuersList.issuers;
     const fetchedIssuers = [];
     const fetchedAssets = [];
     for (let i = 0; i < issuers.length; i++) {
       const issuerObj = issuers[i];
       const abi1 = issuersAbi;
       console.log(abi1);
-      if(!issuerObj.dapp) {continue;}
+      if (!issuerObj.dapp) {
+        continue;
+      }
       const contract = getSmartContract({
         address: issuerObj.dapp,
         abi: issuersAbi
@@ -64,7 +71,7 @@ const actions = {
       issuerData["DID"] = did;
       issuerData["address"] = issuerObj.address;
       issuerData["Entity Name"] = name;
-      issuerData["Country"] = i18n.global.t("countries."+country);
+      issuerData["Country"] = i18n.global.t("countries." + country);
       issuerData["LEI"] = lei;
       issuerData["Cryptos"] = [];
       issuerData["managedClaims"] = trackClaims0;
@@ -82,14 +89,17 @@ const actions = {
         crypto.id = tokens[i];
         crypto.CryptoAssetName = await assetsMethods.name().call();
         crypto.CryptoAssetType = await assetsMethods.tokenType().call();
-        crypto.CryptoAssetType = (crypto.CryptoAssetType || crypto.CryptoAssetType !== '') ? assetTypes[parseInt(crypto.CryptoAssetType)] : "NIL"
+        crypto.CryptoAssetType =
+          crypto.CryptoAssetType || crypto.CryptoAssetType !== ""
+            ? assetTypes[parseInt(crypto.CryptoAssetType)]
+            : "NIL";
         crypto.CryptoAssetSymbol = await assetsMethods.symbol().call();
         crypto.CryptoAssetTotalSupply = await assetsMethods
           .totalSupply()
           .call();
         crypto.whitePaperHash = await assetsMethods.whitePaperHash().call();
         crypto.whitePaperToken = await assetsMethods.whitePaperToken().call();
-        crypto.Country = i18n.global.t("countries."+country);
+        crypto.Country = i18n.global.t("countries." + country);
         crypto.EmittingBody = name;
         crypto.EmittingBodyId = issuerObj.dapp;
         const transparency = {};
@@ -110,16 +120,23 @@ const actions = {
         issuerData["Cryptos"].push(crypto);
         fetchedAssets.push(crypto);
       }
-      commit(SET_ISSUER, {address: issuerData.address, obj: issuerData});
+      commit(SET_ISSUER, { address: issuerData.address, obj: issuerData });
       fetchedIssuers.push(issuerData);
     }
     commit(LOAD_SUCCESS, { fetchedIssuers, fetchedAssets });
   },
-  async smallOffer(context, {address, number}) {
-    const sc = getSmartContract({address, abi: assetsAbi});
+  async smallOffer(context, { address, number }) {
+    const sc = getSmartContract({ address, abi: assetsAbi });
     const isSmallOffer = await sc.methods.smallOffer(parseInt(number)).call();
     console.log("isSmallOffer: ", isSmallOffer);
     return isSmallOffer;
+  },
+  [GET_ISSUER_LIST]: async ({ state, commit }) => {
+    const promise = await getRequest({ pathAndQuery: issuersEndPoint, withPort: false });
+    if (promise.status == 200) {
+      commit(SET_ISSUER_LIST, JSON.parse(promise.data));
+    }
+    return promise;
   }
 };
 
@@ -132,15 +149,18 @@ const mutations = {
     state.issuers = data.fetchedIssuers;
     state.cryptoAssets = data.fetchedAssets;
   },
-  [UPDATE_ISSUER_STATE]: (state, {address, active}) => {
+  [UPDATE_ISSUER_STATE]: (state, { address, active }) => {
     const obj = state.hashedIssuers[address];
-    if(!obj) {
+    if (!obj) {
       return;
     }
     obj.active = active;
   },
-  [SET_ISSUER]: (state, {address, obj}) => {
+  [SET_ISSUER]: (state, { address, obj }) => {
     state.hashedIssuers[address] = obj;
+  },
+  [SET_ISSUER_LIST]: (state, list) => {
+    state.issuersList = list;
   }
 };
 

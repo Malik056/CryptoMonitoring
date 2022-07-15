@@ -12,26 +12,23 @@ export const getRequest = obj => {
   console.log("server: ", serverAdd);
   const url =
     serverAdd +
+    (obj.withPort ?? true ? `${obj.port ?? ":8081"}/` : '/'+obj.pathAndQuery);
+  const obj2 = axios.get(url, {
+    mode: "no-cors"
+  });
+  return obj2;
+};
+
+export const postRequest = obj => {
+  console.log("obj: ", obj);
+  const serverAdd = server;
+  console.log("server: ", serverAdd);
+  const url =
+    serverAdd +
     (obj.withPort ?? true ? `${obj.port ?? ":8081"}/` : obj.pathAndQuery);
-  const obj2 = axios.get(
-    url,
-    {
-      mode: "no-cors"
-    }
-    // , {
-    // // mode: 'no-cors', // 'cors' by default
-    // headers: {
-    //   "Content-Type": "text/plain"
-    // }
-    // }
-  );
-  // .catch(err => {
-  //   console.log(err);
-  //   return {
-  //     data: `user1:cGFzczE=
-  // user2:cGFzczI=`
-  //   };
-  // });
+  const obj2 = axios.get(url, {
+    mode: "no-cors"
+  });
   return obj2;
 };
 
@@ -63,7 +60,7 @@ export const sendTrx = async ({ path, method, body, headers }) => {
     const endPoint = apiEndpoint;
     let result;
     if (method.toLowerCase() == "PATCH".toLowerCase()) {
-      result = await axios.patch(endPoint+ "/" + path, null, {
+      result = await axios.patch(endPoint + "/" + path, null, {
         headers: headers
       });
     } else if (method.toLowerCase() == "POST".toLowerCase()) {

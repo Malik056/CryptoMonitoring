@@ -4,3 +4,5 @@ export const LOAD_SUCCESS = "LOAD_SUCCESS";
 export const LOAD_FAILURE = "LOAD_FAILURE";
 export const UPDATE_ISSUER_STATE = "UPDATE_ISSUER_STATE";
 export const SET_ISSUER = "SET_ISSUER";
+export const SET_ISSUER_LIST = "SET_ISSUER_LIST";
+export const GET_ISSUER_LIST = "GET_ISSUER_LIST";

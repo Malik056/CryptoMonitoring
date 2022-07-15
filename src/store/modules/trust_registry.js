@@ -1,6 +1,6 @@
 import { getSmartContract, sendTrx } from "../../utils/api.js";
 import registryAbi from "@/data/abis/trust_registryabi.json";
-import issuerList from "@/data/tables/markup-table/issuers_list.json";
+// import issuerList from "@/data/tables/markup-table/issuers_list.json";
 import {
   ADD_NEW_ISSUER,
   ADD_TO_HASH,
@@ -46,7 +46,7 @@ const actions = {
     });
     commit(SET_CONTRACT, contract);
     const methods = contract.methods;
-    const issuers = issuerList.issuers;
+    const issuers = state.issuerList.issuers;
     for (let i = 0; i < issuers.length; i++) {
       const issuer = issuers[i];
       const issuingInstitution = await methods
