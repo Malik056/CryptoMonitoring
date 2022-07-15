@@ -12,6 +12,7 @@ import issuersAbi from "@/data/abis/issuerabi.json";
 import assetsAbi from "@/data/abis/assetsabi.json";
 import { i18n } from "@/translation/index.ts";
 import { issuersEndPoint, assetTypes } from "../index.ts";
+import { ADD_NEW_ISSUER } from "../actions/trust_registry.js";
 
 const state = {
   issuers: [],
@@ -162,6 +163,11 @@ const mutations = {
   },
   [SET_ISSUER_LIST]: (state, list) => {
     state.issuersList = list;
+  },
+  [ADD_NEW_ISSUER]: (state, issuer) => {
+    const list = state.issuersList.issuers;
+    list.push(issuer);
+    state.issuersList.issuers = list;
   }
 };
 
