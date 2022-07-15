@@ -110,7 +110,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getIssuers", "isLoading", "isClaiming", "getClaimedInfo"]),
+    ...mapGetters(["getIssuers", "isLoading", "isClaiming"]),
     tableKey() {
       return this.query + this.getIssuers.toString();
     },
