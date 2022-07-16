@@ -108,6 +108,7 @@ const actions = {
     { commit, state, rootState },
     { issuer, callback }
   ) => {
+    delete issuer.dapp;
     const trx = await sendTrx({
       path: "issuer",
       method: "post",
