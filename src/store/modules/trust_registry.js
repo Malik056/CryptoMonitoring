@@ -109,6 +109,7 @@ const actions = {
     { issuer, callback }
   ) => {
     delete issuer.dapp;
+    console.log("Object to API: ", issuer.dapp);
     const trx = await sendTrx({
       path: "issuer",
       method: "post",
