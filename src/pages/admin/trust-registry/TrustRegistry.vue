@@ -81,6 +81,13 @@
             :readonly="!newModal"
             :rules="newModal ? [required] : []"
           />
+          <va-input v-if="newModal"
+            class="mb-4"
+            :label="$t('trustRegistry.modal.dapp')"
+            v-model="selectedObj.dapp"
+            :readonly="!newModal"
+            :rules="newModal ? [required] : []"
+          />
           <va-input
             class="mb-4"
             :label="$t('trustRegistry.modal.pk')"
@@ -337,7 +344,8 @@ export default {
         issuerPK: "",
         issuerName: "",
         competentAuth: "",
-        marketInfrastructureType: ""
+        marketInfrastructureType: "",
+        dapp: "",
         // active: false,
         // ownerPAName: "",
         // ownerPAPK: "",

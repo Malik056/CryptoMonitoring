@@ -49,80 +49,85 @@ const actions = {
       if (!issuerObj.dapp) {
         continue;
       }
-      const contract = getSmartContract({
-        address: issuerObj.dapp,
-        abi: issuersAbi
-      });
-      const methods = contract.methods;
 
-      const name = await methods.institutionName().call();
-      const country = await methods.institutionCountry().call();
-      const did = await methods.institutionID().call();
-      const lei = await methods.institutionLEI().call();
-      const trackClaims0 = await methods.trackClaims(0).call();
-      const trackClaims1 = await methods.trackClaims(1).call();
-      const trackWDR0 = await methods.trackWDR(0).call();
-      const trackWDR1 = await methods.trackWDR(1).call();
-      console.log("Track Claims0: ", trackClaims0);
-      console.log("Track Claims1: ", trackClaims1);
-      console.log("Track WDR0: ", trackWDR0);
-      console.log("Track WDR1: ", trackWDR1);
-      const issuerData = {};
-      issuerData["id"] = issuerObj.dapp;
-      issuerData["DID"] = did;
-      issuerData["address"] = issuerObj.address;
-      issuerData["Entity Name"] = name;
-      issuerData["Country"] = i18n.global.t("countries." + country);
-      issuerData["LEI"] = lei;
-      issuerData["Cryptos"] = [];
-      issuerData["managedClaims"] = trackClaims0;
-      issuerData["totalClaims"] = trackClaims1;
-      issuerData["managedWDR"] = trackWDR0;
-      issuerData["totalWDR"] = trackWDR1;
-      const tokens = issuerObj.tokens;
-      for (let i = 0; i < tokens.length; i++) {
-        const assetsContract = getSmartContract({
-          abi: assetsAbi,
-          address: tokens[i]
+      try {
+        const contract = getSmartContract({
+          address: issuerObj.dapp,
+          abi: issuersAbi
         });
-        const assetsMethods = assetsContract.methods;
-        const crypto = {};
-        crypto.id = tokens[i];
-        crypto.CryptoAssetName = await assetsMethods.name().call();
-        crypto.CryptoAssetType = await assetsMethods.tokenType().call();
-        crypto.CryptoAssetType =
-          crypto.CryptoAssetType || crypto.CryptoAssetType !== ""
-            ? assetTypes[parseInt(crypto.CryptoAssetType)]
-            : "NIL";
-        crypto.CryptoAssetSymbol = await assetsMethods.symbol().call();
-        crypto.CryptoAssetTotalSupply = await assetsMethods
-          .totalSupply()
-          .call();
-        crypto.whitePaperHash = await assetsMethods.whitePaperHash().call();
-        crypto.whitePaperToken = await assetsMethods.whitePaperToken().call();
-        crypto.Country = i18n.global.t("countries." + country);
-        crypto.EmittingBody = name;
-        crypto.EmittingBodyId = issuerObj.dapp;
-        const transparency = {};
-        const transparencyDetails = await assetsMethods
-          .transparencyDetails()
-          .call();
-        transparency.AuthorizedCustomersType = transparencyDetails.clientType;
+        const methods = contract.methods;
 
-        transparency.DistributionStrategy =
-          transparencyDetails.distributionStrategyURL;
-        transparency.ReferenceMarket = transparencyDetails.referenceMarketURL;
-        transparency.IncompatibleCustomerTypes =
-          transparencyDetails.incompatibleClients;
-        transparency.TraderID = transparencyDetails.traderID;
-        transparency.Timestamp = transparencyDetails.lastUpdate;
-        crypto.Transparency = transparency;
-        crypto.QuantityofTokens = crypto.CryptoAssetTotalSupply;
-        issuerData["Cryptos"].push(crypto);
-        fetchedAssets.push(crypto);
+        const name = await methods.institutionName().call();
+        const country = await methods.institutionCountry().call();
+        const did = await methods.institutionID().call();
+        const lei = await methods.institutionLEI().call();
+        const trackClaims0 = await methods.trackClaims(0).call();
+        const trackClaims1 = await methods.trackClaims(1).call();
+        const trackWDR0 = await methods.trackWDR(0).call();
+        const trackWDR1 = await methods.trackWDR(1).call();
+        console.log("Track Claims0: ", trackClaims0);
+        console.log("Track Claims1: ", trackClaims1);
+        console.log("Track WDR0: ", trackWDR0);
+        console.log("Track WDR1: ", trackWDR1);
+        const issuerData = {};
+        issuerData["id"] = issuerObj.dapp;
+        issuerData["DID"] = did;
+        issuerData["address"] = issuerObj.address;
+        issuerData["Entity Name"] = name;
+        issuerData["Country"] = i18n.global.t("countries." + country);
+        issuerData["LEI"] = lei;
+        issuerData["Cryptos"] = [];
+        issuerData["managedClaims"] = trackClaims0;
+        issuerData["totalClaims"] = trackClaims1;
+        issuerData["managedWDR"] = trackWDR0;
+        issuerData["totalWDR"] = trackWDR1;
+        const tokens = issuerObj.tokens;
+        for (let i = 0; i < tokens.length; i++) {
+          const assetsContract = getSmartContract({
+            abi: assetsAbi,
+            address: tokens[i]
+          });
+          const assetsMethods = assetsContract.methods;
+          const crypto = {};
+          crypto.id = tokens[i];
+          crypto.CryptoAssetName = await assetsMethods.name().call();
+          crypto.CryptoAssetType = await assetsMethods.tokenType().call();
+          crypto.CryptoAssetType =
+            crypto.CryptoAssetType || crypto.CryptoAssetType !== ""
+              ? assetTypes[parseInt(crypto.CryptoAssetType)]
+              : "NIL";
+          crypto.CryptoAssetSymbol = await assetsMethods.symbol().call();
+          crypto.CryptoAssetTotalSupply = await assetsMethods
+            .totalSupply()
+            .call();
+          crypto.whitePaperHash = await assetsMethods.whitePaperHash().call();
+          crypto.whitePaperToken = await assetsMethods.whitePaperToken().call();
+          crypto.Country = i18n.global.t("countries." + country);
+          crypto.EmittingBody = name;
+          crypto.EmittingBodyId = issuerObj.dapp;
+          const transparency = {};
+          const transparencyDetails = await assetsMethods
+            .transparencyDetails()
+            .call();
+          transparency.AuthorizedCustomersType = transparencyDetails.clientType;
+
+          transparency.DistributionStrategy =
+            transparencyDetails.distributionStrategyURL;
+          transparency.ReferenceMarket = transparencyDetails.referenceMarketURL;
+          transparency.IncompatibleCustomerTypes =
+            transparencyDetails.incompatibleClients;
+          transparency.TraderID = transparencyDetails.traderID;
+          transparency.Timestamp = transparencyDetails.lastUpdate;
+          crypto.Transparency = transparency;
+          crypto.QuantityofTokens = crypto.CryptoAssetTotalSupply;
+          issuerData["Cryptos"].push(crypto);
+          fetchedAssets.push(crypto);
+        }
+        commit(SET_ISSUER, { address: issuerData.address, obj: issuerData });
+        fetchedIssuers.push(issuerData);
+      } catch (ex) {
+        console.log(ex);
       }
-      commit(SET_ISSUER, { address: issuerData.address, obj: issuerData });
-      fetchedIssuers.push(issuerData);
     }
     commit(LOAD_SUCCESS, { fetchedIssuers, fetchedAssets });
   },
@@ -133,7 +138,10 @@ const actions = {
     return isSmallOffer;
   },
   [GET_ISSUER_LIST]: async ({ state, commit }) => {
-    const promise = await getRequest({ pathAndQuery: issuersEndPoint, withPort: false });
+    const promise = await getRequest({
+      pathAndQuery: issuersEndPoint,
+      withPort: false
+    });
     if (promise.status == 200) {
       const data = promise.data;
       commit(SET_ISSUER_LIST, data);

@@ -12,7 +12,7 @@ export const getRequest = obj => {
   console.log("server: ", serverAdd);
   const url =
     serverAdd +
-    (obj.withPort ?? true ? `${obj.port ?? ":8081"}/` : '/'+obj.pathAndQuery);
+    (obj.withPort ?? true ? `${obj.port ?? ":8081"}/` : "/" + obj.pathAndQuery);
   const obj2 = axios.get(url, {
     mode: "no-cors"
   });
@@ -25,9 +25,13 @@ export const postRequest = obj => {
   console.log("server: ", serverAdd);
   const url =
     serverAdd +
-    (obj.withPort ?? true ? `${obj.port ?? ":8081"}/` : obj.pathAndQuery);
-  const obj2 = axios.get(url, {
-    mode: "no-cors"
+    (obj.withPort ?? false
+      ? `${obj.port ?? ":8081"}/`
+      : "/" + obj.pathAndQuery);
+  const obj2 = axios.post(url, obj.body, {
+    headers: {
+      "Content-Type": "application/json"
+    }
   });
   return obj2;
 };

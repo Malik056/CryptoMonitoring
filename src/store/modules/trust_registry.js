@@ -1,4 +1,4 @@
-import { getSmartContract, sendTrx } from "../../utils/api.js";
+import { getRequest, getSmartContract, postRequest, sendTrx } from "../../utils/api.js";
 import registryAbi from "@/data/abis/trust_registryabi.json";
 // import issuerList from "@/data/tables/markup-table/issuers_list.json";
 import {
@@ -95,7 +95,7 @@ const actions = {
     }
     callback(false);
   },
-  [ADD_NEW_ISSUER]: async ({ commit, state }, { issuer, callback }) => {
+  [ADD_NEW_ISSUER]: async ({ commit, state, rootState }, { issuer, callback }) => {
     const trx = await sendTrx({
       path: "issuer",
       method: "post",
@@ -104,16 +104,20 @@ const actions = {
     });
 
     if(trx && trx.status == 200) {
-      // const list = issuerList.issuers;
-      // const issuerObj = {
-      //   address: issuer.issuerAddress,
-      //   did: issuer.issuerID,
-
-      // };
-      callback(true);
+      const issuerObj = {
+        address: issuer.issuerAddress,
+        did: issuer.issuerID,
+        dapp: issuer.dapp,
+      };
+      rootState.issuers.commit(ADD_NEW_ISSUER, issuerObj);
+      await postRequest({
+        pathAndQuery: "addIssuers",
+        body: rootState.issuers.state.issuersList,
+      })
+      return true;
     }
     else {
-      callback(false);
+      return false;
     }
   }
 };
