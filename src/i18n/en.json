@@ -698,7 +698,8 @@
       "active": "Active",
       "competentAuth": "Competent Authority",
       "offeror": "Offeror",
-      "marketInfraType": "Market Infra Type"
+      "marketInfraType": "Market Infra Type",
+      "dapp": "DApp"
     }
   },
   "errorMessages": {
