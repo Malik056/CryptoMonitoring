@@ -81,7 +81,8 @@
             :readonly="!newModal"
             :rules="newModal ? [required] : []"
           />
-          <va-input v-if="newModal"
+          <va-input
+            v-if="newModal"
             class="mb-4"
             :label="$t('trustRegistry.modal.dapp')"
             v-model="selectedObj.dapp"
@@ -194,7 +195,7 @@ import MarkupTable from "../../admin/tables/markup-tables/MarkupTables";
 import { mapGetters } from "vuex";
 import {
   ADD_NEW_ISSUER,
-  CHANGE_ISSUER_STATE,
+  CHANGE_ISSUER_STATE
 } from "@/store/actions/trust_registry";
 import Modal from "../../../components/modals/Modal";
 import { useColors } from "vuestic-ui";
@@ -284,26 +285,24 @@ export default {
 
       if (this.newModal) {
         this.isLoading = true;
-        this.$store.dispatch(ADD_NEW_ISSUER, {
-          issuer: this.selectedObj,
-          callback: result => {
-            this.isLoading = false;
-            if (result) {
-              this.showModal = false;
-              this.$vaToast.init({
-                message: "Successful",
-                position: "top-right",
-                color: this.colors.success
-              });
-            } else {
-              this.$vaToast.init({
-                message: "Failed",
-                position: "top-right",
-                color: this.colors.danger
-              });
-            }
-          }
+        const result = await this.$store.dispatch(ADD_NEW_ISSUER, {
+          issuer: this.selectedObj
         });
+        this.isLoading = false;
+        if (result) {
+          this.showModal = false;
+          this.$vaToast.init({
+            message: "Successful",
+            position: "top-right",
+            color: this.colors.success
+          });
+        } else {
+          this.$vaToast.init({
+            message: "Failed",
+            position: "top-right",
+            color: this.colors.danger
+          });
+        }
       } else {
         console.log("Update");
         this.isLoading = true;
@@ -345,13 +344,13 @@ export default {
         issuerName: "",
         competentAuth: "",
         marketInfrastructureType: "",
-        dapp: "",
+        dapp: ""
         // active: false,
         // ownerPAName: "",
         // ownerPAPK: "",
       };
       this.newModal = true;
-      this.$refs.issuerModal.show();
+      // this.$refs.issuerModal.show();
     },
     onItemSelected(obj) {
       this.selectedObj = { ...obj };

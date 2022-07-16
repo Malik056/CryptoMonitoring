@@ -1,4 +1,9 @@
-import { getRequest, getSmartContract, postRequest, sendTrx } from "../../utils/api.js";
+import {
+  getRequest,
+  getSmartContract,
+  postRequest,
+  sendTrx
+} from "../../utils/api.js";
 import registryAbi from "@/data/abis/trust_registryabi.json";
 // import issuerList from "@/data/tables/markup-table/issuers_list.json";
 import {
@@ -48,30 +53,34 @@ const actions = {
     const methods = contract.methods;
     const issuers = rootState.issuers.issuersList.issuers;
     for (let i = 0; i < issuers.length; i++) {
-      const issuer = issuers[i];
-      const issuingInstitution = await methods
-        .issuingInstitution(issuer.address)
-        .call();
-      const ownerPAName = await methods.ownerPA_Name().call();
-      const ownerPAPK = await methods.ownerPA_PK().call();
-      const registryDataObj = {};
-      registryDataObj.issuerAddress = issuer.address;
-      registryDataObj.issuerName = issuingInstitution.issuerName;
-      registryDataObj.competentAuth = issuingInstitution.competentAuth;
-      registryDataObj.active = issuingInstitution.active;
-      registryDataObj.issuerID = issuingInstitution.issuerID;
-      registryDataObj.issuerPK = issuingInstitution.issuerPK;
-      registryDataObj.offeror = issuingInstitution.offeror;
-      registryDataObj.marketInfrastructureType =
-        issuingInstitution.marketInfrastructureType == 0
-          ? marketInfrastructureType[0]
-          : marketInfrastructureType[
-              issuingInstitution.marketInfrastructureType - 1
-            ];
-      registryDataObj.ownerPAName = ownerPAName;
-      registryDataObj.ownerPAPK = ownerPAPK;
-      registries.push(registryDataObj);
-      commit(ADD_TO_HASH, registryDataObj);
+      try {
+        const issuer = issuers[i];
+        const issuingInstitution = await methods
+          .issuingInstitution(issuer.address)
+          .call();
+        const ownerPAName = await methods.ownerPA_Name().call();
+        const ownerPAPK = await methods.ownerPA_PK().call();
+        const registryDataObj = {};
+        registryDataObj.issuerAddress = issuer.address;
+        registryDataObj.issuerName = issuingInstitution.issuerName;
+        registryDataObj.competentAuth = issuingInstitution.competentAuth;
+        registryDataObj.active = issuingInstitution.active;
+        registryDataObj.issuerID = issuingInstitution.issuerID;
+        registryDataObj.issuerPK = issuingInstitution.issuerPK;
+        registryDataObj.offeror = issuingInstitution.offeror;
+        registryDataObj.marketInfrastructureType =
+          issuingInstitution.marketInfrastructureType == 0
+            ? marketInfrastructureType[0]
+            : marketInfrastructureType[
+                issuingInstitution.marketInfrastructureType - 1
+              ];
+        registryDataObj.ownerPAName = ownerPAName;
+        registryDataObj.ownerPAPK = ownerPAPK;
+        registries.push(registryDataObj);
+        commit(ADD_TO_HASH, registryDataObj);
+      } catch (ex) {
+        console.log(ex);
+      }
     }
 
     commit(REGISTRY_LOAD_SUCCESS, registries);
@@ -95,28 +104,29 @@ const actions = {
     }
     callback(false);
   },
-  [ADD_NEW_ISSUER]: async ({ commit, state, rootState }, { issuer, callback }) => {
+  [ADD_NEW_ISSUER]: async (
+    { commit, state, rootState },
+    { issuer, callback }
+  ) => {
     const trx = await sendTrx({
       path: "issuer",
       method: "post",
       body: JSON.stringify(issuer),
       headers: { "Content-Type": "application/json" }
     });
-
-    if(trx && trx.status == 200) {
+    if (trx && trx.status == 200) {
       const issuerObj = {
         address: issuer.issuerAddress,
         did: issuer.issuerID,
-        dapp: issuer.dapp,
+        dapp: issuer.dapp
       };
-      rootState.issuers.commit(ADD_NEW_ISSUER, issuerObj);
+      commit(ADD_NEW_ISSUER, issuerObj, { root: true });
       await postRequest({
-        pathAndQuery: "addIssuers",
-        body: rootState.issuers.state.issuersList,
-      })
+        pathAndQuery: "addIssuer",
+        body: JSON.stringify(rootState.issuers.issuersList)
+      });
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }

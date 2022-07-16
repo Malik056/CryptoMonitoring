@@ -61,6 +61,7 @@ export const sendTrx = async ({ path, method, body, headers }) => {
       path.replace("/", "");
     }
     // debugger;
+    debugger;
     const endPoint = apiEndpoint;
     let result;
     if (method.toLowerCase() == "PATCH".toLowerCase()) {

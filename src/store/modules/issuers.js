@@ -126,6 +126,7 @@ const actions = {
         commit(SET_ISSUER, { address: issuerData.address, obj: issuerData });
         fetchedIssuers.push(issuerData);
       } catch (ex) {
+        debugger;
         console.log(ex);
       }
     }
