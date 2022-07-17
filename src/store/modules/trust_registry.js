@@ -106,8 +106,9 @@ const actions = {
   },
   [ADD_NEW_ISSUER]: async (
     { commit, state, rootState },
-    { issuer, callback }
+    { issuer}
   ) => {
+    const dapp = issuer.dapp;
     delete issuer.dapp;
     console.log("Object to API: ", issuer.dapp);
     const trx = await sendTrx({
@@ -116,6 +117,7 @@ const actions = {
       body: JSON.stringify(issuer),
       headers: { "Content-Type": "application/json" }
     });
+    issuer.dapp = dapp;
     if (trx && trx.status == 200) {
       const issuerObj = {
         address: issuer.issuerAddress,

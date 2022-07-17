@@ -268,6 +268,8 @@ export default {
     async saveIssuer() {
       console.log("Saving Issuer");
       let valid = this.$refs.form.validate();
+      const oooj = this.selectedObj;
+      debugger;
       if (
         this.selectedObj.offeror == null ||
         this.selectedObj.offeror == undefined

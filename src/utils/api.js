@@ -8,7 +8,7 @@ const mocks = {
 
 export const getRequest = obj => {
   console.log("obj: ", obj);
-  const serverAdd = server;
+  const serverAdd = obj.server ?? server ;
   console.log("server: ", serverAdd);
   const url =
     serverAdd +
