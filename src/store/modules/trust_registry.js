@@ -120,7 +120,8 @@ const actions = {
       const issuerObj = {
         address: issuer.issuerAddress,
         did: issuer.issuerID,
-        dapp: issuer.dapp
+        dapp: issuer.dapp,
+        tokens: [],
       };
       commit(ADD_NEW_ISSUER, issuerObj, { root: true });
       await postRequest({
